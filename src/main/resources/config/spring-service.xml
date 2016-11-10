@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="logVolumeCalculateService"
+            class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImpl"/>
+    <bean id="volumeAutoCalculateService"
+            class="cn.yunsenlin.web.base.service.Impl.VolumeAutoCalculateServiceImpl">
+        <constructor-arg name="logVolumeCalculateService" ref="logVolumeCalculateService"/>
+        <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
+    </bean>
+    <bean id="woodTypeService"
+            class="cn.yunsenlin.web.base.service.Impl.WoodTypeServiceImpl">
+        <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
+    </bean>
+</beans>

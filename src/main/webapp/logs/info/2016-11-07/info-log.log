@@ -1,0 +1,25 @@
+2016-11-07 22:37:03.315 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2016-11-07 22:37:04.201 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+2016-11-07 22:37:04.702 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+2016-11-07 22:37:05.133 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+2016-11-07 22:37:05.231 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 正在测试每个木材积计算器
+2016-11-07 22:37:05.231 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 正在测试原木木材积计算器
+2016-11-07 22:37:05.232 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 原木木材积计算器测试结束
+2016-11-07 22:37:05.393 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-5} inited
+2016-11-07 22:37:05.524 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+2016-11-07 22:49:57.186 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2016-11-07 22:49:58.187 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+2016-11-07 22:49:58.683 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+2016-11-07 22:49:59.096 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+2016-11-07 22:49:59.206 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 正在测试每个木材积计算器
+2016-11-07 22:49:59.206 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 正在测试原木木材积计算器
+2016-11-07 22:49:59.206 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 原木木材积计算器测试结束
+2016-11-07 22:49:59.513 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-5} inited
+2016-11-07 22:49:59.630 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+2016-11-07 22:50:04.810 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2016-11-07 22:54:42.589 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2016-11-07 22:54:43.509 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+2016-11-07 22:54:43.698 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 正在测试每个木材积计算器
+2016-11-07 22:54:43.698 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 正在测试原木木材积计算器
+2016-11-07 22:54:43.698 INFO  cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImplTest - 原木木材积计算器测试结束
+2016-11-07 22:54:43.707 INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.WoodTypeMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.WoodType" >
+    <id column="type_code" property="typeCode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="belongs" property="belongs" jdbcType="CHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+      type_code, name, belongs
+    from wood_type
+    where type_code = #{typeCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wood_type
+    where type_code = #{typeCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.WoodType" >
+    insert into wood_type (type_code, name, belongs
+      )
+    values (#{typeCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{belongs,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.WoodType" >
+    insert into wood_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeCode != null" >
+        type_code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="belongs != null" >
+        belongs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeCode != null" >
+        #{typeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="belongs != null" >
+        #{belongs,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.WoodType" >
+    update wood_type
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="belongs != null" >
+        belongs = #{belongs,jdbcType=CHAR},
+      </if>
+    </set>
+    where type_code = #{typeCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.WoodType" >
+    update wood_type
+    set name = #{name,jdbcType=VARCHAR},
+      belongs = #{belongs,jdbcType=CHAR}
+    where type_code = #{typeCode,jdbcType=VARCHAR}
+  </update>
+</mapper>
