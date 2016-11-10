@@ -31,8 +31,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="user"
-               domainObjectName="User"
+        <table tableName="session"
+               domainObjectName="Session"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

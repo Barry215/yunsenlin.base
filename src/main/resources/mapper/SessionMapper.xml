@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.SessionMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.Session" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="session" property="session" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+      user_id, session,token
+    from session
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from session
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.Session" >
+    insert into session (user_id, session,token)
+    values (#{userId,jdbcType=INTEGER},#{session,jdbcType=VARCHAR},#{token,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.Session" >
+    insert into session
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="session != null" >
+        session,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="session != null" >
+        #{session,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.Session" >
+    update session
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="session != null" >
+        session = #{session,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.Session" >
+    update session
+    set user_id = #{userID,jdbcType=INTEGER},
+      session = #{session,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR}
+    where user_id = #{typeCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

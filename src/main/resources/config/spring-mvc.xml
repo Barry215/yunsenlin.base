@@ -42,8 +42,8 @@
     </bean>
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
-    <bean class="cn.yunsenlin.web.base.model.validator.UserValidator"
-          id="userValidator"/>
+    <bean class="cn.yunsenlin.web.base.dto.validator.LoginParamValidator"
+          id="loginParamValidator"/>
     <bean class="cn.yunsenlin.web.base.dto.validator.VolumeCalculateParamValidator"
           id="volumeCalculateParamValidator">
         <constructor-arg name="woodTypeService" ref="woodTypeService"/>
@@ -58,5 +58,10 @@
                          name="volumeAutoCalculateService"/>
         <constructor-arg name="volumeCalculateValidator" ref="volumeCalculateParamValidator"/>
         <constructor-arg name="unitVolumeCalculateParam" ref="unitVolumeCalculateParamValidator"/>
+    </bean>
+    <bean class="cn.yunsenlin.web.base.controller.UserController">
+        <constructor-arg name="loginParamValidator" ref="loginParamValidator"/>
+        <constructor-arg name="sessionService" ref="sessionService"/>
+        <constructor-arg name="userService" ref="userService"/>
     </bean>
 </beans>

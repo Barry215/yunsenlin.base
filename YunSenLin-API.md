@@ -69,8 +69,8 @@ requestBody:
 ```json
 {
   "woodBaseList":[
-    {"length": 1.3,"diameter": 15,"typeCode": 104,"num":10}
-	{"length": 1.3,"diameter": 18,"typeCode": 104,"num":6}
+    {"length": 1.3,"diameter": 15,"typeCode": 104,"num":10},
+	{"length": 1.3,"diameter": 18,"typeCode": 104,"num":6},
 	{"length": 1.3,"diameter": 19,"typeCode": 104,"num":8}
   ]
 }
@@ -148,9 +148,9 @@ requestBody:
 
 ```json
 {
-  "woodList"[
- 	{"length":1.3,"diameter":15,"typeCode":104,"num":10,"price":560.00,"priceUpReason":"质量高"}
-	{"length":1.3,"diameter":18,"typeCode":104,"num":6,"price":460.00,"priceDownReason":"腐烂"}
+  "woodList":[
+ 	{"length":1.3,"diameter":15,"typeCode":104,"num":10,"price":560.00,"priceUpReason":"质量高"},
+	{"length":1.3,"diameter":18,"typeCode":104,"num":6,"price":460.00,"priceDownReason":"腐烂"},
 	{"length": 1.3,"diameter": 19,"typeCode": 104,"num":8}
   ]
 }
@@ -162,8 +162,8 @@ requestBody:
 ```json
 {
   "woodBillList":[
-	{"length":1.3,"diameter":15,"typeCode":104,"num":10,"price":560.00,"priceUpReason":"质量高","priceSumNode": 780.67}
-	{"length":1.3,"diameter":18,"typeCode":104,"num":6,"price":460.00,"priceDownReason":"腐烂","priceSumNode": 580.77}
+	{"length":1.3,"diameter":15,"typeCode":104,"num":10,"price":560.00,"priceUpReason":"质量高","priceSumNode": 780.67},
+	{"length":1.3,"diameter":18,"typeCode":104,"num":6,"price":460.00,"priceDownReason":"腐烂","priceSumNode": 580.77},
 	{"length": 1.3,"diameter": 19,"typeCode": 104,"num":8}
   ],
  "priceSum": 1261.44,
@@ -258,7 +258,7 @@ requestBody
     {"length":1.3,"diameter":33,"typeCode":111,"num":12},
     {"length":1.3,"diameter":33,"typeCode":111,"num":12,"price":580.00,"priceUpReason":"质量比较好"}
   ],
-  "woodWeightList"：[
+  "woodWeightList":[
     {"tare":5600,"weight":7800},
 	{"tare":5600,"weight":7800,"price":5780.00,"priceDownReason":"水分超标"}
   ],
@@ -290,6 +290,14 @@ requestBody
 #2 用户模块(web模块)
 /usr
 ## 2.1 登录
+
+| 传入参数                          | 传出参数               | 网址     |
+| ----------------------------- | ------------------ | ------ |
+| 登录名（邮箱或手机号）(loginName string) | 错误信息(error string) | /login |
+| 密码(password  string)          | 密钥(token:string)   |        |
+| 是否记住登录(remember boolean)     |                    |        |
+
+
 
 ## 2.2 注册
 

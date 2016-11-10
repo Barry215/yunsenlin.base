@@ -4,6 +4,7 @@ import cn.yunsenlin.web.base.model.User;
 
 public interface UserService {
     boolean login(String loginName,String password);
+    User loginToGetUser(String loginName,String password);
     void signIn(User user);
     String sendActivatedEmail(String email);
     String sendActivatedMessage(String phone);

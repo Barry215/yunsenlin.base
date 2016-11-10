@@ -14,4 +14,23 @@
             class="cn.yunsenlin.web.base.service.Impl.WoodTypeServiceImpl">
         <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
     </bean>
+    <bean id="aesEncryptionService"
+            class="cn.yunsenlin.web.base.service.Impl.EncryptionServiceImpl"/>
+    <bean id="tokenService"
+            class="cn.yunsenlin.web.base.service.Impl.TokenServiceImpl">
+        <constructor-arg ref="aesEncryptionService"/>
+    </bean>
+    <bean id="userService"
+            class="cn.yunsenlin.web.base.service.Impl.UserServiceImpl">
+        <constructor-arg name="aesEncryptionService" ref="aesEncryptionService"/>
+        <constructor-arg name="userMapper" ref="userMapper"/>
+    </bean>
+    <bean id="gsonService"
+            class="cn.yunsenlin.web.base.service.Impl.GsonServiceImpl"/>
+    <bean id="sessionService"
+            class="cn.yunsenlin.web.base.service.Impl.SessionServiceImpl">
+        <constructor-arg name="gsonService" ref="gsonService"/>
+        <constructor-arg name="sessionMapper" ref="sessionMapper"/>
+        <constructor-arg name="tokenService" ref="tokenService"/>
+    </bean>
 </beans>

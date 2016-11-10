@@ -3,7 +3,8 @@ package cn.yunsenlin.web.base.error;
 
 
 public enum  ErrorUtils {
-    DataValid("D0001","数据验证不通过");
+    DataValid("D0001","数据验证不通过"),
+    NoLogin("U0001","登录错误");
     private String errorCode;
     private String errorInfo;
 
