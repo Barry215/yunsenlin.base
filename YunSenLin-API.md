@@ -328,6 +328,36 @@ responseBody
 
 ## 2.2 注册
 
+| 传入参数                        | 传出参数               | 网址      |
+| --------------------------- | ------------------ | ------- |
+| 手机号(phone string)           | 错误信息(error string) | /signIn |
+| 密码(password string)         |                    |         |
+| 手机号验证码(phoneCode string)    |                    |         |
+| 【可选】邮箱(email string)        |                    |         |
+| 【可选】邮箱验证码(emailCode,string) |                    |         |
+
+requestBody
+
+```json
+{
+  "phone":"18100174605",
+  "password":"123456",
+  "phoneCode":"000000",
+  "email":"1277287015@qq.com",
+  "emailCode":"000000"
+}
+```
+
+responseBody
+
+```json
+{
+  "error":"0"
+}
+```
+
+
+
 ## 2.3 发送注册验证邮件
 
 | 传入参数               | 传出参数                    | 网址                 |
@@ -434,7 +464,19 @@ responseBody
 
 ## 2.7 找回密码
 
+| 传入参数                             | 传出参数               | 网址          |
+| -------------------------------- | ------------------ | ----------- |
+| 【手机邮箱二选一】手机(phone string)        | 错误信息(error string) | /repassword |
+| 【手机邮箱二选一】邮箱(email string)        |                    |             |
+| 【手机邮箱二选一】手机验证码(phoneCode string) |                    |             |
+| 【手机邮箱二选一】邮箱验证码(emailCode string) |                    |             |
+| 新密码(newPassword string)          |                    |             |
+
 ## 2.8 退出
+
+| 传入数据                 | 传出数据               | 网址        |
+| -------------------- | ------------------ | --------- |
+| 用户id (userId string) | 错误信息(error string) | /loginOut |
 
 ## 2.9 发送修改邮箱/手机验证邮件
 
@@ -489,6 +531,8 @@ responseBody
 
 
 ## 2.11 查询密保
+
+
 
 ## 2.12 是否有此手机号码
 

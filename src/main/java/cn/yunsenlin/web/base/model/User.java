@@ -7,6 +7,20 @@ public class User {
     private String phone;
     private String password;
 
+    public User() {
+    }
+
+    public User(String email, String phone, String password) {
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
+
+    public User(String phone, String password) {
+        this.phone = phone;
+        this.password = password;
+    }
+
     public Integer getUserId() {
         return userId;
     }

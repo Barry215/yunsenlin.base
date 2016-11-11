@@ -15,7 +15,7 @@ public class LoginParamValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-        String errorCode = ErrorUtils.DataValid.getErrorCode();
+        String errorCode = ErrorUtils.DataValid.errorCode;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"loginName",errorCode);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"password",errorCode);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"remember",errorCode);

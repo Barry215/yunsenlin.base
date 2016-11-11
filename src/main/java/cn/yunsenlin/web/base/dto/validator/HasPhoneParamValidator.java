@@ -15,7 +15,7 @@ public class HasPhoneParamValidator implements Validator{
 
     @Override
     public void validate(Object target, Errors errors) {
-        String errorCode = ErrorUtils.DataValid.getErrorCode();
+        String errorCode = ErrorUtils.DataValid.errorCode;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"phone",errorCode);
         HasPhoneParam hasPhoneParam = (HasPhoneParam) target;
         String phone = hasPhoneParam.getPhone();

@@ -79,4 +79,9 @@ public class SessionServiceImpl implements SessionService {
         sessionMapper.insert(session);
         return token;
     }
+
+    @Override
+    public void deleteToken(int userId) {
+        sessionMapper.deleteByPrimaryKey(userId);
+    }
 }

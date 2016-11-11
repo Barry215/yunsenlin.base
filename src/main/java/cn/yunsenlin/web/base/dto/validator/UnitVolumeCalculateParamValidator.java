@@ -24,7 +24,7 @@ public class UnitVolumeCalculateParamValidator implements Validator{
     }
     @Override
     public void validate(Object target, Errors errors) {
-        String errorCode = ErrorUtils.DataValid.getErrorCode();
+        String errorCode = ErrorUtils.DataValid.errorCode;
         UnitVolumeCalculateParam object = (UnitVolumeCalculateParam) target;
         List<WoodBase> woodBaseList = object.getWoodBaseList();
         for (WoodBase woodBase : woodBaseList) {

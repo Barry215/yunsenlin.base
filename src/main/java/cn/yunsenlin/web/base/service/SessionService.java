@@ -11,4 +11,5 @@ public interface SessionService {
 
     boolean checkToken(String token,int userId);
     String createToken(int userId,Long tokenPeriod);
+    void deleteToken(int userId);
 }

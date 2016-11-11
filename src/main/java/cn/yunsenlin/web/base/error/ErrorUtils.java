@@ -1,6 +1,8 @@
 package cn.yunsenlin.web.base.error;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public enum  ErrorUtils {
     DataValid("D0001","数据验证不通过"),
@@ -8,24 +10,17 @@ public enum  ErrorUtils {
     EmailAlreadyHas("U0002","邮件地址已经存在"),
     PhoneAlreadyHas("U0003","手机号码已经存在"),
     NoEmail("U0004","邮件地址不存在"),
-    NoPhone("U0005","手机号码不存在");
-    private String errorCode;
-    private String errorInfo;
+    NoPhone("U0005","手机号码不存在"),
+    ErrorPhoneCode("U0006","手机验证码错误"),
+    ErrorEmailCode("U0007","邮箱验证码错误");
+    public String errorCode;
+    public String errorInfo;
+    private static Logger logger = LoggerFactory.getLogger(ErrorUtils.class);
 
     public String getErrorCode() {
+        logger.info("客户端和服务端交互发生了数据交互错误，错误类型代码"+this.errorCode+
+        ",错误信息："+this.errorInfo);
         return errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorInfo() {
-        return errorInfo;
-    }
-
-    public void setErrorInfo(String errorInfo) {
-        this.errorInfo = errorInfo;
     }
 
     ErrorUtils(String errorCode, String errorInfo) {

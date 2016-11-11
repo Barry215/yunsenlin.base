@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.Session" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="session" property="session" jdbcType="VARCHAR" />
-    <result column="token" property="token" jdbcType="VARCHAR"/>
+    <result column="userId" property="userId" jdbcType="VARCHAR"/>
     <result column="token_create_time" property="tokenCreateTime" jdbcType="TIMESTAMP"/>
     <result column="token_period" property="tokenPeriod" jdbcType="BIGINT"/>
   </resultMap>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
-      user_id, session,token,token_create_time,token_period
+      user_id, session,token_create_time,token_period
     from session
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
@@ -19,10 +19,9 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.yunsenlin.web.base.model.Session" >
-    insert into session (user_id, session,token,token_create_time,token_period)
+    insert into session (user_id, session,token_create_time,token_period)
     values (#{userId,jdbcType=INTEGER},
             #{session,jdbcType=VARCHAR},
-            #{token,jdbcType=VARCHAR},
             #{tokenCreateTime,jdbcType=TIMESTAMP},
             #{tokenPeriod,jdbcType=BIGINT})
   </insert>
@@ -35,8 +34,8 @@
       <if test="session != null" >
         session,
       </if>
-      <if test="token != null" >
-        token,
+      <if test="userId != null" >
+        userId,
       </if>
       <if test="tokenCreateTime != null" >
         token_create_time,
@@ -52,8 +51,8 @@
       <if test="session != null" >
         #{session,jdbcType=VARCHAR},
       </if>
-      <if test="token != null" >
-        #{token,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="tokenCreateTime != null" >
         #{tokenCreateTime,jdbcType=TIMESTAMP},
@@ -72,8 +71,8 @@
       <if test="session != null" >
         session = #{session,jdbcType=VARCHAR},
       </if>
-      <if test="token != null" >
-        token = #{token,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="tokenCreateTime != null" >
         token_create_time = #{tokenCreateTime,jdbcType=VARCHAR},
@@ -88,7 +87,6 @@
     update session
     set user_id = #{userId,jdbcType=INTEGER},
       session = #{session,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR},
       token_create_time = #{tokenCreateTime,jdbcType=TIMESTAMP},
       token_period = #{tokenPeriod,jdbcType=BIGINT}
     where user_id = #{userId,jdbcType=INTEGER}

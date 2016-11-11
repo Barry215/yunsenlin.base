@@ -16,7 +16,7 @@ public class SendPhoneParamValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-        String errCode = ErrorUtils.DataValid.getErrorCode();
+        String errCode = ErrorUtils.DataValid.errorCode;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"phone",errCode);
         SendPhoneParam sendPhoneParam = (SendPhoneParam) o;
         String phone = sendPhoneParam.getPhone();

@@ -61,6 +61,8 @@
             class="cn.yunsenlin.web.base.dto.validator.SendEmailParamValidator"/>
     <bean id="sendPhoneParamValidator"
             class="cn.yunsenlin.web.base.dto.validator.SendPhoneParamValidator"/>
+    <bean id="signInParamValidator"
+            class="cn.yunsenlin.web.base.dto.validator.SignInParamValidator"/>
     <!--Controller-->
     <bean id="calculateController"
             class="cn.yunsenlin.web.base.controller.CalculateController">
@@ -78,5 +80,6 @@
         <constructor-arg name="sendEmailParamValidator" ref="sendEmailParamValidator"/>
         <constructor-arg name="sendPhoneParamValidator" ref="sendPhoneParamValidator"/>
         <constructor-arg name="outLetService" ref="outLetService"/>
+        <constructor-arg name="signInParamValidator" ref="signInParamValidator"/>
     </bean>
 </beans>

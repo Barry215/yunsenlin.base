@@ -26,9 +26,10 @@ public class UserController {
     private final Validator hasEmailParamValidator;
     private final Validator sendEmailParamValidator;
     private final Validator sendPhoneParamValidator;
+    private final Validator signInParamValidator;
     private final OutLetService outLetService;
 
-    public UserController(UserService userService, SessionService sessionService, Validator loginParamValidator, Validator hasPhoneParamValidator, Validator hasEmailParamValidator, Validator sendEmailParamValidator, Validator sendPhoneParamValidator, OutLetService outLetService) {
+    public UserController(UserService userService, SessionService sessionService, Validator loginParamValidator, Validator hasPhoneParamValidator, Validator hasEmailParamValidator, Validator sendEmailParamValidator, Validator sendPhoneParamValidator, Validator signInParamValidator, OutLetService outLetService) {
         this.userService = userService;
         this.sessionService = sessionService;
         this.loginParamValidator = loginParamValidator;
@@ -36,6 +37,7 @@ public class UserController {
         this.hasEmailParamValidator = hasEmailParamValidator;
         this.sendEmailParamValidator = sendEmailParamValidator;
         this.sendPhoneParamValidator = sendPhoneParamValidator;
+        this.signInParamValidator = signInParamValidator;
         this.outLetService = outLetService;
     }
 
@@ -55,13 +57,18 @@ public class UserController {
     }
 
     @InitBinder(value = "sendEmailParam")
-    public void initSendEmailParam(DataBinder binder){
+    public void initSendEmailParamValidator(DataBinder binder){
         binder.addValidators(sendEmailParamValidator);
     }
 
     @InitBinder(value = "sendPhoneParam")
-    public void initSendPhoneParam(DataBinder binder){
+    public void initSendPhoneParamValidator(DataBinder binder){
         binder.addValidators(sendPhoneParamValidator);
+    }
+
+    @InitBinder(value = "signInParam")
+    public void initSignInParamValidator(DataBinder binder){
+        binder.addValidators(signInParamValidator);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
@@ -70,7 +77,7 @@ public class UserController {
             @Valid @RequestBody LoginParam loginParam, BindingResult result) {
         if (result.hasErrors()) {
             return new LoginReturn("",
-                    result.getAllErrors().toString(), -1
+                    ErrorUtils.DataValid.getErrorCode(), -1
             );
         }
         String loginName = loginParam.getLoginName();
@@ -88,7 +95,7 @@ public class UserController {
             }
             return new LoginReturn(token, "0", user.getUserId());
         } else {
-            return new LoginReturn("", ErrorUtils.NoLogin.toString(), -1);
+            return new LoginReturn("", ErrorUtils.NoLogin.getErrorCode(), -1);
         }
     }
 
@@ -119,7 +126,28 @@ public class UserController {
     @RequestMapping(value = "/signIn", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public SignInReturn SignIn(@Valid @RequestBody SignInParam signInParam, BindingResult result) {
-        return null;
+        if (result.hasErrors()){
+            return new SignInReturn(ErrorUtils.DataValid.getErrorCode());
+        }
+        String phone = signInParam.getPhone();
+        String phoneCode = signInParam.getPhoneCode();
+        String password = signInParam.getPassword();
+        String email = signInParam.getEmail();
+        String emailCode = signInParam.getEmailCode();
+        if (!outLetService.checkPhoneCode(phoneCode,phone)){
+            return new SignInReturn(ErrorUtils.ErrorPhoneCode.getErrorCode());
+        }
+        if (email==null||email.length()==0){
+            if (!outLetService.checkEmailCode(emailCode,email)){
+                return new SignInReturn(ErrorUtils.ErrorEmailCode.getErrorCode());
+            }
+            User user = new User(password,password);
+            userService.signIn(user);
+        }else{
+            User user = new User(email,phone,password);
+            userService.signIn(user);
+        }
+        return new SignInReturn("0");
     }
 
     @RequestMapping(value = "/sendEmailToSignIn", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
@@ -216,5 +244,11 @@ public class UserController {
                     false);
         }
         return new SendPhoneReturn("0",outLetService.sendPhone(phone));
+    }
+    @RequestMapping(value = "/loginOut", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public LoginOutReturn loginOut(loginOutParam loginOutParam){
+        sessionService.deleteToken(loginOutParam.getUserId());
+        return new LoginOutReturn("0");
     }
 }

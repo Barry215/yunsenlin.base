@@ -15,12 +15,13 @@ public class SendEmailParamValidator implements Validator{
 
     @Override
     public void validate(Object o, Errors errors) {
-        String errCode = ErrorUtils.DataValid.getErrorCode();
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email",errCode);
+        String errorCode = ErrorUtils.DataValid.errorCode;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email",errorCode);
         SendEmailParam sendEmailParam = (SendEmailParam) o;
         String email = sendEmailParam.getEmail();
         if (email==null||!email.matches(RegxFactory.emailRegx)){
-            errors.rejectValue("email",errCode);
+            errors.rejectValue("email",errorCode);
         }
 
     }

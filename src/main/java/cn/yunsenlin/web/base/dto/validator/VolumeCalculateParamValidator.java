@@ -22,7 +22,7 @@ public class VolumeCalculateParamValidator implements Validator{
 
     @Override
     public void validate(Object target, Errors errors) {
-        String errorCode = ErrorUtils.DataValid.getErrorCode();
+        String errorCode = ErrorUtils.DataValid.errorCode;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"length", errorCode);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"diameter",errorCode);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"typeCode",errorCode);

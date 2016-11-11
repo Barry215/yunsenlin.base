@@ -16,7 +16,7 @@ public class HasEmailParamValidator implements Validator{
 
     @Override
     public void validate(Object target, Errors errors) {
-        String errorCode = ErrorUtils.DataValid.getErrorCode();
+        String errorCode = ErrorUtils.DataValid.errorCode;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email",errorCode);
         HasEmailParam hasEmailParam = (HasEmailParam) target;
         String email = hasEmailParam.getEmail();
