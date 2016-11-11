@@ -29,7 +29,7 @@
 | 传入参数                       | 传出参数                   | 网址地址             |
 | -------------------------- | ---------------------- | ---------------- |
 | 木材检尺长(米) (length double)   | 材积(立方米)(volume double) | /volumeCalculate |
-| 木材检尺径(厘米)(diameter double) | 错误信息(error int)        |                  |
+| 木材检尺径(厘米)(diameter double) | 错误信息(error string)     |                  |
 | 木材品种(typeCode int)         |                        |                  |
 
 requestBody:
@@ -46,7 +46,7 @@ responseBody
 ```json
 {
   "volume": 0.041,
-  "error": 0
+  "error": "0"
 }
 ```
 ## 1.2 计算检尺类木材总材积
@@ -54,7 +54,7 @@ responseBody
 | 传入参数                         | 传出参数                    | 网址地址                 |
 | ---------------------------- | ----------------------- | -------------------- |
 | 1总木材(woodBaseList)->woodBase | 材积(立方米) (volume double) | /unitVolumeCalculate |
-|                              | 错误信息(error int)         |                      |
+|                              | 错误信息(error string)      |                      |
 woodBase(List element):
 
 | 数据                          |
@@ -118,7 +118,7 @@ responseBody:
 | ------------------- | --------------------------------- | ------------- |
 | 总木材(woodList)->wood | 木材分类账单(woodBilList)->woodBillElem | /SumCalculate |
 |                     | 检尺类计算总价(priceSum double)          |               |
-|                     | 错误信息(error int)                   |               |
+|                     | 错误信息(error string)                |               |
 wood (list element)
 
 | 数据                               |
@@ -175,7 +175,7 @@ requestBody:
 | 传入参数                        | 传出参数                              | 网址地址          |
 | --------------------------- | --------------------------------- | ------------- |
 | 木材检尺长(米) (length double)    | 默认价格(元/立方米) (defaultPrice double) | /defaultPrice |
-| 木材检尺径(厘米) (diameter double) | 错误信息(error int)                   |               |
+| 木材检尺径(厘米) (diameter double) | 错误信息(error string)                |               |
 | 木材品种(typeCode int)          |                                   |               |
 
 requestBody:
@@ -197,15 +197,15 @@ responseBody
 ```
 ## 1.6 保存一个木材计算账单（需要登录）
 
-| 传入参数                                     | 传出参数            | 网站地址     |
-| ---------------------------------------- | --------------- | -------- |
-| 总检尺类木材（woodCheckList）woodCheckElem       | 错误信息(error int) | /saveAll |
-| 总称重类木材（woodWeightList）woodWeightElem     |                 |          |
-| 总半估值类木材（woodHalfEstimatList）woodHalfEstimateElem |                 |          |
-| 总完全估值类木材（woodFullEstimateList）woodFullEstimateElem |                 |          |
-| 【可选】附加奖金/罚金(rewardAndPunish double)      |                 |          |
-| 【可选】附加奖金理由(rewardReason string)          |                 |          |
-| 【可选】附加罚金理由(punishReason string)          |                 |          |
+| 传入参数                                     | 传出参数               | 网站地址     |
+| ---------------------------------------- | ------------------ | -------- |
+| 总检尺类木材（woodCheckList）woodCheckElem       | 错误信息(error string) | /saveAll |
+| 总称重类木材（woodWeightList）woodWeightElem     |                    |          |
+| 总半估值类木材（woodHalfEstimatList）woodHalfEstimateElem |                    |          |
+| 总完全估值类木材（woodFullEstimateList）woodFullEstimateElem |                    |          |
+| 【可选】附加奖金/罚金(rewardAndPunish double)      |                    |          |
+| 【可选】附加奖金理由(rewardReason string)          |                    |          |
+| 【可选】附加罚金理由(punishReason string)          |                    |          |
 
 woodCheckElem (list element)
 
@@ -273,6 +273,14 @@ requestBody
 }
 ```
 
+responseBody
+
+```json
+{
+  "error":"0"
+}
+```
+
 
 
 ## 1.7 设置称重类木材单价（需要登录）
@@ -295,7 +303,26 @@ requestBody
 | ----------------------------- | ------------------ | ------ |
 | 登录名（邮箱或手机号）(loginName string) | 错误信息(error string) | /login |
 | 密码(password  string)          | 密钥(token:string)   |        |
-| 是否记住登录(remember boolean)     |                    |        |
+| 是否记住登录(remember boolean)      |                    |        |
+
+requestBody
+
+```json
+{
+  "loginName":"18100174605",
+  "password":"123456",
+  "remember":false
+}
+```
+
+responseBody
+
+```json
+{
+  "error":"0",
+  "token":"asdasdasdsafcvabnDFFDDSAJKdhemd456"
+}
+```
 
 
 
@@ -303,21 +330,217 @@ requestBody
 
 ## 2.3 发送注册验证邮件
 
+| 传入参数               | 传出参数                | 网址                 |
+| ------------------ | ------------------- | ------------------ |
+| 邮箱地址(email string) | 是否发送成功(has boolean) | /sendEmailToSignIn |
+|                    | 错误信息(error string)  |                    |
+
+requestBody
+
+```json
+{
+  "email":"18100174605@qq.com"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",true,
+  "error":"0"
+}
+```
+
+
+
 ## 2.4 发送注册验证短信
+
+| 传入参数               | 传出参数                | 网址                 |
+| ------------------ | ------------------- | ------------------ |
+| 手机号码(phone string) | 是否发送成功(has boolean) | /sendPhoneToSignIn |
+|                    | 错误信息(error string)  |                    |
+
+requestBody
+
+```json
+{
+  "phone":"18100174605"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",true,
+  "error":"0"
+}
+```
+
+
 
 ## 2.5 发送找回密码验证邮件
 
+| 传入参数               | 传出参数                | 网址                     |
+| ------------------ | ------------------- | ---------------------- |
+| 邮箱地址(email string) | 是否发送成功(has boolean) | /sendEmailToRepassword |
+|                    | 错误信息(error string)  |                        |
+
+requestBody
+
+```json
+{
+  "email":"18100174605@qq.com"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",true,
+  "error":"0"
+}
+```
+
+
+
 ## 2.6 发送找回密码验证短信
+
+| 传入参数               | 传出参数                | 网址                     |
+| ------------------ | ------------------- | ---------------------- |
+| 手机号码(phone string) | 是否发送成功(has boolean) | /sendPhoneToRepassword |
+|                    | 错误信息(error string)  |                        |
+
+requestBody
+
+```json
+{
+  "phone":"18100174605"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",true,
+  "error":"0"
+}
+```
+
+
 
 ## 2.7 找回密码
 
 ## 2.8 退出
 
-## 2.9 发送修改邮箱/手机验证短信
+## 2.9 发送修改邮箱/手机验证邮件
 
-## 2.10 发送修改邮箱/手机验证邮件
+| 传入参数               | 传出参数                | 网址                 |
+| ------------------ | ------------------- | ------------------ |
+| 邮箱地址(email string) | 是否发送成功(has boolean) | /sendEmailToModify |
+|                    | 错误信息(error string)  |                    |
+
+requestBody
+
+```json
+{
+  "email":"18100174605@qq.com"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",true,
+  "error":"0"
+}
+```
+
+
+
+## 2.10 发送修改邮箱/手机验证短信
+
+| 传入参数               | 传出参数                | 网址                 |
+| ------------------ | ------------------- | ------------------ |
+| 手机号码(phone string) | 是否发送成功(has boolean) | /sendPhoneToModify |
+|                    | 错误信息(error string)  |                    |
+
+requestBody
+
+```json
+{
+  "phone":"18100174605"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",true,
+  "error":"0"
+}
+```
+
+
 
 ## 2.11 查询密保
+
+## 2.12 是否有此手机号码
+
+| 传入参数               | 传出参数               | 网址        |
+| ------------------ | ------------------ | --------- |
+| 手机号码(phone string) | 是否有(has boolean)   | /hasPhone |
+|                    | 错误信息(error string) |           |
+
+requestBody
+
+```json
+{
+  "phone":"18100174605"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",false,
+  "error":"0"
+}
+```
+
+
+
+## 2.13 是否有此邮箱
+
+| 传入参数               | 传出参数               | 网址        |
+| ------------------ | ------------------ | --------- |
+| 邮箱地址(email string) | 是否有(has boolean)   | /hasEmail |
+|                    | 错误信息(error string) |           |
+
+requestBody
+
+```json
+{
+  "email":"18100174605@qq.com"
+}
+```
+
+responseBody
+
+```json
+{
+  "has",false,
+  "error":"0"
+}
+```
+
+
 
 #3 财务数据（web模块）
 /finance

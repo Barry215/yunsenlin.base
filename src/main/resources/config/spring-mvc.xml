@@ -42,6 +42,7 @@
     </bean>
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+    <!--Validators-->
     <bean class="cn.yunsenlin.web.base.dto.validator.LoginParamValidator"
           id="loginParamValidator"/>
     <bean class="cn.yunsenlin.web.base.dto.validator.VolumeCalculateParamValidator"
@@ -52,6 +53,11 @@
             class="cn.yunsenlin.web.base.dto.validator.UnitVolumeCalculateParamValidator">
         <constructor-arg ref="woodTypeService" name="woodTypeService"/>
     </bean>
+    <bean id="hasEmailParamValidator"
+            class="cn.yunsenlin.web.base.dto.validator.HasEmailParamValidator"/>
+    <bean id="hasPhoneParamValidator"
+            class="cn.yunsenlin.web.base.dto.validator.HasPhoneParamValidator"/>
+    <!--Controller-->
     <bean id="calculateController"
             class="cn.yunsenlin.web.base.controller.CalculateController">
         <constructor-arg ref="volumeAutoCalculateService"
@@ -63,5 +69,7 @@
         <constructor-arg name="loginParamValidator" ref="loginParamValidator"/>
         <constructor-arg name="sessionService" ref="sessionService"/>
         <constructor-arg name="userService" ref="userService"/>
+        <constructor-arg name="hasEmailParamValidator" ref="hasPhoneParamValidator"/>
+        <constructor-arg name="hasPhoneParamValidator" ref="hasPhoneParamValidator"/>
     </bean>
 </beans>

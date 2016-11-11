@@ -4,20 +4,27 @@
   <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.Session" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="session" property="session" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR"/>
+    <result column="token_create_time" property="tokenCreateTime" jdbcType="TIMESTAMP"/>
+    <result column="token_period" property="tokenPeriod" jdbcType="BIGINT"/>
   </resultMap>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
-      user_id, session,token
+      user_id, session,token,token_create_time,token_period
     from session
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from session
-    where user_id = #{userId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.yunsenlin.web.base.model.Session" >
-    insert into session (user_id, session,token)
-    values (#{userId,jdbcType=INTEGER},#{session,jdbcType=VARCHAR},#{token,jdbcType=VARCHAR})
+    insert into session (user_id, session,token,token_create_time,token_period)
+    values (#{userId,jdbcType=INTEGER},
+            #{session,jdbcType=VARCHAR},
+            #{token,jdbcType=VARCHAR},
+            #{tokenCreateTime,jdbcType=TIMESTAMP},
+            #{tokenPeriod,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.Session" >
     insert into session
@@ -31,6 +38,12 @@
       <if test="token != null" >
         token,
       </if>
+      <if test="tokenCreateTime != null" >
+        token_create_time,
+      </if>
+      <if test="tokenPeriod != null" >
+        token_period,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -41,6 +54,12 @@
       </if>
       <if test="token != null" >
         #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenCreateTime != null" >
+        #{tokenCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tokenPeriod != null" >
+        #{tokenPeriod,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -56,14 +75,22 @@
       <if test="token != null" >
         token = #{token,jdbcType=VARCHAR},
       </if>
+      <if test="tokenCreateTime != null" >
+        token_create_time = #{tokenCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenPeriod != null" >
+        token_period = #{tokenPeriod,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.Session" >
     update session
-    set user_id = #{userID,jdbcType=INTEGER},
+    set user_id = #{userId,jdbcType=INTEGER},
       session = #{session,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR}
-    where user_id = #{typeCode,jdbcType=VARCHAR}
+      token = #{token,jdbcType=VARCHAR},
+      token_create_time = #{tokenCreateTime,jdbcType=TIMESTAMP},
+      token_period = #{tokenPeriod,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

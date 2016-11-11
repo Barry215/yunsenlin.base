@@ -5,7 +5,11 @@ import cn.yunsenlin.web.base.factory.RegxFactory;
 import cn.yunsenlin.web.base.model.User;
 import cn.yunsenlin.web.base.service.EncryptionService;
 import cn.yunsenlin.web.base.service.UserService;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Transactional
+@RequestMapping("/user")
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final EncryptionService aesEncryptionService;
@@ -46,7 +50,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loginToGetUser(String loginName, String password) {
         if (login(loginName,password)
-                &&loginName.matches(RegxFactory.mobileRegx)){
+                &&loginName.matches(RegxFactory.phoneRegx)){
             return userMapper.selectByPhone(loginName);
         }else if (login(loginName,password)
                 &&loginName.matches(RegxFactory.mobileRegx)) {
@@ -65,6 +69,18 @@ public class UserServiceImpl implements UserService {
                 )
         );
         userMapper.insertSelective(user);
+    }
+
+    @Override
+    public boolean hasEmail(String email) {
+        User user =userMapper.selectByEmail(email);
+        return user!=null;
+    }
+
+    @Override
+    public boolean hasPhone(String phone) {
+        User user = userMapper.selectByPhone(phone);
+        return user!=null;
     }
 
     @Override

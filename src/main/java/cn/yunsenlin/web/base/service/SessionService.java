@@ -10,5 +10,5 @@ public interface SessionService {
     Object get(String token,User user,String description);
 
     boolean checkToken(String token,int userId);
-    String createToken(int userId);
+    String createToken(int userId,Long tokenPeriod);
 }

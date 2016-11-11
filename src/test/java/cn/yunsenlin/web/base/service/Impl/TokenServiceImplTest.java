@@ -13,7 +13,7 @@ public class TokenServiceImplTest extends SpringTestBase{
             LoggerFactory.getLogger(TokenService.class);
     @Test
     public void getUniqueTokenString() throws Exception {
-        for (int i=0;i<1000;i++){
+        for (int i=0;i<10;i++){
             logger.debug("测试TOKEN生成字符串"
             +tokenService.getUniqueTokenString());
             logger.debug(tokenService.getTokenDate(

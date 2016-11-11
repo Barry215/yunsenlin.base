@@ -1,9 +1,29 @@
 package cn.yunsenlin.web.base.model;
 
+import java.util.Date;
+
 public class Session {
     private int userId;
-    private String session;
-    private String token;
+    private String session = "";
+    private String token = "";
+    private Date tokenCreateTime = new Date();
+    private Long tokenPeriod;
+
+    public Date getTokenCreateTime() {
+        return tokenCreateTime;
+    }
+
+    public void setTokenCreateTime(Date tokenCreateTime) {
+        this.tokenCreateTime = tokenCreateTime;
+    }
+
+    public Long getTokenPeriod() {
+        return tokenPeriod;
+    }
+
+    public void setTokenPeriod(Long tokenPeriod) {
+        this.tokenPeriod = tokenPeriod;
+    }
 
     public String getToken() {
         return token;

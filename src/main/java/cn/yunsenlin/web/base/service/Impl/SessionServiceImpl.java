@@ -8,6 +8,8 @@ import cn.yunsenlin.web.base.service.GsonService;
 import cn.yunsenlin.web.base.service.SessionService;
 import cn.yunsenlin.web.base.service.TokenService;
 
+import java.util.Date;
+
 public class SessionServiceImpl implements SessionService {
     private final SessionMapper sessionMapper;
     private final GsonService gsonService;
@@ -26,8 +28,16 @@ public class SessionServiceImpl implements SessionService {
         if (session != null && session.getToken().equals(token)) {
             SessionObject sessionObject =
                     (SessionObject) gsonService.toObject(session.getSession(), SessionObject.class);
+            if (sessionObject==null){
+                sessionObject= new SessionObject();
+            }
             sessionObject.put(object, description);
             session.setSession(gsonService.toJson(sessionObject));
+            Long tokenPeriod = session.getTokenPeriod();
+            if (tokenPeriod<1800000){
+                session.setTokenPeriod(1800000L);
+                session.setTokenCreateTime(new Date());
+            }
             sessionMapper.updateByPrimaryKey(session);
         }
     }
@@ -39,6 +49,12 @@ public class SessionServiceImpl implements SessionService {
         if (session != null && session.getToken().equals(token)) {
             SessionObject sessionObject
                     = (SessionObject) gsonService.toObject(session.getSession(),SessionObject.class);
+            Long tokenPeriod = session.getTokenPeriod();
+            if (tokenPeriod<1800000){
+                session.setTokenPeriod(1800000L);
+                session.setTokenCreateTime(new Date());
+                sessionMapper.updateByPrimaryKey(session);
+            }
             return sessionObject.get(description);
         }
         return null;
@@ -52,13 +68,14 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public String createToken(int userId) {
+    public String createToken(int userId,Long tokenPeriod) {
         sessionMapper.deleteByPrimaryKey(userId);
         Session session = new Session();
         session.setUserId(userId);
         String token =tokenService.getUniqueTokenString();
         session.setToken(token);
+        session.setTokenPeriod(tokenPeriod);
         sessionMapper.insert(session);
-        return null;
+        return token;
     }
 }
