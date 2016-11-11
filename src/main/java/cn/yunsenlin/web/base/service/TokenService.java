@@ -5,4 +5,5 @@ import java.util.Date;
 public interface TokenService {
     String getUniqueTokenString();
     Date getTokenDate(String token);
+    String getEmailAndPhoneCode();
 }

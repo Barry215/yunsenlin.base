@@ -1,5 +1,6 @@
 package cn.yunsenlin.web.base.service.Impl;
 
+import cn.yunsenlin.web.base.factory.RegxFactory;
 import cn.yunsenlin.web.base.service.EncryptionService;
 import cn.yunsenlin.web.base.service.TokenService;
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class TokenServiceImpl implements TokenService {
         String dateString =
                 aesEncryptionService.decrypt(
                         token.substring(token.length()-24,token.length()),
-                        "123456"
+                        RegxFactory.tokenPassword
                 );
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmmss");//小写的mm表示的是分钟
         try {
@@ -58,6 +59,18 @@ public class TokenServiceImpl implements TokenService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public String getEmailAndPhoneCode() {
+        String base = "0123456789";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
     }
 
     private String generate(){
@@ -70,7 +83,7 @@ public class TokenServiceImpl implements TokenService {
         String time = sdf.format(date);
         String aesTimeString =
                 aesEncryptionService.encrypt(
-                        time,"123456"
+                        time, RegxFactory.tokenPassword
                 );
         for (int i = 0; i < length; i++) {
             int number = random.nextInt(base.length());

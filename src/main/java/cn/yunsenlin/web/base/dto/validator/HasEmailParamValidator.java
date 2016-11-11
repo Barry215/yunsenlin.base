@@ -20,7 +20,7 @@ public class HasEmailParamValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"email",errorCode);
         HasEmailParam hasEmailParam = (HasEmailParam) target;
         String email = hasEmailParam.getEmail();
-        if (!email.matches(RegxFactory.mobileRegx)){
+        if (!email.matches(RegxFactory.emailRegx)){
             errors.rejectValue("email",errorCode);
         }
     }

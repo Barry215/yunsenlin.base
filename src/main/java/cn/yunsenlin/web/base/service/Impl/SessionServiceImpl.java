@@ -2,6 +2,7 @@ package cn.yunsenlin.web.base.service.Impl;
 
 import cn.yunsenlin.web.base.dao.SessionMapper;
 import cn.yunsenlin.web.base.dto.SessionObject;
+import cn.yunsenlin.web.base.factory.RegxFactory;
 import cn.yunsenlin.web.base.model.Session;
 import cn.yunsenlin.web.base.model.User;
 import cn.yunsenlin.web.base.service.GsonService;
@@ -34,8 +35,8 @@ public class SessionServiceImpl implements SessionService {
             sessionObject.put(object, description);
             session.setSession(gsonService.toJson(sessionObject));
             Long tokenPeriod = session.getTokenPeriod();
-            if (tokenPeriod<1800000){
-                session.setTokenPeriod(1800000L);
+            if (tokenPeriod<RegxFactory.tokenLong){
+                session.setTokenPeriod(RegxFactory.tokenLong);
                 session.setTokenCreateTime(new Date());
             }
             sessionMapper.updateByPrimaryKey(session);
@@ -50,8 +51,8 @@ public class SessionServiceImpl implements SessionService {
             SessionObject sessionObject
                     = (SessionObject) gsonService.toObject(session.getSession(),SessionObject.class);
             Long tokenPeriod = session.getTokenPeriod();
-            if (tokenPeriod<1800000){
-                session.setTokenPeriod(1800000L);
+            if (tokenPeriod< RegxFactory.tokenLong){
+                session.setTokenPeriod(RegxFactory.tokenLong);
                 session.setTokenCreateTime(new Date());
                 sessionMapper.updateByPrimaryKey(session);
             }

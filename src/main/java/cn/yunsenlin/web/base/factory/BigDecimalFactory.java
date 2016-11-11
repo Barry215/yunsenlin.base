@@ -12,7 +12,7 @@ public class BigDecimalFactory {
     public static BigDecimal get(String number) {
         Date now = new Date();
         Long cleanTimes = now.getTime() - lastCleanTime.getTime();
-        if (cleanTimes > 3600000 || numberMap.size() > 10000) {
+        if (cleanTimes > RegxFactory.bigDecimalCleanTime || numberMap.size() > RegxFactory.bigDecimalMaxSize) {
             numberMap = new HashMap<>();
             lastCleanTime = new Date();
         }

@@ -22,7 +22,7 @@ public class LoginParamValidator implements Validator{
         LoginParam loginParam = (LoginParam) o;
         String loginName = loginParam.getLoginName();
         String password = loginParam.getPassword();
-        if (!loginName.matches(RegxFactory.mobileRegx)
+        if (!loginName.matches(RegxFactory.emailRegx)
                 &&!loginName.matches(RegxFactory.phoneRegx)){
             errors.rejectValue("loginName",errorCode);
         }

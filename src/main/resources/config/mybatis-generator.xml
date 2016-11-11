@@ -3,7 +3,10 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="D:\Program Files\apache-maven-3.3.9\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>
+    <!--windows版本-->
+    <!--<classPathEntry location="D:\Program Files\apache-maven-3.3.9\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>-->
+    <!--Mac版本-->
+    <!--<classPathEntry location="/Users/Richard/mysql-connector-java-5.1.30.jar"/>-->
     <!--数据库驱动-->
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -31,8 +34,15 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="session"
-               domainObjectName="Session"
+        <table tableName="email_send_record"
+               domainObjectName="EmailSendRecord"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="phone_send_record"
+               domainObjectName="PhoneSendRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

@@ -6,7 +6,9 @@ public enum  ErrorUtils {
     DataValid("D0001","数据验证不通过"),
     NoLogin("U0001","登录错误"),
     EmailAlreadyHas("U0002","邮件地址已经存在"),
-    PhoneAlreadyHas("U0003","邮件地址已经存在");
+    PhoneAlreadyHas("U0003","手机号码已经存在"),
+    NoEmail("U0004","邮件地址不存在"),
+    NoPhone("U0005","手机号码不存在");
     private String errorCode;
     private String errorInfo;
 

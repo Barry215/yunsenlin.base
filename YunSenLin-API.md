@@ -201,7 +201,7 @@ responseBody
 | ---------------------------------------- | ------------------ | -------- |
 | 总检尺类木材（woodCheckList）woodCheckElem       | 错误信息(error string) | /saveAll |
 | 总称重类木材（woodWeightList）woodWeightElem     |                    |          |
-| 总半估值类木材（woodHalfEstimatList）woodHalfEstimateElem |                    |          |
+| 总半估值类木材（woodHalfEstimatedList）woodHalfEstimateElem |                    |          |
 | 总完全估值类木材（woodFullEstimateList）woodFullEstimateElem |                    |          |
 | 【可选】附加奖金/罚金(rewardAndPunish double)      |                    |          |
 | 【可选】附加奖金理由(rewardReason string)          |                    |          |
@@ -266,7 +266,7 @@ requestBody
     {"typeCode":111,"volume":60},
     {"typeCode":111,"volume":60,"price":788}
   ],
-  "woodHalfEstimateList":[
+  "woodHalfEstimatedList":[
     {"rootDiameter":45,"typeCode":123},
     {"GBH":35,"typeCode":24,"price":560.00,"priceDownReason":"水分超标"}
   ]
@@ -330,10 +330,10 @@ responseBody
 
 ## 2.3 发送注册验证邮件
 
-| 传入参数               | 传出参数                | 网址                 |
-| ------------------ | ------------------- | ------------------ |
-| 邮箱地址(email string) | 是否发送成功(has boolean) | /sendEmailToSignIn |
-|                    | 错误信息(error string)  |                    |
+| 传入参数               | 传出参数                    | 网址                 |
+| ------------------ | ----------------------- | ------------------ |
+| 邮箱地址(email string) | 是否发送成功(success boolean) | /sendEmailToSignIn |
+|                    | 错误信息(error string)      |                    |
 
 requestBody
 
@@ -347,7 +347,7 @@ responseBody
 
 ```json
 {
-  "has",true,
+  "has":true,
   "error":"0"
 }
 ```
@@ -356,10 +356,10 @@ responseBody
 
 ## 2.4 发送注册验证短信
 
-| 传入参数               | 传出参数                | 网址                 |
-| ------------------ | ------------------- | ------------------ |
-| 手机号码(phone string) | 是否发送成功(has boolean) | /sendPhoneToSignIn |
-|                    | 错误信息(error string)  |                    |
+| 传入参数               | 传出参数                    | 网址                 |
+| ------------------ | ----------------------- | ------------------ |
+| 手机号码(phone string) | 是否发送成功(success boolean) | /sendPhoneToSignIn |
+|                    | 错误信息(error string)      |                    |
 
 requestBody
 
@@ -373,7 +373,7 @@ responseBody
 
 ```json
 {
-  "has",true,
+  "has":true,
   "error":"0"
 }
 ```
@@ -382,10 +382,10 @@ responseBody
 
 ## 2.5 发送找回密码验证邮件
 
-| 传入参数               | 传出参数                | 网址                     |
-| ------------------ | ------------------- | ---------------------- |
-| 邮箱地址(email string) | 是否发送成功(has boolean) | /sendEmailToRepassword |
-|                    | 错误信息(error string)  |                        |
+| 传入参数               | 传出参数                    | 网址                     |
+| ------------------ | ----------------------- | ---------------------- |
+| 邮箱地址(email string) | 是否发送成功(success boolean) | /sendEmailToRepassword |
+|                    | 错误信息(error string)      |                        |
 
 requestBody
 
@@ -399,7 +399,7 @@ responseBody
 
 ```json
 {
-  "has",true,
+  "has":true,
   "error":"0"
 }
 ```
@@ -408,10 +408,10 @@ responseBody
 
 ## 2.6 发送找回密码验证短信
 
-| 传入参数               | 传出参数                | 网址                     |
-| ------------------ | ------------------- | ---------------------- |
-| 手机号码(phone string) | 是否发送成功(has boolean) | /sendPhoneToRepassword |
-|                    | 错误信息(error string)  |                        |
+| 传入参数               | 传出参数                    | 网址                     |
+| ------------------ | ----------------------- | ---------------------- |
+| 手机号码(phone string) | 是否发送成功(success boolean) | /sendPhoneToRepassword |
+|                    | 错误信息(error string)      |                        |
 
 requestBody
 
@@ -425,7 +425,7 @@ responseBody
 
 ```json
 {
-  "has",true,
+  "has":true,
   "error":"0"
 }
 ```
@@ -438,10 +438,10 @@ responseBody
 
 ## 2.9 发送修改邮箱/手机验证邮件
 
-| 传入参数               | 传出参数                | 网址                 |
-| ------------------ | ------------------- | ------------------ |
-| 邮箱地址(email string) | 是否发送成功(has boolean) | /sendEmailToModify |
-|                    | 错误信息(error string)  |                    |
+| 传入参数               | 传出参数                    | 网址                 |
+| ------------------ | ----------------------- | ------------------ |
+| 邮箱地址(email string) | 是否发送成功(success boolean) | /sendEmailToModify |
+|                    | 错误信息(error string)      |                    |
 
 requestBody
 
@@ -455,7 +455,7 @@ responseBody
 
 ```json
 {
-  "has",true,
+  "has":true,
   "error":"0"
 }
 ```
@@ -464,10 +464,10 @@ responseBody
 
 ## 2.10 发送修改邮箱/手机验证短信
 
-| 传入参数               | 传出参数                | 网址                 |
-| ------------------ | ------------------- | ------------------ |
-| 手机号码(phone string) | 是否发送成功(has boolean) | /sendPhoneToModify |
-|                    | 错误信息(error string)  |                    |
+| 传入参数               | 传出参数                    | 网址                 |
+| ------------------ | ----------------------- | ------------------ |
+| 手机号码(phone string) | 是否发送成功(success boolean) | /sendPhoneToModify |
+|                    | 错误信息(error string)      |                    |
 
 requestBody
 
@@ -481,7 +481,7 @@ responseBody
 
 ```json
 {
-  "has",true,
+  "has":true,
   "error":"0"
 }
 ```
@@ -509,7 +509,7 @@ responseBody
 
 ```json
 {
-  "has",false,
+  "has":false,
   "error":"0"
 }
 ```
@@ -535,7 +535,7 @@ responseBody
 
 ```json
 {
-  "has",false,
+  "has":false,
   "error":"0"
 }
 ```

@@ -54,4 +54,12 @@
         <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.SessionMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="emailSendRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.EmailSendRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="phoneSendRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.PhoneSendRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>

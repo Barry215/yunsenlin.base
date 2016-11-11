@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean login(String loginName, String password) {
-        if (loginName.matches(RegxFactory.mobileRegx)){
+        if (loginName.matches(RegxFactory.emailRegx)){
             User user = userMapper.selectByEmail(loginName);
             if (user!=null&&
                     user.getPassword().equals(
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
                 &&loginName.matches(RegxFactory.phoneRegx)){
             return userMapper.selectByPhone(loginName);
         }else if (login(loginName,password)
-                &&loginName.matches(RegxFactory.mobileRegx)) {
+                &&loginName.matches(RegxFactory.emailRegx)) {
             return userMapper.selectByEmail(loginName);
         }
             return null;

@@ -33,4 +33,11 @@
         <constructor-arg name="sessionMapper" ref="sessionMapper"/>
         <constructor-arg name="tokenService" ref="tokenService"/>
     </bean>
+    <bean id="outLetService"
+            class="cn.yunsenlin.web.base.service.Impl.OutLetServiceImpl">
+        <constructor-arg name="emailSendRecordMapper" ref="emailSendRecordMapper"/>
+        <constructor-arg name="encryptionService" ref="aesEncryptionService"/>
+        <constructor-arg name="phoneSendRecordMapper" ref="phoneSendRecordMapper"/>
+        <constructor-arg name="tokenService" ref="tokenService"/>
+    </bean>
 </beans>
