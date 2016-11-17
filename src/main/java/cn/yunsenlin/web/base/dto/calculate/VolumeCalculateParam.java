@@ -4,6 +4,7 @@ public class VolumeCalculateParam {
     private String length;
     private String diameter;
     private String typeCode;
+    private String num;
 
     public String getLength() {
         return length;
@@ -29,4 +30,11 @@ public class VolumeCalculateParam {
         this.typeCode = typeCode;
     }
 
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
 }

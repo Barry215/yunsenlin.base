@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Transactional
-@RequestMapping("/calculate")
-public class CalculateController {
+@RequestMapping("/android/calculate")
+public class CalculateAndroidController {
     private final VolumeAutoCalculateService volumeAutoCalculateService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final Validator volumeCalculateValidator;
+    private final Validator logVolumeCalculateValidator;
     private final Validator unitVolumeCalculateParam;
 
-    public CalculateController(VolumeAutoCalculateService volumeAutoCalculateService, Validator volumeCalculateValidator, Validator unitVolumeCalculateParam) {
+    public CalculateAndroidController(VolumeAutoCalculateService volumeAutoCalculateService, Validator logVolumeCalculateValidator, Validator unitVolumeCalculateParam) {
         this.volumeAutoCalculateService = volumeAutoCalculateService;
-        this.volumeCalculateValidator = volumeCalculateValidator;
+        this.logVolumeCalculateValidator = logVolumeCalculateValidator;
         this.unitVolumeCalculateParam = unitVolumeCalculateParam;
     }
-    @InitBinder(value = "volumeCalculateValidator")
+    @InitBinder(value = "logVolumeCalculateValidator")
     public void initVolumeCalculateValidator(DataBinder binder) {
-        binder.addValidators(volumeCalculateValidator);
+        binder.addValidators(logVolumeCalculateValidator);
     }
     @InitBinder(value = "unitVolumeCalculateParam")
     public void initWoodBaseValidator(DataBinder binder){
         binder.addValidators(unitVolumeCalculateParam);
     }
 
-    @RequestMapping(value = "/volumeCalculate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/logVolumeCalculate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public VolumeCalculateReturn volumeCalculate(
             @Valid
@@ -48,13 +48,14 @@ public class CalculateController {
         String length = volumeCalculateValidator.getLength();
         String diameter = volumeCalculateValidator.getDiameter();
         String typeCode = volumeCalculateValidator.getTypeCode();
+        String num = volumeCalculateValidator.getNum();
         logger.info("volumeCalculate running length="+length+"," +
-                "diameter="+diameter+",typeCode="+typeCode);
+                "diameter="+diameter+",typeCode="+typeCode+",num="+num);
         String volume =
-            volumeAutoCalculateService.getVolumeAutoCalculate(length,diameter,typeCode);
+            volumeAutoCalculateService.getLogVolumeAutoCalculate(length,diameter,typeCode,num);
         return new VolumeCalculateReturn(volume,"0");
     }
-    @RequestMapping(value = "/unitVolumeCalculate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/unitLogVolumeCalculate", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public VolumeCalculateReturn unitVolumeCalculate(@RequestBody
                                                          @Valid UnitVolumeCalculateParam unitVolumeCalculateParam, BindingResult result){
@@ -63,7 +64,7 @@ public class CalculateController {
         }
         logger.info("unitVolumeCalculateParam running list:"+ unitVolumeCalculateParam);
         String volume =
-                volumeAutoCalculateService.getVolumeAutoCalculate(unitVolumeCalculateParam.getWoodBaseList());
+                volumeAutoCalculateService.getLogVolumeAutoCalculate(unitVolumeCalculateParam.getWoodBaseList());
         return new VolumeCalculateReturn(volume,"0");
     }
 

@@ -1,11 +1,11 @@
 package cn.yunsenlin.web.base.service.Impl.VolumeCalculate;
 
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
-import cn.yunsenlin.web.base.service.VolumeCalculateService;
+import cn.yunsenlin.web.base.service.LogVolumeCalculateService;
 
 import java.math.BigDecimal;
 
-public class LogVolumeCalculateServiceImpl implements VolumeCalculateService{
+public class Log2013LogVolumeCalculateServiceImpl implements LogVolumeCalculateService {
     private static BigDecimal num0 = getByFactory("0");
     private static BigDecimal num_1 = getByFactory("-1");
     private static BigDecimal num4 = getByFactory("4");

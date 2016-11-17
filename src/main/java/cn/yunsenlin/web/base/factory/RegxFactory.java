@@ -12,7 +12,7 @@ public class RegxFactory {
     public final static Long tokenLong = 1800000L;
     final static int bigDecimalCleanTime = 3600000;
     final static int bigDecimalMaxSize = 10000;
-    public final static int emailAviableTime = 1800000;
-    public final static int phoneAviableTime = 1800000;
+    public final static int emailAvailableTime = 1800000;
+    public final static int phoneAvailableTime = 1800000;
 
 }

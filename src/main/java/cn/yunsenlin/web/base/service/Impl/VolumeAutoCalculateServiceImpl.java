@@ -4,44 +4,53 @@ import cn.yunsenlin.web.base.dao.WoodTypeMapper;
 import cn.yunsenlin.web.base.dto.calculate.WoodBase;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
 import cn.yunsenlin.web.base.model.WoodType;
+import cn.yunsenlin.web.base.service.EvaluateVolumeCalculateService;
+import cn.yunsenlin.web.base.service.LogVolumeCalculateService;
+import cn.yunsenlin.web.base.service.TimberVolumeCalculateService;
 import cn.yunsenlin.web.base.service.VolumeAutoCalculateService;
-import cn.yunsenlin.web.base.service.VolumeCalculateService;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateService{
-    private final VolumeCalculateService logVolumeCalculateService;
+    private final LogVolumeCalculateService log2013LogVolumeCalculateService;
     private final WoodTypeMapper woodTypeMapper;
+    private final TimberVolumeCalculateService timberVolumeCalculateService;
+    private final EvaluateVolumeCalculateService evaluateVolumeCalculateService;
 
-    public VolumeAutoCalculateServiceImpl(VolumeCalculateService logVolumeCalculateService, WoodTypeMapper woodTypeMapper) {
-        this.logVolumeCalculateService = logVolumeCalculateService;
+    public VolumeAutoCalculateServiceImpl(LogVolumeCalculateService log2013LogVolumeCalculateService, WoodTypeMapper woodTypeMapper, TimberVolumeCalculateService timberVolumeCalculateService, EvaluateVolumeCalculateService evaluateVolumeCalculateService) {
+        this.log2013LogVolumeCalculateService = log2013LogVolumeCalculateService;
         this.woodTypeMapper = woodTypeMapper;
+        this.timberVolumeCalculateService = timberVolumeCalculateService;
+        this.evaluateVolumeCalculateService = evaluateVolumeCalculateService;
     }
 
+
     @Override
-    public String getVolumeAutoCalculate(String length, String diameter, String typeCode) {
+    public String getLogVolumeAutoCalculate(String length, String diameter, String typeCode,String num) {
         WoodType woodType = woodTypeMapper.selectByPrimaryKey(typeCode);
-        if (woodType!=null&&woodType.getBelongs().equals("原木")){
-            return logVolumeCalculateService.getVolumeCalculateResult(
+        if (woodType!=null&&woodType.getBelongs().equals("原木")
+                &&woodType.getName().equals("原木2013")){
+            return log2013LogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).toString();
+            ).multiply(BigDecimalFactory.get(num)).toString();
         }else{
             return "-1";
         }
     }
 
     @Override
-    public String getVolumeAutoCalculate(List<WoodBase> woodBaseList) {
+    public String getLogVolumeAutoCalculate(List<WoodBase> woodBaseList) {
         BigDecimal sum = BigDecimalFactory.get("0");
         for (WoodBase woodBase : woodBaseList) {
             String typeCode =woodBase.getTypeCode();
             WoodType woodType = woodTypeMapper.selectByPrimaryKey(typeCode);
-            if (woodType!=null&&woodType.getBelongs().equals("原木")){
+            if (woodType!=null&&woodType.getBelongs().equals("原木")
+                    &&woodType.getName().equals("原木2013")){
                 BigDecimal num = BigDecimalFactory.get(woodBase.getNum()+"");
                 sum =sum.add(
-                        (logVolumeCalculateService.getVolumeCalculateResult(
+                        (log2013LogVolumeCalculateService.getVolumeCalculateResult(
                                 BigDecimalFactory.get(woodBase.getLength()),
                                 BigDecimalFactory.get(woodBase.getDiameter())
                                 ).multiply(num)
@@ -51,5 +60,17 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             }
         }
         return sum.toString();
+    }
+
+    @Override
+    public String getTimberVolumeAutoCalculate(String length, String width, String height) {
+        return timberVolumeCalculateService.getVolumeCalculateResult(length,width,height);
+    }
+
+    @Override
+    public String getEvaluateVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
+        return evaluateVolumeCalculateService.evaluate(
+                length,xiongjing,num,typeCode,cityCode
+        );
     }
 }

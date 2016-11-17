@@ -11,10 +11,10 @@ import org.springframework.validation.Validator;
 
 import java.util.List;
 
-public class UnitVolumeCalculateParamValidator implements Validator{
+public class UnitLogVolumeCalculateParamValidator implements Validator{
     private final WoodTypeService woodTypeService;
 
-    public UnitVolumeCalculateParamValidator(WoodTypeService woodTypeService) {
+    public UnitLogVolumeCalculateParamValidator(WoodTypeService woodTypeService) {
         this.woodTypeService = woodTypeService;
     }
 

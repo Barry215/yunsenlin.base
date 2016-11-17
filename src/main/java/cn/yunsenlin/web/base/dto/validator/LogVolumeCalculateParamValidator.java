@@ -8,10 +8,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-public class VolumeCalculateParamValidator implements Validator{
+public class LogVolumeCalculateParamValidator implements Validator{
     private final WoodTypeService woodTypeService;
 
-    public VolumeCalculateParamValidator(WoodTypeService woodTypeService) {
+    public LogVolumeCalculateParamValidator(WoodTypeService woodTypeService) {
         this.woodTypeService = woodTypeService;
     }
 
@@ -26,10 +26,12 @@ public class VolumeCalculateParamValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"length", errorCode);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"diameter",errorCode);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"typeCode",errorCode);
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"num",errorCode);
         VolumeCalculateParam param = (VolumeCalculateParam) target;
         String length = param.getLength();
         String diameter = param.getDiameter();
         String typeCode = param.getTypeCode();
+        String num = param.getNum();
         if (!woodTypeService.hasTypeCode(typeCode)){
             errors.rejectValue("typeCode",errorCode);
         }
@@ -38,6 +40,9 @@ public class VolumeCalculateParamValidator implements Validator{
         }
         if (!BigDecimalFactory.isNumber(diameter)){
             errors.rejectValue("diameter",errorCode);
+        }
+        if (!BigDecimalFactory.isNumber(num)){
+            errors.rejectValue("num",errorCode);
         }
     }
 }

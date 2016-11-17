@@ -182,38 +182,6 @@ public class UserController {
         return new SendPhoneReturn("0",outLetService.sendPhone(phone));
     }
 
-    @RequestMapping(value = "/sendEmailToModify", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public SendEmailReturn sendEmailToModify(
-            @Valid @RequestBody SendEmailParam sendEmailParam, BindingResult result) {
-        if (result.hasErrors()){
-            return new SendEmailReturn(ErrorUtils.DataValid.getErrorCode(),
-                    false);
-        }
-        String email = sendEmailParam.getEmail();
-        if (!userService.hasEmail(email)){
-            return new SendEmailReturn(ErrorUtils.NoEmail.getErrorCode(),
-                    false);
-        }
-        return new SendEmailReturn("0",outLetService.sendEmail(email));
-    }
-
-    @RequestMapping(value = "/sendPhoneToModify", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public SendPhoneReturn sendPhoneToModify(
-            @Valid @RequestBody SendPhoneParam sendPhoneParam, BindingResult result) {
-        if (result.hasErrors()){
-            return new SendPhoneReturn(ErrorUtils.DataValid.getErrorCode(),
-                    false);
-        }
-        String phone = sendPhoneParam.getPhone();
-        if (!userService.hasPhone(phone)){
-            return new SendPhoneReturn(ErrorUtils.NoPhone.getErrorCode(),
-                    false);
-        }
-        return new SendPhoneReturn("0",outLetService.sendPhone(phone));
-    }
-
     @RequestMapping(value = "/sendEmailToRepassword", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public SendEmailReturn sendEmailToRepassword(

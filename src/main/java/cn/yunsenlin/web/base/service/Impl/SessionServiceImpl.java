@@ -34,10 +34,12 @@ public class SessionServiceImpl implements SessionService {
             }
             sessionObject.put(object, description);
             session.setSession(gsonService.toJson(sessionObject));
-            Long tokenPeriod = session.getTokenPeriod();
+            Date now = new Date();
+            Long tokenPeriod = session.getTokenCreateTime()
+                    .getTime()+session.getTokenPeriod()-now.getTime();
             if (tokenPeriod<RegxFactory.tokenLong){
-                session.setTokenPeriod(RegxFactory.tokenLong);
-                session.setTokenCreateTime(new Date());
+                session.setTokenPeriod(session.getTokenPeriod());
+                session.setTokenCreateTime(now);
             }
             sessionMapper.updateByPrimaryKey(session);
         }
@@ -50,11 +52,12 @@ public class SessionServiceImpl implements SessionService {
         if (session != null && session.getToken().equals(token)) {
             SessionObject sessionObject
                     = (SessionObject) gsonService.toObject(session.getSession(),SessionObject.class);
-            Long tokenPeriod = session.getTokenPeriod();
-            if (tokenPeriod< RegxFactory.tokenLong){
-                session.setTokenPeriod(RegxFactory.tokenLong);
-                session.setTokenCreateTime(new Date());
-                sessionMapper.updateByPrimaryKey(session);
+            Date now = new Date();
+            Long tokenPeriod = session.getTokenCreateTime()
+                    .getTime()+session.getTokenPeriod()-now.getTime();
+            if (tokenPeriod<RegxFactory.tokenLong){
+                session.setTokenPeriod(session.getTokenPeriod());
+                session.setTokenCreateTime(now);
             }
             return sessionObject.get(description);
         }
@@ -65,7 +68,23 @@ public class SessionServiceImpl implements SessionService {
     public boolean checkToken(String token, int userId) {
         Session session =
                 sessionMapper.selectByPrimaryKey(userId);
-        return session != null && session.getToken().equals(token);
+        if (session==null){
+            return false;
+        }
+        Long now = new Date().getTime();
+        Long tokenPeriod = session.getTokenPeriod();
+        Long deadDate = session.getTokenCreateTime().getTime()+tokenPeriod;
+        if (session.getToken().equals(token)
+                &&deadDate>=now){
+            Long tokenLong = session.getTokenCreateTime()
+                    .getTime()+session.getTokenPeriod()-now;
+            if (tokenLong<RegxFactory.tokenLong){
+                session.setTokenPeriod(session.getTokenPeriod());
+                session.setTokenCreateTime(new Date());
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

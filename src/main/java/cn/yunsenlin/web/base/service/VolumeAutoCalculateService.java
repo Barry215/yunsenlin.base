@@ -5,6 +5,8 @@ import cn.yunsenlin.web.base.dto.calculate.WoodBase;
 import java.util.List;
 
 public interface VolumeAutoCalculateService {
-    String getVolumeAutoCalculate(String length,String diameter,String typeCode);
-    String getVolumeAutoCalculate(List<WoodBase> woodBaseList);
+    String getLogVolumeAutoCalculate(String length, String diameter, String typeCode,String num);
+    String getLogVolumeAutoCalculate(List<WoodBase> woodBaseList);
+    String getTimberVolumeAutoCalculate(String length,String width,String height);
+    String getEvaluateVolumeAutoCalculate(String length,String xiongjing,String num,String typeCode,String cityCode);
 }

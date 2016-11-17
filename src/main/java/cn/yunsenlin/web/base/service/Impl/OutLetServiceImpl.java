@@ -35,7 +35,7 @@ public class OutLetServiceImpl implements OutLetService {
         Date now = new Date();
         int repeatCount=0;
         for (PhoneSendRecord p: phoneSendRecordList) {
-            if (now.getTime()-p.getTime().getTime()<RegxFactory.phoneAviableTime){
+            if (now.getTime()-p.getTime().getTime()<RegxFactory.phoneAvailableTime){
                 repeatCount++;
             }
         }
@@ -59,7 +59,7 @@ public class OutLetServiceImpl implements OutLetService {
         Date now = new Date();
         int repeatCount=0;
         for (EmailSendRecord e: emailSendRecordList) {
-            if (now.getTime()-e.getTime().getTime()<RegxFactory.emailAviableTime){
+            if (now.getTime()-e.getTime().getTime()<RegxFactory.emailAvailableTime){
                 repeatCount++;
             }
         }
@@ -86,7 +86,7 @@ public class OutLetServiceImpl implements OutLetService {
             );
             Date now = new Date();
             Date sendTime = phoneSendRecordList.get(0).getTime();
-            if (rightCode.equals(code)&&now.getTime()-sendTime.getTime()<RegxFactory.phoneAviableTime){
+            if (rightCode.equals(code)&&now.getTime()-sendTime.getTime()<RegxFactory.phoneAvailableTime){
                 return true;
             }
         }
@@ -104,7 +104,7 @@ public class OutLetServiceImpl implements OutLetService {
             );
             Date now = new Date();
             Date sendTime = emailSendRecordList.get(0).getTime();
-            if (rightCode.equals(code)&&now.getTime()-sendTime.getTime()<RegxFactory.emailAviableTime){
+            if (rightCode.equals(code)&&now.getTime()-sendTime.getTime()<RegxFactory.emailAvailableTime){
                 return true;
             }
         }

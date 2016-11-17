@@ -3,17 +3,33 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="logVolumeCalculateService"
-            class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.LogVolumeCalculateServiceImpl"/>
+    <bean id="log2013LogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.Log2013LogVolumeCalculateServiceImpl"/>
+    <bean id="log1984LogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.Log1984LogVolumeCalculateServiceImpl"/>
+    <bean id="boleCenterLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BoleCenterLogVolumeCalculateServiceImpl"/>
+    <bean id="boleLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BoleLogVolumeCalculateServiceImpl"/>
+    <bean id="smallBoleLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.SmallBoleLogVolumeCalculateServiceImpl"/>
+    <bean id="timberVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.TimberVolumeCalculateServiceImpl"/>
+    <bean id="rafterLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.RafterLogVolumeCalculateServiceImpl"/>
     <bean id="volumeAutoCalculateService"
             class="cn.yunsenlin.web.base.service.Impl.VolumeAutoCalculateServiceImpl">
-        <constructor-arg name="logVolumeCalculateService" ref="logVolumeCalculateService"/>
+        <constructor-arg name="log2013LogVolumeCalculateService" ref="log2013LogVolumeCalculateService"/>
         <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
+        <constructor-arg name="timberVolumeCalculateService" ref="timberVolumeCalculateService"/>
+        <constructor-arg name="evaluateVolumeCalculateService" ref="evaluateVolumeCalculateService"/>
     </bean>
     <bean id="woodTypeService"
             class="cn.yunsenlin.web.base.service.Impl.WoodTypeServiceImpl">
         <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
     </bean>
+    <bean id="evaluateVolumeCalculateService"
+            class="cn.yunsenlin.web.base.service.Impl.EvaluateVolumeCalculateServiceImpl"/>
     <bean id="aesEncryptionService"
             class="cn.yunsenlin.web.base.service.Impl.EncryptionServiceImpl"/>
     <bean id="tokenService"

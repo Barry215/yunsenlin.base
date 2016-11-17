@@ -45,12 +45,12 @@
     <!--Validators-->
     <bean class="cn.yunsenlin.web.base.dto.validator.LoginParamValidator"
           id="loginParamValidator"/>
-    <bean class="cn.yunsenlin.web.base.dto.validator.VolumeCalculateParamValidator"
-          id="volumeCalculateParamValidator">
+    <bean class="cn.yunsenlin.web.base.dto.validator.LogVolumeCalculateParamValidator"
+          id="logVolumeCalculateParamValidator">
         <constructor-arg name="woodTypeService" ref="woodTypeService"/>
     </bean>
-    <bean id="unitVolumeCalculateParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.UnitVolumeCalculateParamValidator">
+    <bean id="unitLogVolumeCalculateParamValidator"
+            class="cn.yunsenlin.web.base.dto.validator.UnitLogVolumeCalculateParamValidator">
         <constructor-arg ref="woodTypeService" name="woodTypeService"/>
     </bean>
     <bean id="hasEmailParamValidator"
@@ -65,11 +65,11 @@
             class="cn.yunsenlin.web.base.dto.validator.SignInParamValidator"/>
     <!--Controller-->
     <bean id="calculateController"
-            class="cn.yunsenlin.web.base.controller.CalculateController">
+            class="cn.yunsenlin.web.base.controller.CalculateAndroidController">
         <constructor-arg ref="volumeAutoCalculateService"
                          name="volumeAutoCalculateService"/>
-        <constructor-arg name="volumeCalculateValidator" ref="volumeCalculateParamValidator"/>
-        <constructor-arg name="unitVolumeCalculateParam" ref="unitVolumeCalculateParamValidator"/>
+        <constructor-arg name="logVolumeCalculateValidator" ref="logVolumeCalculateParamValidator"/>
+        <constructor-arg name="unitVolumeCalculateParam" ref="unitLogVolumeCalculateParamValidator"/>
     </bean>
     <bean class="cn.yunsenlin.web.base.controller.UserController">
         <constructor-arg name="loginParamValidator" ref="loginParamValidator"/>
