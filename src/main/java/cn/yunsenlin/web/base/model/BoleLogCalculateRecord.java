@@ -1,5 +1,7 @@
 package cn.yunsenlin.web.base.model;
 
+import java.math.BigDecimal;
+
 public class BoleLogCalculateRecord {
     private Integer id;
 
@@ -8,6 +10,12 @@ public class BoleLogCalculateRecord {
     private Double width;
 
     private Double volume;
+
+    public BoleLogCalculateRecord(BigDecimal length, BigDecimal width, BigDecimal volume) {
+        this.length = length.doubleValue();
+        this.width = width.doubleValue();
+        this.volume = volume.doubleValue();
+    }
 
     public Integer getId() {
         return id;

@@ -17,12 +17,23 @@
     </bean>
     <bean id="log1984LogVolumeCalculateService"
           class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.Log1984LogVolumeCalculateServiceImpl"/>
-    <bean id="boleCenterLogVolumeCalculateService"
-          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BoleCenterLogVolumeCalculateServiceImpl"/>
-    <bean id="boleLogVolumeCalculateService"
-          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BoleLogVolumeCalculateServiceImpl"/>
+    <bean id="boleShanLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BoleShanLogVolumeCalculateServiceImpl">
+        <constructor-arg name="boleShanLogCalculateRecordMapper" ref="boleShanLogCalculateRecordMapper"/>
+    </bean>
+    <bean id="bolePinusLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BolePinusLogVolumeCalculateServiceImpl">
+        <constructor-arg name="bolePinusLogCalculateRecordMapper" ref="bolePinusLogCalculateRecordMapper"/>
+    </bean>
+
+    <bean id="bole1999LogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.Bole1999LogVolumeCalculateServiceImpl">
+        <constructor-arg name="boleLogCalculateRecordMapper" ref="boleLogCalculateRecordMapper"/>
+    </bean>
     <bean id="smallBoleLogVolumeCalculateService"
-          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.SmallBoleLogVolumeCalculateServiceImpl"/>
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.SmallBoleLogVolumeCalculateServiceImpl">
+        <constructor-arg name="smallBoleLogCalculateRecordMapper" ref="smallBoleLogCalculateRecordMapper"/>
+    </bean>
     <bean id="timberVolumeCalculateService"
           class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.TimberVolumeCalculateServiceImpl"/>
     <bean id="rafterLogVolumeCalculateService"
@@ -32,6 +43,11 @@
     <bean id="volumeAutoCalculateService"
             class="cn.yunsenlin.web.base.service.Impl.VolumeAutoCalculateServiceImpl">
         <constructor-arg name="log2013LogVolumeCalculateService" ref="log2013LogVolumeCalculateService"/>
+        <constructor-arg name="log1984LogVolumeCalculateService" ref="log1984LogVolumeCalculateService"/>
+        <constructor-arg name="bole1999LogVolumeCalculateService" ref="bole1999LogVolumeCalculateService"/>
+        <constructor-arg name="boleShanLogCalculateRecordMapper" ref="boleShanLogVolumeCalculateService"/>
+        <constructor-arg name="bolePinusLogVolumeCalculateService" ref="bolePinusLogVolumeCalculateService"/>
+        <constructor-arg name="smallBoleLogVolumeCalculateService" ref="smallBoleLogVolumeCalculateService"/>
         <constructor-arg name="mineLogVolumeCalculateService" ref="mineLogVolumeCalculateService"/>
         <constructor-arg name="purlinLogVolumeCalculateService" ref="purlinLogVolumeCalculateService"/>
         <constructor-arg name="rafterLogVolumeCalculateService" ref="rafterLogVolumeCalculateService"/>

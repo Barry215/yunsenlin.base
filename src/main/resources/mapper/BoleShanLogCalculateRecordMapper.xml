@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.yunsenlin.web.base.dao.BoleCenterLogCalculateRecordMapper" >
-  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.BoleCenterLogCalculateRecord" >
+<mapper namespace="cn.yunsenlin.web.base.dao.BoleShanLogCalculateRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.BoleShanLogCalculateRecord" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="length" property="length" jdbcType="DOUBLE" />
     <result column="width" property="width" jdbcType="DOUBLE" />
@@ -10,21 +10,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
       id, length, width, volume
-    from bole_center_log_calculate_record
+    from bole_shan_log_calculate_record
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from bole_center_log_calculate_record
+    delete from bole_shan_log_calculate_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.BoleCenterLogCalculateRecord" >
-    insert into bole_center_log_calculate_record (id, length, width, 
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.BoleShanLogCalculateRecord" >
+    insert into bole_shan_log_calculate_record (id, length, width,
       volume)
     values (#{id,jdbcType=INTEGER}, #{length,jdbcType=DOUBLE}, #{width,jdbcType=DOUBLE}, 
       #{volume,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.BoleCenterLogCalculateRecord" >
-    insert into bole_center_log_calculate_record
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.BoleShanLogCalculateRecord" >
+    insert into bole_shan_log_calculate_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -54,8 +54,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.BoleCenterLogCalculateRecord" >
-    update bole_center_log_calculate_record
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.BoleShanLogCalculateRecord" >
+    update bole_shan_log_calculate_record
     <set >
       <if test="length != null" >
         length = #{length,jdbcType=DOUBLE},
@@ -69,8 +69,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.BoleCenterLogCalculateRecord" >
-    update bole_center_log_calculate_record
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.BoleShanLogCalculateRecord" >
+    update bole_shan_log_calculate_record
     set length = #{length,jdbcType=DOUBLE},
       width = #{width,jdbcType=DOUBLE},
       volume = #{volume,jdbcType=DOUBLE}

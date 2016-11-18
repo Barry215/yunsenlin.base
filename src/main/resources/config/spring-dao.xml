@@ -78,4 +78,20 @@
         <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.RafterLogCalculateRecordMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="boleLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.BoleLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="smallBoleLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.SmallBoleLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="boleShanLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.BoleShanLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="bolePinusLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.BolePinusLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>

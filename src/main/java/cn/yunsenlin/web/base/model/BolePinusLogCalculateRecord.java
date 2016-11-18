@@ -2,7 +2,7 @@ package cn.yunsenlin.web.base.model;
 
 import java.math.BigDecimal;
 
-public class SmallBoleLogCalculateRecord {
+public class BolePinusLogCalculateRecord {
     private Integer id;
 
     private Double length;
@@ -11,7 +11,7 @@ public class SmallBoleLogCalculateRecord {
 
     private Double volume;
 
-    public SmallBoleLogCalculateRecord(BigDecimal length, BigDecimal width, BigDecimal volume) {
+    public BolePinusLogCalculateRecord(BigDecimal length, BigDecimal width, BigDecimal volume) {
         this.length = length.doubleValue();
         this.width = width.doubleValue();
         this.volume = volume.doubleValue();

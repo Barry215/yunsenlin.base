@@ -1,6 +1,7 @@
 package cn.yunsenlin.web.base.service.Impl;
 
 import cn.yunsenlin.web.base.dao.WoodTypeMapper;
+import cn.yunsenlin.web.base.dto.calculate.Timber;
 import cn.yunsenlin.web.base.dto.calculate.WoodBase;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
 import cn.yunsenlin.web.base.model.WoodType;
@@ -14,6 +15,11 @@ import java.util.List;
 
 public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateService {
     private final LogVolumeCalculateService log2013LogVolumeCalculateService;
+    private final LogVolumeCalculateService log1984LogVolumeCalculateService;
+    private final LogVolumeCalculateService bole1999LogVolumeCalculateService;
+    private final LogVolumeCalculateService bolePinusLogVolumeCalculateService;
+    private final LogVolumeCalculateService boleShanLogCalculateRecordMapper;
+    private final LogVolumeCalculateService smallBoleLogVolumeCalculateService;
     private final LogVolumeCalculateService mineLogVolumeCalculateService;
     private final LogVolumeCalculateService purlinLogVolumeCalculateService;
     private final LogVolumeCalculateService rafterLogVolumeCalculateService;
@@ -21,8 +27,25 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
     private final TimberVolumeCalculateService timberVolumeCalculateService;
     private final EvaluateVolumeCalculateService evaluateVolumeCalculateService;
 
-    public VolumeAutoCalculateServiceImpl(LogVolumeCalculateService log2013LogVolumeCalculateService, LogVolumeCalculateService mineLogVolumeCalculateService, LogVolumeCalculateService purlinLogVolumeCalculateService, LogVolumeCalculateService rafterLogVolumeCalculateService, WoodTypeMapper woodTypeMapper, TimberVolumeCalculateService timberVolumeCalculateService, EvaluateVolumeCalculateService evaluateVolumeCalculateService) {
+    public VolumeAutoCalculateServiceImpl(
+            LogVolumeCalculateService log2013LogVolumeCalculateService,
+            LogVolumeCalculateService log1984LogVolumeCalculateService,
+            LogVolumeCalculateService bole1999LogVolumeCalculateService,
+            LogVolumeCalculateService bolePinusLogVolumeCalculateService,
+            LogVolumeCalculateService boleShanLogCalculateRecordMapper,
+            LogVolumeCalculateService smallBoleLogVolumeCalculateService,
+            LogVolumeCalculateService mineLogVolumeCalculateService,
+            LogVolumeCalculateService purlinLogVolumeCalculateService,
+            LogVolumeCalculateService rafterLogVolumeCalculateService,
+            WoodTypeMapper woodTypeMapper,
+            TimberVolumeCalculateService timberVolumeCalculateService,
+            EvaluateVolumeCalculateService evaluateVolumeCalculateService) {
         this.log2013LogVolumeCalculateService = log2013LogVolumeCalculateService;
+        this.log1984LogVolumeCalculateService = log1984LogVolumeCalculateService;
+        this.bole1999LogVolumeCalculateService = bole1999LogVolumeCalculateService;
+        this.bolePinusLogVolumeCalculateService = bolePinusLogVolumeCalculateService;
+        this.boleShanLogCalculateRecordMapper = boleShanLogCalculateRecordMapper;
+        this.smallBoleLogVolumeCalculateService = smallBoleLogVolumeCalculateService;
         this.mineLogVolumeCalculateService = mineLogVolumeCalculateService;
         this.purlinLogVolumeCalculateService = purlinLogVolumeCalculateService;
         this.rafterLogVolumeCalculateService = rafterLogVolumeCalculateService;
@@ -38,6 +61,13 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("原木2013")) {
             return log2013LogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原木")
+                && woodType.getName().equals("原木1984")) {
+            return log1984LogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
             ).multiply(BigDecimalFactory.get(num)).toString();
@@ -63,6 +93,34 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
                     BigDecimalFactory.get(diameter)
             ).multiply(BigDecimalFactory.get(num)).toString();
         }
+        if (woodType != null && woodType.getBelongs().equals("原条")
+                && woodType.getName().equals("原条1999")){
+            return bole1999LogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原条")
+                && woodType.getName().equals("小原条")){
+            return smallBoleLogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原条")
+                && woodType.getName().equals("杉原条")){
+            return boleShanLogCalculateRecordMapper.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原条")
+                && woodType.getName().equals("马尾松原条")){
+            return bolePinusLogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
         return "-1";
 
     }
@@ -73,7 +131,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         for (WoodBase woodBase : woodBaseList) {
             String typeCode = woodBase.getTypeCode();
             WoodType woodType = woodTypeMapper.selectByPrimaryKey(typeCode);
-            if (woodType != null&& woodType.getBelongs().equals("原木")) {
+            if (woodType != null
+                    && (woodType.getBelongs().equals("原木")
+                    ||woodType.getBelongs().equals("原条"))) {
                 sum = sum.add(
                         BigDecimalFactory.get(
                                 getLogVolumeAutoCalculate(
@@ -91,8 +151,27 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
     }
 
     @Override
-    public String getTimberVolumeAutoCalculate(String length, String width, String height) {
-        return timberVolumeCalculateService.getVolumeCalculateResult(length, width, height);
+    public String getTimberVolumeAutoCalculate(String length, String width, String height,String num) {
+        return timberVolumeCalculateService.getVolumeCalculateResult(length, width, height)
+                .multiply(BigDecimalFactory.get(num)).toString();
+    }
+
+    @Override
+    public String getTimberVolumeAutoCalculate(List<Timber> timbers) {
+        BigDecimal sum = BigDecimalFactory.get("0");
+        for (Timber timber :timbers){
+            sum = sum.add(
+                    BigDecimalFactory.get(
+                            getTimberVolumeAutoCalculate(
+                                    timber.getLength(),
+                                    timber.getWidth(),
+                                    timber.getHeight(),
+                                    timber.getNum()
+                            )
+                    )
+            );
+        }
+        return sum.toString();
     }
 
     @Override

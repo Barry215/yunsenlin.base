@@ -34,15 +34,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="purlin_log_calculate_record"
-               domainObjectName="PurlinLogCalculateRecord"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="mine_log_calculate_record"
-               domainObjectName="MineLogCalculateRecord"
+        <table tableName="bole_pinus_log_calculate_record"
+               domainObjectName="BolePinusLogCalculateRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

@@ -57,10 +57,30 @@ public class VolumeAutoCalculateServiceImplTest extends SpringTestBase{
                 "3.8","11","100003","1"),"0.050");
         Assert.assertEquals(service.getLogVolumeAutoCalculate(
                 "1","3","100003","1"),"0.0010");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "2","4","100009","1"),"0.0025");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "2","22","100009","1"),"0.076");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "5.5","22","100009","1"),"0.209");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "3.0","10","100008","1"),"0.0261");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "5.0","10","100008","1"),"0.0348");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "5","8","100013","1"),"0.025");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "5","14","100013","1"),"0.067");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "5","26","100013","1"),"0.193");
     }
     @Test
     public void isNumber(){
         Assert.assertEquals(BigDecimalFactory.isNumber("11"),true);
     }
-
+    @Test
+    public void getTimberVolumeAutoCalculate(){
+        Assert.assertEquals(service.getTimberVolumeAutoCalculate(
+                "5.2","30","12","1"),"0.019");
+    }
 }
