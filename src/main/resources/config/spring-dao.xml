@@ -62,4 +62,20 @@
         <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.PhoneSendRecordMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="log2013CalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.Log2013CalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="mineLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.MineLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="purlinLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.PurlinLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="rafterLogCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.RafterLogCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>

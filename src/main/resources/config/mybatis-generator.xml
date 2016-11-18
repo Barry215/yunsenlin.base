@@ -34,43 +34,15 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="bole_center_log_calculate_record"
-               domainObjectName="BoleCenterLogCalculateRecord"
+        <table tableName="purlin_log_calculate_record"
+               domainObjectName="PurlinLogCalculateRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false"/>
-        <table tableName="bole_log_calculate_record"
-               domainObjectName="BoleLogCalculateRecord"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="log1984_calculate_record"
-               domainObjectName="log1984CalculateRecord"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="log2013_calculate_record"
-               domainObjectName="log2013CalculateRecord"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="rafter_log_calculate_record"
-               domainObjectName="RafterLogCalculateRecord"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="small_bole_log_calculate_record"
-               domainObjectName="SmallBoleLogCalculateRecord"
+        <table tableName="mine_log_calculate_record"
+               domainObjectName="MineLogCalculateRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
