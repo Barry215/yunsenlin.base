@@ -87,4 +87,6 @@
         <constructor-arg name="phoneSendRecordMapper" ref="phoneSendRecordMapper"/>
         <constructor-arg name="tokenService" ref="tokenService"/>
     </bean>
+    <bean id="sigarService"
+            class="cn.yunsenlin.web.base.service.Impl.SigarServiceImpl"/>
 </beans>
