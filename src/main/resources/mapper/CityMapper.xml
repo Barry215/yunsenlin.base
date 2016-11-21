@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.CityMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.City" >
+    <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.City" >
+    insert into city (city_code, city_name)
+    values (#{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.City" >
+    insert into city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cityCode != null" >
+        city_code,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT * FROM city;
+  </select>
+</mapper>

@@ -1,6 +1,6 @@
 package cn.yunsenlin.web.base.dto.calculate.android;
 
-public class ValidationReturn {
+public class ValidationReturn extends Validation{
     private String sum;
     private String volume;
 

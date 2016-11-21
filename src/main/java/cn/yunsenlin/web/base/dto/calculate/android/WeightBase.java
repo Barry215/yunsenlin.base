@@ -3,7 +3,6 @@ package cn.yunsenlin.web.base.dto.calculate.android;
 public class WeightBase {
     private String total;
     private String lorry;
-    private String piece;
 
     public String getTotal() {
         return total;
@@ -19,13 +18,5 @@ public class WeightBase {
 
     public void setLorry(String lorry) {
         this.lorry = lorry;
-    }
-
-    public String getPiece() {
-        return piece;
-    }
-
-    public void setPiece(String piece) {
-        this.piece = piece;
     }
 }

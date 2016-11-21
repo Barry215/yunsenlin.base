@@ -20,4 +20,12 @@ public class LogBaseReturn {
     public void setError(String error) {
         this.error = error;
     }
+
+    public LogBaseReturn(String volume, String error) {
+        this.volume = volume;
+        this.error = error;
+    }
+
+    public LogBaseReturn() {
+    }
 }

@@ -1,6 +1,6 @@
 package cn.yunsenlin.web.base.dto.calculate.android;
 
-public class WeightReturn extends WeightBase{
+public class WeightReturn extends Weight{
     private String sum;
     private String weight;
 

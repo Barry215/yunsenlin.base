@@ -103,5 +103,10 @@
         <constructor-arg name="tokenService" ref="tokenService"/>
     </bean>
     <bean id="sigarService"
-            class="cn.yunsenlin.web.base.service.Impl.SigarServiceImpl"/>
+          class="cn.yunsenlin.web.base.service.Impl.SigarServiceImpl"/>
+    <bean id="commonInfoService"
+          class="cn.yunsenlin.web.base.service.Impl.CommonInfoServiceImpl">
+        <constructor-arg name="cityMapper" ref="cityMapper"/>
+        <constructor-arg name="logTypeMapper" ref="logTypeMapper"/>
+    </bean>
 </beans>

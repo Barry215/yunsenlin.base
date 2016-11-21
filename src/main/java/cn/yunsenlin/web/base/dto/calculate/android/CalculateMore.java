@@ -6,7 +6,7 @@ import java.util.List;
 public class CalculateMore {
     private Date time;
     private List<Log> logList;
-    private List<WeightBase> weightList;
+    private List<Weight> weightList;
     private List<Timber> timberList;
     private List<Validation> validationList;
     private String token;
@@ -27,11 +27,11 @@ public class CalculateMore {
         this.logList = logList;
     }
 
-    public List<WeightBase> getWeightList() {
+    public List<Weight> getWeightList() {
         return weightList;
     }
 
-    public void setWeightList(List<WeightBase> weightList) {
+    public void setWeightList(List<Weight> weightList) {
         this.weightList = weightList;
     }
 

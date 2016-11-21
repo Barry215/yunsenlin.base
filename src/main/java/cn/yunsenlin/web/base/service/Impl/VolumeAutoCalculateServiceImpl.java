@@ -1,8 +1,7 @@
 package cn.yunsenlin.web.base.service.Impl;
 
 import cn.yunsenlin.web.base.dao.WoodTypeMapper;
-import cn.yunsenlin.web.base.dto.calculate.android.Timber;
-import cn.yunsenlin.web.base.dto.calculate.android.WoodBase;
+import cn.yunsenlin.web.base.dto.calculate.android.*;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
 import cn.yunsenlin.web.base.model.WoodType;
 import cn.yunsenlin.web.base.service.EvaluateVolumeCalculateService;
@@ -11,6 +10,7 @@ import cn.yunsenlin.web.base.service.TimberVolumeCalculateService;
 import cn.yunsenlin.web.base.service.VolumeAutoCalculateService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateService {
@@ -156,58 +156,213 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
     }
 
     @Override
-    public String getLogVolumeAutoCalculate(List<WoodBase> woodBaseList) {
-        BigDecimal sum = BigDecimalFactory.get("0");
-        for (WoodBase woodBase : woodBaseList) {
-            String typeCode = woodBase.getTypeCode();
-            WoodType woodType = woodTypeMapper.selectByPrimaryKey(typeCode);
-            if (woodType != null
-                    && (woodType.getBelongs().equals("原木")
-                    ||woodType.getBelongs().equals("原条"))) {
-                sum = sum.add(
-                        BigDecimalFactory.get(
-                                getLogVolumeAutoCalculate(
-                                        woodBase.getLength(),
-                                        woodBase.getDiameter(),
-                                        woodType.getTypeCode(),
-                                        woodBase.getNum() + ""
-                                )
-                        ));
-            } else {
-                return "-1";
-            }
-        }
-        return sum.toString();
-    }
-
-    @Override
     public String getTimberVolumeAutoCalculate(String length, String width, String height,String num) {
         return timberVolumeCalculateService.getVolumeCalculateResult(length, width, height)
                 .multiply(BigDecimalFactory.get(num)).toString();
     }
 
     @Override
-    public String getTimberVolumeAutoCalculate(List<Timber> timbers) {
-        BigDecimal sum = BigDecimalFactory.get("0");
-        for (Timber timber :timbers){
-            sum = sum.add(
-                    BigDecimalFactory.get(
-                            getTimberVolumeAutoCalculate(
-                                    timber.getLength(),
-                                    timber.getWidth(),
-                                    timber.getHeight(),
-                                    timber.getNum()
-                            )
-                    )
+    public String getEvaluateXiongJingVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
+        return evaluateVolumeCalculateService.evaluateXiongJing(
+                length, xiongjing, num, typeCode, cityCode
+        );
+    }
+
+    @Override
+    public String getEvaluateGenJingVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
+        return evaluateVolumeCalculateService.evaluateGenJing(
+                length, xiongjing, num, typeCode, cityCode
+        );
+    }
+
+    @Override
+    public String getWeightCalculate(String total, String lorry) {
+        return BigDecimalFactory.get(total).subtract(
+                BigDecimalFactory.get(lorry)
+        ).toString();
+    }
+
+    @Override
+    public List<LogReturn> getLogReturn(List<Log> logList) {
+        List<LogReturn> logReturnList = new ArrayList<>();
+        for (Log l : logList) {
+            LogReturn logReturn = new LogReturn();
+            logReturn.setTypeCode(l.getTypeCode());
+            logReturn.setLength(l.getLength());
+            logReturn.setDiameter(l.getDiameter());
+            logReturn.setNum(l.getNum());
+            logReturn.setPiece(l.getPiece());
+            String volume = getLogVolumeAutoCalculate(
+                    l.getLength(),l.getDiameter(),
+                    l.getTypeCode(),l.getNum()
             );
+            logReturn.setVolume(
+                    volume
+            );
+            String sum = BigDecimalFactory.get(volume).multiply(
+                    BigDecimalFactory.get(l.getNum())
+            ).toString();
+            logReturn.setSum(sum);
+            logReturnList.add(logReturn);
+        }
+        return logReturnList;
+    }
+
+    @Override
+    public List<WeightReturn> getWeightReturn(List<Weight> weightList) {
+        List<WeightReturn> weightReturnList = new ArrayList<>();
+        for (Weight w : weightList) {
+            WeightReturn wr = new WeightReturn();
+            wr.setTotal(w.getTotal());
+            wr.setLorry(w.getLorry());
+            wr.setPiece(w.getPiece());
+            String weight = getWeightCalculate(
+                    w.getTotal(),w.getLorry()
+            );
+            wr.setWeight(weight);
+            String sum = BigDecimalFactory.get(weight).multiply(
+                    BigDecimalFactory.get(w.getPiece())
+            ).divide(BigDecimalFactory.get("1000"),3,BigDecimal.ROUND_HALF_UP).toString();
+            wr.setSum(sum);
+            weightReturnList.add(wr);
+        }
+        return weightReturnList;
+    }
+
+    @Override
+    public List<TimberReturn> getTimberReturn(List<Timber> timberList) {
+        List<TimberReturn> timberReturnList = new ArrayList<>();
+        for (Timber t : timberList) {
+            TimberReturn tb = new TimberReturn();
+            tb.setHeight(t.getHeight());
+            tb.setWidth(t.getWidth());
+            tb.setLength(t.getLength());
+            tb.setStack(t.getStack());
+            tb.setPiece(t.getPiece());
+            tb.setNum(t.getNum());
+            String volume = getTimberVolumeAutoCalculate(
+                    t.getLength(),t.getWidth(),t.getHeight(),t.getNum()
+            );
+            tb.setVolume(volume);
+            String sum = BigDecimalFactory.get(volume).multiply(
+                    BigDecimalFactory.get(tb.getVolume())
+            ).toString();
+            tb.setSum(sum);
+            timberReturnList.add(tb);
+        }
+        return timberReturnList;
+    }
+
+    @Override
+    public List<ValidationReturn> getValidationReturn(List<Validation> validationList) {
+        List<ValidationReturn> validationReturn = new ArrayList<>();
+        for (Validation v : validationList) {
+            ValidationReturn vd = new ValidationReturn();
+            vd.setPiece(v.getPiece());
+            vd.setLength(v.getLength());
+            vd.setDiameter(v.getDiameter());
+            vd.setCityCode(v.getCityCode());
+            vd.setType(v.getType());
+            vd.setLogCode(v.getLogCode());
+            String volume;
+            if (v.getType().equals("genjing")){
+                volume = getEvaluateGenJingVolumeAutoCalculate(
+                        v.getLength(),v.getDiameter(),v.getNum(),
+                        v.getLogCode(),v.getCityCode()
+                );
+            }else{
+                volume = getEvaluateXiongJingVolumeAutoCalculate(
+                        v.getLength(),v.getDiameter(),v.getNum(),
+                        v.getLogCode(),v.getCityCode()
+                );
+            }
+            vd.setVolume(volume);
+            String sum = BigDecimalFactory.get(volume).multiply(
+                    BigDecimalFactory.get(vd.getPiece())
+            ).toString();
+            vd.setSum(sum);
+            validationReturn.add(vd);
+        }
+        return validationReturn;
+    }
+
+    @Override
+    public String getLogSum(List<Log> logList) {
+        BigDecimal sum = BigDecimalFactory.get("0");
+        for (LogReturn l :
+                getLogReturn(logList)) {
+            sum = sum.add(BigDecimalFactory.get(l.getSum()));
         }
         return sum.toString();
     }
 
     @Override
-    public String getEvaluateVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
-        return evaluateVolumeCalculateService.evaluate(
-                length, xiongjing, num, typeCode, cityCode
-        );
+    public String getLogVolume(List<Log> logList) {
+        BigDecimal volume = BigDecimalFactory.get("0");
+        for (LogReturn l :
+                getLogReturn(logList)) {
+            volume = volume.add(BigDecimalFactory.get(l.getVolume()));
+        }
+        return volume.toString();
+    }
+
+    @Override
+    public String getWeightSum(List<Weight> weightList) {
+        BigDecimal sum = BigDecimalFactory.get("0");
+        for (WeightReturn w :
+                getWeightReturn(weightList)) {
+            sum = sum.add(BigDecimalFactory.get(w.getSum()));
+        }
+        return sum.toString();
+    }
+
+    @Override
+    public String getWeight(List<Weight> weightList) {
+        BigDecimal sum = BigDecimalFactory.get("0");
+        for (WeightReturn w :
+                getWeightReturn(weightList)) {
+            sum = sum.add(BigDecimalFactory.get(w.getWeight()));
+        }
+        return sum.toString();
+    }
+
+    @Override
+    public String getTimberSum(List<Timber> timberList) {
+        BigDecimal sum = BigDecimalFactory.get("0");
+        for (TimberReturn t :
+                getTimberReturn(timberList)) {
+            sum = sum.add(BigDecimalFactory.get(t.getSum()));
+        }
+        return sum.toString();
+    }
+
+    @Override
+    public String getTimberVolume(List<Timber> timberList) {
+        BigDecimal volume = BigDecimalFactory.get("0");
+        for (TimberReturn t :
+                getTimberReturn(timberList)) {
+            volume = volume.add(BigDecimalFactory.get(t.getVolume()));
+        }
+        return volume.toString();
+    }
+
+    @Override
+    public String getValidationSum(List<Validation> validationList) {
+        BigDecimal sum = BigDecimalFactory.get("0");
+        for (ValidationReturn l :
+                getValidationReturn(validationList)) {
+            sum = sum.add(BigDecimalFactory.get(l.getSum()));
+        }
+        return sum.toString();
+    }
+
+    @Override
+    public String getValidationVolume(List<Validation> validationList) {
+        BigDecimal volume = BigDecimalFactory.get("0");
+        for (ValidationReturn l :
+                getValidationReturn(validationList)) {
+            volume = volume.add(BigDecimalFactory.get(l.getVolume()));
+        }
+        return volume.toString();
     }
 }

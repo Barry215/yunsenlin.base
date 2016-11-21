@@ -19,4 +19,5 @@ public class LogReturn extends Log{
     public void setSum(String sum) {
         this.sum = sum;
     }
+
 }

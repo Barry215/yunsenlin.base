@@ -43,8 +43,15 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
     <!--Validators-->
+    <bean id="evaluateLogBaseValidator"
+          class="cn.yunsenlin.web.base.dto.calculate.android.validator.EvaluateLogBaseValidator"/>
     <bean id="logBaseValidator"
-            class="cn.yunsenlin.web.base.dto.validator.LogBaseValidator"/>
+          class="cn.yunsenlin.web.base.dto.calculate.android.validator.LogBaseValidator"/>
+    <bean id="timberBaseValidator"
+          class="cn.yunsenlin.web.base.dto.calculate.android.validator.TimberBaseValidator"/>
+    <bean id="weightBaseValidator"
+          class="cn.yunsenlin.web.base.dto.calculate.android.validator.WeightBaseValidator"/>
+
     <bean class="cn.yunsenlin.web.base.dto.validator.LoginParamValidator"
           id="loginParamValidator"/>
     <bean class="cn.yunsenlin.web.base.dto.validator.LogVolumeCalculateParamValidator"
@@ -68,6 +75,16 @@
     <!--Controller-->
     <bean id="calculateController"
             class="cn.yunsenlin.web.base.controller.CalculateAndroidController">
+        <constructor-arg name="commonInfoService" ref="commonInfoService"/>
+        <constructor-arg name="evaluateLogBaseValidator" ref="evaluateLogBaseValidator"/>
+        <constructor-arg name="logBaseValidator" ref="logBaseValidator"/>
+        <constructor-arg name="timberBaseValidator" ref="timberBaseValidator"/>
+        <constructor-arg name="volumeAutoCalculateService" ref="volumeAutoCalculateService"/>
+        <constructor-arg name="weightBaseValidator" ref="weightBaseValidator"/>
+    </bean>
+    <bean id="calculateMoreAndroidController"
+          class="cn.yunsenlin.web.base.controller.CalculateMoreAndroidController">
+        <constructor-arg name="volumeAutoCalculateService" ref="volumeAutoCalculateService"/>
     </bean>
     <bean class="cn.yunsenlin.web.base.controller.MonitorController">
         <constructor-arg name="sigarService" ref="sigarService"/>

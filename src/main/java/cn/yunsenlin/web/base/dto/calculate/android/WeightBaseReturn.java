@@ -2,7 +2,6 @@ package cn.yunsenlin.web.base.dto.calculate.android;
 
 public class WeightBaseReturn {
     private String weight;
-    private String result;
     private String error;
 
     public String getWeight() {
@@ -13,19 +12,16 @@ public class WeightBaseReturn {
         this.weight = weight;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
     public String getError() {
         return error;
     }
 
     public void setError(String error) {
+        this.error = error;
+    }
+
+    public WeightBaseReturn(String weight, String error) {
+        this.weight = weight;
         this.error = error;
     }
 }

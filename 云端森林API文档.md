@@ -494,7 +494,6 @@ response 说明
 {
   "total":"",
   "lorry":"",
-  "piece":""
 }	
 ```
 
@@ -511,7 +510,6 @@ response body
 ```json
 {
   "weight":"",
-  "result":"",
   "error":""
 }
 ```
@@ -693,7 +691,8 @@ response 说明
 {
   "length":"",
   "diameter":"",
-  "logCode":""
+  "logCode":"",
+  "cityCode"
 }	
 ```
 
@@ -732,7 +731,8 @@ response 说明
 {
   "length":"",
   "diameter":"",
-  "logCode":""
+  "logCode":"",
+  "cityCode":""
 }
 ```
 
@@ -813,14 +813,16 @@ response 说明
         "width":"",
         "length":"",
         "num":"",
-        "stack":""
+        "stack":"",
+        "piece":""
       },
       {
         "height":"",
         "width":"",
         "length":"",
         "num":"",
-        "stack":""
+        "stack":"",
+        "piece":""
       }
     ]
   },
@@ -912,7 +914,8 @@ response body
         "num":"",
         "stack":"",
         "volume":"",
-        "sum":""
+        "sum":"",
+        "piece":""
       },
       {
         "height":"",
@@ -921,7 +924,8 @@ response body
         "num":"",
         "stack":"",
         "volume":"",
-        "sum":""
+        "sum":"",
+        "piece":""
       }
     ]
   },
@@ -955,9 +959,9 @@ response body
   "weightSum":"",
   "weightVolume":"",
   "timberSum":"",
-  "timberVolume":"",
+  "TimberVolume":"",
   "valuationSum":"",
-  "valuationVolume":"",
+  "ValuationVolume":"",
   "allSum":""
 }
 ```
@@ -1303,7 +1307,7 @@ response body
 
 ```json
 {
-  "indexList":[
+  "timeList":[
     {
       "time":""
     },
@@ -1405,7 +1409,8 @@ response body
         "num":"",
         "stack":"",
         "volume":"",
-        "sum":""
+        "sum":"",
+        "piece":""
       },
       {
         "height":"",
@@ -1414,7 +1419,8 @@ response body
         "num":"",
         "stack":"",
         "volume":"",
-        "sum":""
+        "sum":"",
+        "piece":""
       }
     ]
   },
@@ -1504,7 +1510,8 @@ response body
         "num":"",
         "stack":"",
         "volume":"",
-        "sum":""
+        "sum":"",
+        "piece":""
       },
       {
         "height":"",
@@ -1513,7 +1520,8 @@ response body
         "num":"",
         "stack":"",
         "volume":"",
-        "sum":""
+        "sum":"",
+        "piece":""
       }
     ]
   },
