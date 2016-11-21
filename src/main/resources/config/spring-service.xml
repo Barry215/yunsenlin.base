@@ -25,7 +25,19 @@
           class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.BolePinusLogVolumeCalculateServiceImpl">
         <constructor-arg name="bolePinusLogCalculateRecordMapper" ref="bolePinusLogCalculateRecordMapper"/>
     </bean>
-
+    <bean id="americanLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.AmericanLogVolumeCalculateServiceImpl">
+        <constructor-arg name="americanLogCalculateRecordMapper" ref="americanLogCalculateRecordMapper"/>
+    </bean>
+    <bean id="southeastAsiaLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.SoutheastAsiaLogVolumeCalculateServiceImpl">
+        <constructor-arg name="southeastAsiaLogCalculateRecordMapper" ref="southeastAsiaLogCalculateRecordMapper"/>
+    </bean>
+    <bean id="russianLogVolumeCalculateService"
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.RussianLogVolumeCalculateServiceImpl">
+        <constructor-arg name="russianLogCalculateRecordMapper" ref="russianLogCalculateRecordMapper"/>
+        <constructor-arg name="russianVolumeMapper" ref="russianVolumeMapper"/>
+    </bean>
     <bean id="bole1999LogVolumeCalculateService"
           class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.Bole1999LogVolumeCalculateServiceImpl">
         <constructor-arg name="boleLogCalculateRecordMapper" ref="boleLogCalculateRecordMapper"/>
@@ -54,6 +66,9 @@
         <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
         <constructor-arg name="timberVolumeCalculateService" ref="timberVolumeCalculateService"/>
         <constructor-arg name="evaluateVolumeCalculateService" ref="evaluateVolumeCalculateService"/>
+        <constructor-arg name="americanLogVolumeCalculateService" ref="americanLogVolumeCalculateService"/>
+        <constructor-arg name="southeastAsiaLogVolumeCalculateService" ref="southeastAsiaLogVolumeCalculateService"/>
+        <constructor-arg name="russianLogVolumeCalculateService" ref="russianLogVolumeCalculateService"/>
     </bean>
     <bean id="woodTypeService"
             class="cn.yunsenlin.web.base.service.Impl.WoodTypeServiceImpl">

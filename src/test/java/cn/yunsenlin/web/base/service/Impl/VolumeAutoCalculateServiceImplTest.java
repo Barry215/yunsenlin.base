@@ -73,6 +73,10 @@ public class VolumeAutoCalculateServiceImplTest extends SpringTestBase{
                 "5","14","100013","1"),"0.067");
         Assert.assertEquals(service.getLogVolumeAutoCalculate(
                 "5","26","100013","1"),"0.193");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "36","24","100005","1"),"900");
+        Assert.assertEquals(service.getLogVolumeAutoCalculate(
+                "1","55","100006","1"),"0.2376");
     }
     @Test
     public void isNumber(){
@@ -81,6 +85,6 @@ public class VolumeAutoCalculateServiceImplTest extends SpringTestBase{
     @Test
     public void getTimberVolumeAutoCalculate(){
         Assert.assertEquals(service.getTimberVolumeAutoCalculate(
-                "5.2","30","12","1"),"0.019");
+                "5.2","30","12","1"),"0.0019");
     }
 }

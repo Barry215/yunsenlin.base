@@ -1,4 +1,4 @@
-package cn.yunsenlin.web.base.dto.calculate;
+package cn.yunsenlin.web.base.dto.calculate.android;
 
 public class WoodBase {
     private String length;

@@ -18,7 +18,7 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/WEB-INF/html/" />
+        <property name="prefix" value="/WEB-INF/" />
         <property name="suffix" value=".jsp" />
     </bean>
     <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
@@ -43,6 +43,8 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
     <!--Validators-->
+    <bean id="logBaseValidator"
+            class="cn.yunsenlin.web.base.dto.validator.LogBaseValidator"/>
     <bean class="cn.yunsenlin.web.base.dto.validator.LoginParamValidator"
           id="loginParamValidator"/>
     <bean class="cn.yunsenlin.web.base.dto.validator.LogVolumeCalculateParamValidator"
@@ -66,20 +68,8 @@
     <!--Controller-->
     <bean id="calculateController"
             class="cn.yunsenlin.web.base.controller.CalculateAndroidController">
-        <constructor-arg ref="volumeAutoCalculateService"
-                         name="volumeAutoCalculateService"/>
-        <constructor-arg name="logVolumeCalculateValidator" ref="logVolumeCalculateParamValidator"/>
-        <constructor-arg name="unitVolumeCalculateParam" ref="unitLogVolumeCalculateParamValidator"/>
     </bean>
-    <bean class="cn.yunsenlin.web.base.controller.UserController">
-        <constructor-arg name="loginParamValidator" ref="loginParamValidator"/>
-        <constructor-arg name="sessionService" ref="sessionService"/>
-        <constructor-arg name="userService" ref="userService"/>
-        <constructor-arg name="hasEmailParamValidator" ref="hasPhoneParamValidator"/>
-        <constructor-arg name="hasPhoneParamValidator" ref="hasPhoneParamValidator"/>
-        <constructor-arg name="sendEmailParamValidator" ref="sendEmailParamValidator"/>
-        <constructor-arg name="sendPhoneParamValidator" ref="sendPhoneParamValidator"/>
-        <constructor-arg name="outLetService" ref="outLetService"/>
-        <constructor-arg name="signInParamValidator" ref="signInParamValidator"/>
+    <bean class="cn.yunsenlin.web.base.controller.MonitorController">
+        <constructor-arg name="sigarService" ref="sigarService"/>
     </bean>
 </beans>

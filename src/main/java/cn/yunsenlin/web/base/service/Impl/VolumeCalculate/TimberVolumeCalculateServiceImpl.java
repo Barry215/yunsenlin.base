@@ -11,20 +11,20 @@ public class TimberVolumeCalculateServiceImpl implements TimberVolumeCalculateSe
         BigDecimal lengthBig = BigDecimalFactory.get(length);
         BigDecimal widthBig = BigDecimalFactory.get(width);
         BigDecimal heightBig = BigDecimalFactory.get(height);
-        // TODO: 11/18/2016
-        if (BigDecimalFactory.get(length).compareTo(BigDecimalFactory.get("2"))==-1){
-            return BigDecimalFactory.get(length).multiply(
-                    BigDecimalFactory.get(width)
-            ).multiply(
-                    BigDecimalFactory.get(width)
-            ).divide(BigDecimalFactory.get("1000000"),5, BigDecimal.ROUND_HALF_UP);
-        }else{
-            return BigDecimalFactory.get(length).multiply(
-                    BigDecimalFactory.get(width)
-            ).multiply(
-                    BigDecimalFactory.get(width)
-            ).divide(BigDecimalFactory.get("1000000"),4, BigDecimal.ROUND_HALF_UP);
+        if (lengthBig.compareTo(BigDecimalFactory.get("0.5"))>=0
+                &&lengthBig.compareTo(BigDecimalFactory.get("8"))<=0
+                &&widthBig.compareTo(BigDecimalFactory.get("12"))>=0
+                &&widthBig.compareTo(BigDecimalFactory.get("300"))<=0
+                &&heightBig.compareTo(BigDecimalFactory.get("12"))>=0
+                &&heightBig.compareTo(BigDecimalFactory.get("100"))<=0){
+            if (lengthBig.compareTo(BigDecimalFactory.get("2"))<0){
+                return lengthBig.multiply(widthBig).multiply(heightBig)
+                        .divide(BigDecimalFactory.get("1000000"),5,BigDecimal.ROUND_HALF_UP);
+            }else {
+                return lengthBig.multiply(widthBig).multiply(heightBig)
+                        .divide(BigDecimalFactory.get("1000000"),4,BigDecimal.ROUND_HALF_UP);
+            }
         }
-
+        return BigDecimalFactory.get("-1");
     }
 }

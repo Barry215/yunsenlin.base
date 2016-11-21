@@ -1,4 +1,4 @@
-package cn.yunsenlin.web.base.dto.calculate;
+package cn.yunsenlin.web.base.dto.calculate.android;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package cn.yunsenlin.web.base.service;
 
-import cn.yunsenlin.web.base.dto.calculate.Timber;
-import cn.yunsenlin.web.base.dto.calculate.WoodBase;
+import cn.yunsenlin.web.base.dto.calculate.android.Timber;
+import cn.yunsenlin.web.base.dto.calculate.android.WoodBase;
 
 import java.util.List;
 

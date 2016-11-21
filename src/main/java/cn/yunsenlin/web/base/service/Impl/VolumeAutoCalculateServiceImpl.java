@@ -1,8 +1,8 @@
 package cn.yunsenlin.web.base.service.Impl;
 
 import cn.yunsenlin.web.base.dao.WoodTypeMapper;
-import cn.yunsenlin.web.base.dto.calculate.Timber;
-import cn.yunsenlin.web.base.dto.calculate.WoodBase;
+import cn.yunsenlin.web.base.dto.calculate.android.Timber;
+import cn.yunsenlin.web.base.dto.calculate.android.WoodBase;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
 import cn.yunsenlin.web.base.model.WoodType;
 import cn.yunsenlin.web.base.service.EvaluateVolumeCalculateService;
@@ -22,6 +22,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
     private final LogVolumeCalculateService smallBoleLogVolumeCalculateService;
     private final LogVolumeCalculateService mineLogVolumeCalculateService;
     private final LogVolumeCalculateService purlinLogVolumeCalculateService;
+    private final LogVolumeCalculateService americanLogVolumeCalculateService;
+    private final LogVolumeCalculateService southeastAsiaLogVolumeCalculateService;
+    private final LogVolumeCalculateService russianLogVolumeCalculateService;
     private final LogVolumeCalculateService rafterLogVolumeCalculateService;
     private final WoodTypeMapper woodTypeMapper;
     private final TimberVolumeCalculateService timberVolumeCalculateService;
@@ -36,6 +39,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             LogVolumeCalculateService smallBoleLogVolumeCalculateService,
             LogVolumeCalculateService mineLogVolumeCalculateService,
             LogVolumeCalculateService purlinLogVolumeCalculateService,
+            LogVolumeCalculateService americanLogVolumeCalculateService,
+            LogVolumeCalculateService southeastAsiaLogVolumeCalculateService,
+            LogVolumeCalculateService russianLogVolumeCalculateService,
             LogVolumeCalculateService rafterLogVolumeCalculateService,
             WoodTypeMapper woodTypeMapper,
             TimberVolumeCalculateService timberVolumeCalculateService,
@@ -48,6 +54,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         this.smallBoleLogVolumeCalculateService = smallBoleLogVolumeCalculateService;
         this.mineLogVolumeCalculateService = mineLogVolumeCalculateService;
         this.purlinLogVolumeCalculateService = purlinLogVolumeCalculateService;
+        this.americanLogVolumeCalculateService = americanLogVolumeCalculateService;
+        this.southeastAsiaLogVolumeCalculateService = southeastAsiaLogVolumeCalculateService;
+        this.russianLogVolumeCalculateService = russianLogVolumeCalculateService;
         this.rafterLogVolumeCalculateService = rafterLogVolumeCalculateService;
         this.woodTypeMapper = woodTypeMapper;
         this.timberVolumeCalculateService = timberVolumeCalculateService;
@@ -117,6 +126,27 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         if (woodType != null && woodType.getBelongs().equals("原条")
                 && woodType.getName().equals("马尾松原条")){
             return bolePinusLogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原木")
+                && woodType.getName().equals("美国原木")){
+            return americanLogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原木")
+                && woodType.getName().equals("俄罗斯原木")){
+            return russianLogVolumeCalculateService.getVolumeCalculateResult(
+                    BigDecimalFactory.get(length),
+                    BigDecimalFactory.get(diameter)
+            ).multiply(BigDecimalFactory.get(num)).toString();
+        }
+        if (woodType != null && woodType.getBelongs().equals("原木")
+                && woodType.getName().equals("东南亚原木")){
+            return southeastAsiaLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
             ).multiply(BigDecimalFactory.get(num)).toString();

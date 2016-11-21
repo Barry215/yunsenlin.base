@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.RussianVolumeMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.RussianVolume" >
+    <id column="length" property="length" jdbcType="DOUBLE" />
+    <id column="diameter" property="diameter" jdbcType="DOUBLE" />
+    <result column="volume" property="volume" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.RussianVolumeKey" >
+    select
+      length, diameter, volume
+    from russian_volume_form
+    where length = #{length,jdbcType=DOUBLE}
+      and diameter = #{diameter,jdbcType=DOUBLE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.RussianVolumeKey" >
+    delete from russian_volume_form
+    where length = #{length,jdbcType=DOUBLE}
+      and diameter = #{diameter,jdbcType=DOUBLE}
+  </delete>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.RussianVolume" >
+    insert into russian_volume_form (length, diameter, volume
+      )
+    values (#{length,jdbcType=DOUBLE}, #{diameter,jdbcType=DOUBLE}, #{volume,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.RussianVolume" >
+    insert into russian_volume_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="diameter != null" >
+        diameter,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="length != null" >
+        #{length,jdbcType=DOUBLE},
+      </if>
+      <if test="diameter != null" >
+        #{diameter,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.RussianVolume" >
+    update russian_volume_form
+    <set >
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where length = #{length,jdbcType=DOUBLE}
+      and diameter = #{diameter,jdbcType=DOUBLE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.RussianVolume" >
+    update russian_volume_form
+    set volume = #{volume,jdbcType=DOUBLE}
+    where length = #{length,jdbcType=DOUBLE}
+      and diameter = #{diameter,jdbcType=DOUBLE}
+  </update>
+</mapper>

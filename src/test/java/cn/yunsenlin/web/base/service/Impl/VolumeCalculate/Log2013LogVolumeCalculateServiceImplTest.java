@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 public class Log2013LogVolumeCalculateServiceImplTest extends SpringTestBase{
     private LogVolumeCalculateService logLogVolumeCalculateService
-            = (LogVolumeCalculateService) app.getBean("logVolumeCalculateService");
+            = (LogVolumeCalculateService) app.getBean("log2013LogVolumeCalculateService");
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Test

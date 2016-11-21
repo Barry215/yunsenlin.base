@@ -1,18 +1,9 @@
-package cn.yunsenlin.web.base.dto.calculate;
+package cn.yunsenlin.web.base.dto.calculate.android;
 
-public class Timber {
+public class TimberBase {
     private String length;
     private String width;
     private String height;
-    private String num;
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
 
     public String getLength() {
         return length;

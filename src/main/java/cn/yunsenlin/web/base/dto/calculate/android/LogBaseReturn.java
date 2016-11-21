@@ -1,7 +1,7 @@
-package cn.yunsenlin.web.base.dto.calculate;
+package cn.yunsenlin.web.base.dto.calculate.android;
 
 
-public class VolumeCalculateReturn {
+public class LogBaseReturn {
     private String volume;
     private String error;
 
@@ -19,13 +19,5 @@ public class VolumeCalculateReturn {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public VolumeCalculateReturn(String volume, String error) {
-        this.volume = volume;
-        this.error = error;
-    }
-
-    public VolumeCalculateReturn() {
     }
 }
