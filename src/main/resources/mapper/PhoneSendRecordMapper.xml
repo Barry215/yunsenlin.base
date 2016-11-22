@@ -12,7 +12,7 @@
       id, phone, code, time
     from phone_send_record
     where phone = #{phone,jdbcType=VARCHAR}
-    ORDER BY time ASC
+    ORDER BY time DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from phone_send_record

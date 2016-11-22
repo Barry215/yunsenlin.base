@@ -10,7 +10,7 @@
   </resultMap>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
-      user_id, session,token_create_time,token_period
+      user_id, session,token_create_time,token_period,token
     from session
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
@@ -19,11 +19,12 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.yunsenlin.web.base.model.Session" >
-    insert into session (user_id, session,token_create_time,token_period)
+    insert into session (user_id, session,token_create_time,token_period,token)
     values (#{userId,jdbcType=INTEGER},
             #{session,jdbcType=VARCHAR},
             #{tokenCreateTime,jdbcType=TIMESTAMP},
-            #{tokenPeriod,jdbcType=BIGINT})
+            #{tokenPeriod,jdbcType=BIGINT},
+            #{token,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.Session" >
     insert into session
@@ -43,6 +44,9 @@
       <if test="tokenPeriod != null" >
         token_period,
       </if>
+      <if test="token != null" >
+        token,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -59,6 +63,9 @@
       </if>
       <if test="tokenPeriod != null" >
         #{tokenPeriod,jdbcType=BIGINT},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -80,6 +87,9 @@
       <if test="tokenPeriod != null" >
         token_period = #{tokenPeriod,jdbcType=VARCHAR},
       </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -88,7 +98,8 @@
     set user_id = #{userId,jdbcType=INTEGER},
       session = #{session,jdbcType=VARCHAR},
       token_create_time = #{tokenCreateTime,jdbcType=TIMESTAMP},
-      token_period = #{tokenPeriod,jdbcType=BIGINT}
+      token_period = #{tokenPeriod,jdbcType=BIGINT},
+      token = #{token,jdbcType=BIGINT}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

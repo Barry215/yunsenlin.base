@@ -25,7 +25,7 @@ public class TimberVolumeCalculateServiceImpl implements TimberVolumeCalculateSe
         BigDecimal volume = BigDecimalFactory.get("-1");
         if (lengthBig.compareTo(BigDecimalFactory.get("0.5"))>=0
                 &&lengthBig.compareTo(BigDecimalFactory.get("8"))<=0
-                &&widthBig.compareTo(BigDecimalFactory.get("12"))>=0
+                &&widthBig.compareTo(BigDecimalFactory.get("30"))>=0
                 &&widthBig.compareTo(BigDecimalFactory.get("300"))<=0
                 &&heightBig.compareTo(BigDecimalFactory.get("12"))>=0
                 &&heightBig.compareTo(BigDecimalFactory.get("100"))<=0){
@@ -55,6 +55,6 @@ public class TimberVolumeCalculateServiceImpl implements TimberVolumeCalculateSe
                     +",volume:"+volume.toString());
             logger.error(e.getMessage());
         }
-        return BigDecimalFactory.get("-1");
+        return volume;
     }
 }

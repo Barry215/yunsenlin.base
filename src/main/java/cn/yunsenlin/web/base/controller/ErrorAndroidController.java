@@ -19,6 +19,6 @@ public class ErrorAndroidController {
         errorListReturn.add(ErrorUtils.NoLogin);
         errorListReturn.add(ErrorUtils.NoPhone);
         errorListReturn.add(ErrorUtils.PhoneMessageTooMuch);
-        return null;
+        return errorListReturn;
     }
 }

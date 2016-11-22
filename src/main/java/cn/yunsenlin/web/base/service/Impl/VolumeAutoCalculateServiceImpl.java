@@ -197,7 +197,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
                     l.getTypeCode(),l.getNum()
             );
             logReturn.setVolume(
-                    volume
+                    BigDecimalFactory.get(volume).multiply(
+                            BigDecimalFactory.get(l.getNum())
+                    ).toString()
             );
             if (BigDecimalFactory.isNumber(l.getPiece())) {
                 String sum = BigDecimalFactory.get(volume).multiply(
@@ -249,10 +251,16 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             String volume = getTimberVolumeAutoCalculate(
                     t.getLength(),t.getWidth(),t.getHeight(),t.getNum()
             );
-            tb.setVolume(volume);
+            tb.setVolume(
+                    BigDecimalFactory.get(volume).multiply(
+                            BigDecimalFactory.get(t.getStack())
+                    ).toString()
+            );
             if (BigDecimalFactory.isNumber(t.getPiece())) {
                 String sum = BigDecimalFactory.get(volume).multiply(
-                        BigDecimalFactory.get(tb.getVolume())
+                        BigDecimalFactory.get(tb.getPiece())
+                ).multiply(
+                        BigDecimalFactory.get(t.getStack())
                 ).toString();
                 tb.setSum(sum);
             }

@@ -175,6 +175,18 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
 
     @Override
     public void saveLogList(List<LogReturn> logReturnList, BillUserRecord userRecordKey) {
+        log2013CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        log1984CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        mineLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        boleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        rafterLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        purlinLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        boleShanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        smallBoleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        bolePinusLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        americanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        russianLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        southeastAsiaLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
         for (LogReturn l : logReturnList) {
             saveLoginReturn(l,userRecordKey);
         }
@@ -182,60 +194,49 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
     private void saveLoginReturn(LogReturn l, BillUserRecord userRecordKey){
         WoodType woodType = woodTypeMapper.selectByPrimaryKey(l.getTypeCode());
         if (judgeWoodType(woodType,"原木2013")) {
-            log2013CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             log2013CalculateUserRecordMapper.insert(
                     l.toLog2013CalculateUserRecord(userRecordKey)
             );
         }
         if (judgeWoodType(woodType,"原木1984")) {
-            log1984CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             log1984CalculateUserRecordMapper.insert(l.toLog1984CalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"矿木")) {
-            mineLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             mineLogCalculateUserRecordMapper.insert(l.toMineLogCalculateUserRecord(userRecordKey));
         }
 
         if (judgeWoodType(woodType,"檩材")) {
-            purlinLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             purlinLogCalculateUserRecordMapper.insert(l.toPurlinLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"椽材")) {
-            rafterLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             rafterLogCalculateUserRecordMapper.insert(l.toRafterLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"原条1999")) {
-            boleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             boleLogCalculateUserRecordMapper.insert(l.toBoleLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"小原条")) {
-            smallBoleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             smallBoleLogCalculateUserRecordMapper.insert(l.toSmallBoleLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"杉原条")) {
-            boleShanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             boleShanLogCalculateUserRecordMapper.insert(l.toBoleShanLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"马尾松原条")) {
-            bolePinusLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             bolePinusLogCalculateUserRecordMapper.insert(l.toBolePinusLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"美国原木")) {
-            americanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             americanLogCalculateUserRecordMapper.insert(l.toAmericanLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"俄罗斯原木")) {
-            russianLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             russianLogCalculateUserRecordMapper.insert(l.toRussianLogCalculateUserRecord(userRecordKey));
         }
         if (judgeWoodType(woodType,"东南亚原木")) {
-            southeastAsiaLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             southeastAsiaLogCalculateUserRecordMapper.insert(l.toSoutheastAsiaLogCalculateUserRecord(userRecordKey));
         }
     }
 
     @Override
     public void saveWeightReturnList(List<WeightReturn> weightReturnList, BillUserRecord userRecordKey) {
+        weightUserRecordMapper.deleteByPrimaryKey(userRecordKey);
         int userId = userRecordKey.getUserid();
         Date time = userRecordKey.getTime();
         for (WeightReturn w : weightReturnList) {
@@ -253,13 +254,13 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
             if (BigDecimalFactory.isNumber(sum)) {
                 wr.setSum(Double.parseDouble(sum));
             }
-            weightUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             weightUserRecordMapper.insert(wr);
         }
     }
 
     @Override
     public void saveTimberReturnList(List<TimberReturn> timberReturnList, BillUserRecord userRecordKey) {
+        timberCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
         int userId = userRecordKey.getUserid();
         Date time = userRecordKey.getTime();
         for (TimberReturn t :
@@ -272,6 +273,14 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
             tu.setWidth(Double.parseDouble(t.getWidth()));
             tu.setHeight(Double.parseDouble(t.getHeight()));
             tu.setVolume(Double.parseDouble(t.getVolume()));
+            String num = t.getNum();
+            if (BigDecimalFactory.isNumber(num)){
+                tu.setNum(Integer.parseInt(num));
+            }
+            String stack = t.getStack();
+            if (BigDecimalFactory.isNumber(stack)){
+                tu.setStack(Integer.parseInt(stack));
+            }
             String piece = t.getPiece();
             if (BigDecimalFactory.isNumber(piece)) {
                 tu.setPiece(Double.parseDouble(piece));
@@ -280,7 +289,6 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
             if (BigDecimalFactory.isNumber(sum)) {
                 tu.setSum(Double.parseDouble(sum));
             }
-            timberCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             timberCalculateUserRecordMapper.insert(tu);
         }
     }

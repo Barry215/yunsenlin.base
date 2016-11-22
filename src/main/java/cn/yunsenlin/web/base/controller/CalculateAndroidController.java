@@ -56,7 +56,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/log2013", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn log2013(LogBase logBase,BindingResult result) {
+    public LogBaseReturn log2013(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -72,7 +72,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/log1984", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn log1984(LogBase logBase,BindingResult result) {
+    public LogBaseReturn log1984(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -88,7 +88,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/russianLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn russianLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn russianLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -104,7 +104,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/americanLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn americanLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn americanLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -120,7 +120,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/southeastAsiaLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn southeastAsiaLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn southeastAsiaLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -136,7 +136,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/mineLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn mineLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn mineLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -152,7 +152,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/purlinLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn purlinLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn purlinLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -168,7 +168,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/rafterLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn rafterLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn rafterLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -184,7 +184,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/boleLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn boleLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn boleLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -200,7 +200,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/smallBoleLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn smallBoleLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn smallBoleLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -216,7 +216,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/shanBoleLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn shanBoleLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn shanBoleLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -232,7 +232,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/pinusBoleLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn pinusBoleLog(LogBase logBase,BindingResult result) {
+    public LogBaseReturn pinusBoleLog(@RequestBody LogBase logBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -248,7 +248,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/weightLog", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public WeightBaseReturn weightLog(WeightBase weightBase,BindingResult result) {
+    public WeightBaseReturn weightLog(@RequestBody WeightBase weightBase,BindingResult result) {
         if (result.hasErrors()){
             return new WeightBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -265,7 +265,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/timber", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn timber(TimberBase timberBase,BindingResult result) {
+    public LogBaseReturn timber(@RequestBody TimberBase timberBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -306,7 +306,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/valuateLogByGenJing", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn valuateLogByGenJing(EvaluateLogBase evaluateLogBase,BindingResult result) {
+    public LogBaseReturn valuateLogByGenJing(@RequestBody EvaluateLogBase evaluateLogBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()
@@ -324,7 +324,7 @@ public class CalculateAndroidController {
 
     @RequestMapping(value = "/valuateLogByXiongJing", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LogBaseReturn valuateLogByXiongJing(EvaluateLogBase evaluateLogBase,BindingResult result) {
+    public LogBaseReturn valuateLogByXiongJing(@RequestBody EvaluateLogBase evaluateLogBase,BindingResult result) {
         if (result.hasErrors()){
             return new LogBaseReturn(
                     "", ErrorUtils.DataValid.getErrorCode()

@@ -63,6 +63,10 @@
           class="cn.yunsenlin.web.base.dto.tongBu.android.validator.GetBillListParamValidator"/>
     <bean id="tokenParamValidator"
           class="cn.yunsenlin.web.base.dto.tongBu.android.validator.TokenParamValidator"/>
+    <bean id="calculateMoreValidator"
+          class="cn.yunsenlin.web.base.dto.calculate.android.validator.CalculateMoreValidator"/>
+    <bean id="billKeyValidator"
+          class="cn.yunsenlin.web.base.dto.calculate.android.validator.BillKeyValidator"/>
 
     <!--Controller-->
     <bean id="calculateController"
@@ -79,6 +83,8 @@
         <constructor-arg name="sessionService" ref="sessionService"/>
         <constructor-arg name="volumeAutoCalculateService" ref="volumeAutoCalculateService"/>
         <constructor-arg name="userRecordSaveService" ref="userRecordSaveService"/>
+        <constructor-arg name="billKeyValidator" ref="billKeyValidator"/>
+        <constructor-arg name="calculateMoreValidator" ref="calculateMoreValidator"/>
     </bean>
     <bean id="monitorController"
           class="cn.yunsenlin.web.base.controller.MonitorController">
