@@ -5,6 +5,15 @@ import java.util.Date;
 public class BillKey {
     private Date time;
     private String token;
+    private int userId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public BillKey(Date time, String token) {
         this.time = time;

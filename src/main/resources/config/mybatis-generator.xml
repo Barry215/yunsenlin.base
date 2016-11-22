@@ -34,8 +34,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="weight_user_record"
-               domainObjectName="WeightUserRecord"
+        <table tableName="timber_calculate_user_record"
+               domainObjectName="TimberCalculateUserRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

@@ -1,6 +1,6 @@
 package cn.yunsenlin.web.base.model;
 
-public class Log1984CalculateUserRecord extends Log1984CalculateUserRecordKey {
+public class Log1984CalculateUserRecord extends BillUserRecordKey {
     private Double length;
 
     private Double width;
@@ -10,6 +10,16 @@ public class Log1984CalculateUserRecord extends Log1984CalculateUserRecordKey {
     private Double piece;
 
     private Double sum;
+
+    private Double num;
+
+    public Double getNum() {
+        return num;
+    }
+
+    public void setNum(Double num) {
+        this.num = num;
+    }
 
     public Double getLength() {
         return length;

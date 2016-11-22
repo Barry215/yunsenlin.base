@@ -147,4 +147,8 @@
     where userId = #{userid,jdbcType=INTEGER}
       and time = #{time,jdbcType=TIMESTAMP}
   </update>
+  <select id="getTimeIndex" parameterType="java.lang.Integer">
+    SELECT time FROM bill_user_record
+    WHERE userId = #{userId,jdbcType=INTEGER}
+  </select>
 </mapper>

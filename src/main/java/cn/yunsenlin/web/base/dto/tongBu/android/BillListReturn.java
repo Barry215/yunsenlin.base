@@ -1,19 +1,27 @@
 package cn.yunsenlin.web.base.dto.tongBu.android;
 
-import cn.yunsenlin.web.base.dto.calculate.android.CalculateMore;
+import cn.yunsenlin.web.base.dto.calculate.android.CalculateMoreReturn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BillListReturn {
-    private List<CalculateMore> billList
+    private List<CalculateMoreReturn> billList
             = new ArrayList<>();
 
-    public List<CalculateMore> getBillList() {
+    public List<CalculateMoreReturn> getBillList() {
         return billList;
     }
 
-    public void setBillList(List<CalculateMore> billList) {
+    public BillListReturn() {
+    }
+
+    public BillListReturn(List<CalculateMoreReturn> billList) {
+
+        this.billList = billList;
+    }
+
+    public void setBillList(List<CalculateMoreReturn> billList) {
         this.billList = billList;
     }
 }

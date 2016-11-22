@@ -2,13 +2,16 @@ package cn.yunsenlin.web.base.service.Impl;
 
 import cn.yunsenlin.web.base.dao.*;
 import cn.yunsenlin.web.base.dto.calculate.android.*;
+import cn.yunsenlin.web.base.dto.tongBu.android.IndexReturn;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
 import cn.yunsenlin.web.base.model.*;
-import cn.yunsenlin.web.base.model.inter.UserRecordKey;
 import cn.yunsenlin.web.base.service.UserRecordSaveService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserRecordSaveServiceImpl implements UserRecordSaveService {
     private final AmericanLogCalculateUserRecordMapper americanLogCalculateUserRecordMapper;
     private final BillUserRecordMapper billUserRecordMapper;
@@ -24,6 +27,8 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
     private final SmallBoleLogCalculateUserRecordMapper smallBoleLogCalculateUserRecordMapper;
     private final SoutheastAsiaLogCalculateUserRecordMapper southeastAsiaLogCalculateUserRecordMapper;
     private final WeightUserRecordMapper weightUserRecordMapper;
+    private final RussianLogCalculateUserRecordMapper russianLogCalculateUserRecordMapper;
+    private final TimberCalculateUserRecordMapper timberCalculateUserRecordMapper;
 
     public UserRecordSaveServiceImpl(AmericanLogCalculateUserRecordMapper americanLogCalculateUserRecordMapper,
                                      BillUserRecordMapper billUserRecordMapper,
@@ -37,7 +42,7 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
                                      SmallBoleLogCalculateUserRecordMapper smallBoleLogCalculateUserRecordMapper,
                                      SoutheastAsiaLogCalculateUserRecordMapper southeastAsiaLogCalculateUserRecordMapper,
                                      WeightUserRecordMapper weightUserRecordMapper,
-                                     RafterLogCalculateUserRecordMapper rafterLogCalculateUserRecordMapper) {
+                                     RafterLogCalculateUserRecordMapper rafterLogCalculateUserRecordMapper, RussianLogCalculateUserRecordMapper russianLogCalculateUserRecordMapper, TimberCalculateUserRecordMapper timberCalculateUserRecordMapper) {
         this.americanLogCalculateUserRecordMapper = americanLogCalculateUserRecordMapper;
         this.billUserRecordMapper = billUserRecordMapper;
         this.woodTypeMapper = woodTypeMapper;
@@ -51,11 +56,13 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
         this.smallBoleLogCalculateUserRecordMapper = smallBoleLogCalculateUserRecordMapper;
         this.southeastAsiaLogCalculateUserRecordMapper = southeastAsiaLogCalculateUserRecordMapper;
         this.weightUserRecordMapper = weightUserRecordMapper;
-        this.rafterLogCalculateUserRecordMapper =rafterLogCalculateUserRecordMapper;
+        this.rafterLogCalculateUserRecordMapper = rafterLogCalculateUserRecordMapper;
+        this.russianLogCalculateUserRecordMapper = russianLogCalculateUserRecordMapper;
+        this.timberCalculateUserRecordMapper = timberCalculateUserRecordMapper;
     }
 
     @Override
-    public void save(CalculateMoreReturn calculateMoreReturn,CalculateMore calculateMore) {
+    public void save(CalculateMoreReturn calculateMoreReturn, CalculateMore calculateMore) {
         BillUserRecord userRecordKey = new BillUserRecord();
         userRecordKey.setTime(calculateMoreReturn.getTime());
         userRecordKey.setUserid(calculateMore.getUserId());
@@ -67,10 +74,10 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
                 = calculateMoreReturn.getTimberList();
         List<ValidationReturn> validationReturnList
                 = calculateMoreReturn.getValidationList();
-        saveLogList(logReturnList,userRecordKey);
-        saveWeightReturnList(weightReturnList,userRecordKey);
-        saveTimberReturnList(timberReturnList,userRecordKey);
-        saveValidationReturnList(validationReturnList,userRecordKey);
+        saveLogList(logReturnList, userRecordKey);
+        saveWeightReturnList(weightReturnList, userRecordKey);
+        saveTimberReturnList(timberReturnList, userRecordKey);
+        saveValidationReturnList(validationReturnList, userRecordKey);
         BillUserRecord billUserRecord = new BillUserRecord();
         billUserRecord.setUserid(userRecordKey.getUserid());
         billUserRecord.setTime(userRecordKey.getTime());
@@ -88,7 +95,7 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
         String weightSum = calculateMoreReturn.getWeightSum();
         if (BigDecimalFactory.isNumber(weightSum)) {
             billUserRecord.setWeightSum(
-                Double.parseDouble(weightSum)
+                    Double.parseDouble(weightSum)
             );
         }
         String validationSum = calculateMoreReturn.getValuationSum();
@@ -113,241 +120,125 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
                         calculateMoreReturn.getTimberVolume()
                 )
         );
+        billUserRecordMapper.deleteByPrimaryKey(userRecordKey);
         billUserRecordMapper.insert(billUserRecord);
     }
 
     @Override
-    public CalculateMoreReturn get(UserRecordKey userRecordKey) {
+    public CalculateMoreReturn get(BillUserRecordKey userRecordKey) {
+        List<LogReturn> logList = new ArrayList<>();
+        List<Log2013CalculateUserRecord> list1
+                = log2013CalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<Log1984CalculateUserRecord> list2
+                = log1984CalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<AmericanLogCalculateUserRecord> list3
+                = americanLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<BoleLogCalculateUserRecord> list4
+                = boleLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<BolePinusLogCalculateUserRecord> list5
+                = bolePinusLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<BoleShanLogCalculateUserRecord> list6
+                = boleShanLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<MineLogCalculateUserRecord> list7
+                = mineLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<PurlinLogCalculateUserRecord> list8
+                = purlinLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<RafterLogCalculateUserRecord> list9
+                = rafterLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<RussianLogCalculateUserRecord> list10
+                = russianLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<SmallBoleLogCalculateUserRecord> list11
+                = smallBoleLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        List<SoutheastAsiaLogCalculateUserRecord> list12
+                = southeastAsiaLogCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        logList.addAll(toLogReturn1(list1));
+        logList.addAll(toLogReturn2(list2));
+        logList.addAll(toLogReturn3(list3));
+        logList.addAll(toLogReturn4(list4));
+        logList.addAll(toLogReturn5(list5));
+        logList.addAll(toLogReturn6(list6));
+        logList.addAll(toLogReturn7(list11));
+        logList.addAll(toLogReturn8(list7));
+        logList.addAll(toLogReturn9(list8));
+        logList.addAll(toLogReturn10(list9));
+        logList.addAll(toLogReturn11(list10));
+        logList.addAll(toLogReturn12(list12));
+        List<WeightUserRecord> weightList = weightUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        CalculateMoreReturn c = new CalculateMoreReturn();
+        c.setLogList(logList);
+        c.setWeightList(toWeightReturn(weightList));
+        List<TimberCalculateUserRecord> timberList = timberCalculateUserRecordMapper.selectByPrimaryKey(userRecordKey);
+        c.setTimberList(toTimberReturn(timberList));
+        // TODO: 11/22/2016 暂时不计算估算木材
         return null;
     }
 
     @Override
-    public void saveLogList(List<LogReturn> logReturnList,BillUserRecord userRecordKey) {
-        int userId = userRecordKey.getUserid();
-        Date time =userRecordKey.getTime();
-        for (LogReturn l: logReturnList) {
-            WoodType woodType = woodTypeMapper.selectByPrimaryKey(l.getTypeCode());
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("原木2013")) {
-                Log2013CalculateUserRecord record =
-                        new Log2013CalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                log2013CalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("原木1984")) {
-                Log1984CalculateUserRecord record =
-                        new Log1984CalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                log1984CalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("矿木")){
-                MineLogCalculateUserRecord record =
-                        new MineLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                mineLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("檩材")){
-                PurlinLogCalculateUserRecord record =
-                        new PurlinLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                purlinLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("椽材")){
-                RafterLogCalculateUserRecord record =
-                        new RafterLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                rafterLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原条")
-                    && woodType.getName().equals("原条1999")){
-                BoleLogCalculateUserRecord record =
-                        new BoleLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                boleLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原条")
-                    && woodType.getName().equals("小原条")){
-                SmallBoleLogCalculateUserRecord record =
-                        new SmallBoleLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                smallBoleLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原条")
-                    && woodType.getName().equals("杉原条")){
-                BoleShanLogCalculateUserRecord record =
-                        new BoleShanLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                boleShanLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原条")
-                    && woodType.getName().equals("马尾松原条")){
-                BolePinusLogCalculateUserRecord record =
-                        new BolePinusLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                bolePinusLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("美国原木")){
-                AmericanLogCalculateUserRecord record =
-                        new AmericanLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                americanLogCalculateUserRecordMapper.insert(record);
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("俄罗斯原木")){
-                // TODO: 11/22/2016 俄罗斯木材没有保存
-            }
-            if (woodType != null && woodType.getBelongs().equals("原木")
-                    && woodType.getName().equals("东南亚原木")){
-                SoutheastAsiaLogCalculateUserRecord record =
-                        new SoutheastAsiaLogCalculateUserRecord();
-                record.setUserid(userId);
-                record.setTime(time);
-                record.setLength(Double.parseDouble(l.getLength()));
-                record.setWidth(Double.parseDouble(l.getDiameter()));
-                record.setVolume(Double.parseDouble(l.getVolume()));
-                String sum = l.getSum();
-                String piece = l.getPiece();
-                if (BigDecimalFactory.isNumber(sum)){
-                    record.setSum(Double.parseDouble(sum));
-                }
-                if (BigDecimalFactory.isNumber(piece)){
-                    record.setPiece(Double.parseDouble(piece));
-                }
-                southeastAsiaLogCalculateUserRecordMapper.insert(record);
-            }
+    public void saveLogList(List<LogReturn> logReturnList, BillUserRecord userRecordKey) {
+        for (LogReturn l : logReturnList) {
+            saveLoginReturn(l,userRecordKey);
+        }
+    }
+    private void saveLoginReturn(LogReturn l, BillUserRecord userRecordKey){
+        WoodType woodType = woodTypeMapper.selectByPrimaryKey(l.getTypeCode());
+        if (judgeWoodType(woodType,"原木2013")) {
+            log2013CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            log2013CalculateUserRecordMapper.insert(
+                    l.toLog2013CalculateUserRecord(userRecordKey)
+            );
+        }
+        if (judgeWoodType(woodType,"原木1984")) {
+            log1984CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            log1984CalculateUserRecordMapper.insert(l.toLog1984CalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"矿木")) {
+            mineLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            mineLogCalculateUserRecordMapper.insert(l.toMineLogCalculateUserRecord(userRecordKey));
+        }
+
+        if (judgeWoodType(woodType,"檩材")) {
+            purlinLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            purlinLogCalculateUserRecordMapper.insert(l.toPurlinLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"椽材")) {
+            rafterLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            rafterLogCalculateUserRecordMapper.insert(l.toRafterLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"原条1999")) {
+            boleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            boleLogCalculateUserRecordMapper.insert(l.toBoleLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"小原条")) {
+            smallBoleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            smallBoleLogCalculateUserRecordMapper.insert(l.toSmallBoleLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"杉原条")) {
+            boleShanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            boleShanLogCalculateUserRecordMapper.insert(l.toBoleShanLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"马尾松原条")) {
+            bolePinusLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            bolePinusLogCalculateUserRecordMapper.insert(l.toBolePinusLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"美国原木")) {
+            americanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            americanLogCalculateUserRecordMapper.insert(l.toAmericanLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"俄罗斯原木")) {
+            russianLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            russianLogCalculateUserRecordMapper.insert(l.toRussianLogCalculateUserRecord(userRecordKey));
+        }
+        if (judgeWoodType(woodType,"东南亚原木")) {
+            southeastAsiaLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            southeastAsiaLogCalculateUserRecordMapper.insert(l.toSoutheastAsiaLogCalculateUserRecord(userRecordKey));
         }
     }
 
     @Override
-    public void saveWeightReturnList(List<WeightReturn> weightReturnList,BillUserRecord userRecordKey) {
+    public void saveWeightReturnList(List<WeightReturn> weightReturnList, BillUserRecord userRecordKey) {
         int userId = userRecordKey.getUserid();
-        Date time =userRecordKey.getTime();
-        for (WeightReturn w:weightReturnList) {
+        Date time = userRecordKey.getTime();
+        for (WeightReturn w : weightReturnList) {
             WeightUserRecord wr = new WeightUserRecord();
             wr.setUserid(userId);
             wr.setTime(time);
@@ -359,21 +250,261 @@ public class UserRecordSaveServiceImpl implements UserRecordSaveService {
                 wr.setPiece(Double.parseDouble(piece));
             }
             String sum = w.getSum();
-            if (BigDecimalFactory.isNumber(sum)){
+            if (BigDecimalFactory.isNumber(sum)) {
                 wr.setSum(Double.parseDouble(sum));
             }
+            weightUserRecordMapper.deleteByPrimaryKey(userRecordKey);
             weightUserRecordMapper.insert(wr);
         }
     }
 
     @Override
-    public void saveTimberReturnList(List<TimberReturn> timberReturnList,BillUserRecord userRecordKey) {
-// TODO: 11/22/2016
+    public void saveTimberReturnList(List<TimberReturn> timberReturnList, BillUserRecord userRecordKey) {
+        int userId = userRecordKey.getUserid();
+        Date time = userRecordKey.getTime();
+        for (TimberReturn t :
+                timberReturnList) {
+            TimberCalculateUserRecord tu =
+                    new TimberCalculateUserRecord();
+            tu.setUserid(userId);
+            tu.setTime(time);
+            tu.setLength(Double.parseDouble(t.getLength()));
+            tu.setWidth(Double.parseDouble(t.getWidth()));
+            tu.setHeight(Double.parseDouble(t.getHeight()));
+            tu.setVolume(Double.parseDouble(t.getVolume()));
+            String piece = t.getPiece();
+            if (BigDecimalFactory.isNumber(piece)) {
+                tu.setPiece(Double.parseDouble(piece));
+            }
+            String sum = t.getSum();
+            if (BigDecimalFactory.isNumber(sum)) {
+                tu.setSum(Double.parseDouble(sum));
+            }
+            timberCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+            timberCalculateUserRecordMapper.insert(tu);
+        }
     }
 
     @Override
-    public void saveValidationReturnList(List<ValidationReturn> validationReturnList,BillUserRecord userRecordKey) {
-// TODO: 11/22/2016
+    public void saveValidationReturnList(List<ValidationReturn> validationReturnList, BillUserRecord userRecordKey) {
+        // TODO: 11/22/2016 暂时不计算估算木材
     }
 
+    @Override
+    public void delete(BillUserRecordKey userRecordKey) {
+        americanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        billUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        boleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        bolePinusLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        boleShanLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        log1984CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        log2013CalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        mineLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        purlinLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        rafterLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        smallBoleLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        southeastAsiaLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        weightUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        russianLogCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        timberCalculateUserRecordMapper.deleteByPrimaryKey(userRecordKey);
+        // TODO: 11/22/2016 暂时不计算估算木材
+    }
+
+    @Override
+    public IndexReturn getIndexReturn(int userId) {
+        IndexReturn indexReturn = new IndexReturn();
+        indexReturn.setIndexList(billUserRecordMapper.getTimeIndex(userId));
+        return indexReturn;
+    }
+
+    private List<LogReturn> toLogReturn1(List<Log2013CalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (Log2013CalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100001");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn2(List<Log1984CalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (Log1984CalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100002");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn3(List<AmericanLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (AmericanLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100005");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn4(List<BoleLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (BoleLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100009");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn5(List<BolePinusLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (BolePinusLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100014");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn6(List<BoleShanLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (BoleShanLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100013");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn7(List<SmallBoleLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (SmallBoleLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100008");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn8(List<MineLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (MineLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100007");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn9(List<PurlinLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (PurlinLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100012");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn10(List<RafterLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (RafterLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100003");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn11(List<RussianLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (RussianLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100004");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<LogReturn> toLogReturn12(List<SoutheastAsiaLogCalculateUserRecord> list) {
+        List<LogReturn> logList = new ArrayList<>();
+        for (SoutheastAsiaLogCalculateUserRecord r : list) {
+            LogReturn l = new LogReturn();
+            l.setVolume(r.getVolume().toString());
+            l.setDiameter(r.getWidth().toString());
+            l.setTypeCode("100006");
+            l.setNum(r.getNum().toString());
+            l.setSum(r.getSum().toString());
+            l.setPiece(r.getPiece().toString());
+            l.setLength(r.getLength().toString());
+            logList.add(l);
+        }
+        return logList;
+    }
+    private List<WeightReturn> toWeightReturn(List<WeightUserRecord> list){
+        return list.stream().map(WeightUserRecord::toWeightReturn).collect(Collectors.toList());
+    }
+    private List<TimberReturn> toTimberReturn(List<TimberCalculateUserRecord> list){
+        return list.stream().map(TimberCalculateUserRecord::toTimberReturn).collect(Collectors.toList());
+    }
+    private boolean judgeWoodType(WoodType woodType,String name){
+        return woodType != null && woodType.getBelongs().equals("原木")
+                && woodType.getName().equals(name);
+    }
 }

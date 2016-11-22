@@ -1,16 +1,8 @@
 package cn.yunsenlin.web.base.dto.tongBu.android;
 
-public class TokenParam {
+public class GetBillListParam extends IndexReturn{
     private String token;
     private int userId;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public String getToken() {
         return token;
@@ -18,5 +10,13 @@ public class TokenParam {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

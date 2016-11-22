@@ -1,18 +1,16 @@
 package cn.yunsenlin.web.base.dao;
 
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.model.SoutheastAsiaLogCalculateUserRecord;
-import cn.yunsenlin.web.base.model.SoutheastAsiaLogCalculateUserRecordKey;
+
+import java.util.List;
 
 public interface SoutheastAsiaLogCalculateUserRecordMapper {
-    int deleteByPrimaryKey(SoutheastAsiaLogCalculateUserRecordKey key);
+    int deleteByPrimaryKey(BillUserRecordKey key);
 
     int insert(SoutheastAsiaLogCalculateUserRecord record);
 
     int insertSelective(SoutheastAsiaLogCalculateUserRecord record);
 
-    SoutheastAsiaLogCalculateUserRecord selectByPrimaryKey(SoutheastAsiaLogCalculateUserRecordKey key);
-
-    int updateByPrimaryKeySelective(SoutheastAsiaLogCalculateUserRecord record);
-
-    int updateByPrimaryKey(SoutheastAsiaLogCalculateUserRecord record);
+    List<SoutheastAsiaLogCalculateUserRecord> selectByPrimaryKey(BillUserRecordKey key);
 }

@@ -1,18 +1,16 @@
 package cn.yunsenlin.web.base.dao;
 
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.model.RafterLogCalculateUserRecord;
-import cn.yunsenlin.web.base.model.RafterLogCalculateUserRecordKey;
+
+import java.util.List;
 
 public interface RafterLogCalculateUserRecordMapper {
-    int deleteByPrimaryKey(RafterLogCalculateUserRecordKey key);
+    int deleteByPrimaryKey(BillUserRecordKey key);
 
     int insert(RafterLogCalculateUserRecord record);
 
     int insertSelective(RafterLogCalculateUserRecord record);
 
-    RafterLogCalculateUserRecord selectByPrimaryKey(RafterLogCalculateUserRecordKey key);
-
-    int updateByPrimaryKeySelective(RafterLogCalculateUserRecord record);
-
-    int updateByPrimaryKey(RafterLogCalculateUserRecord record);
+    List<RafterLogCalculateUserRecord> selectByPrimaryKey(BillUserRecordKey key);
 }

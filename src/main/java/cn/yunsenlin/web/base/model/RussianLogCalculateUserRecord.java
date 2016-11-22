@@ -1,6 +1,6 @@
 package cn.yunsenlin.web.base.model;
 
-public class PurlinLogCalculateUserRecord extends BillUserRecordKey {
+public class RussianLogCalculateUserRecord extends BillUserRecordKey {
     private Double length;
 
     private Double width;

@@ -3,7 +3,9 @@ package cn.yunsenlin.web.base.controller;
 import cn.yunsenlin.web.base.dto.calculate.android.*;
 import cn.yunsenlin.web.base.error.ErrorUtils;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.service.SessionService;
+import cn.yunsenlin.web.base.service.UserRecordSaveService;
 import cn.yunsenlin.web.base.service.VolumeAutoCalculateService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +19,12 @@ import java.util.List;
 public class CalculateMoreAndroidController {
     private final VolumeAutoCalculateService volumeAutoCalculateService;
     private final SessionService sessionService;
+    private final UserRecordSaveService userRecordSaveService;
 
-    public CalculateMoreAndroidController(VolumeAutoCalculateService volumeAutoCalculateService, SessionService sessionService) {
+    public CalculateMoreAndroidController(VolumeAutoCalculateService volumeAutoCalculateService, SessionService sessionService, UserRecordSaveService userRecordSaveService) {
         this.volumeAutoCalculateService = volumeAutoCalculateService;
         this.sessionService = sessionService;
+        this.userRecordSaveService = userRecordSaveService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
@@ -102,7 +106,7 @@ public class CalculateMoreAndroidController {
         if (sessionService.checkToken(
                 calculateMore.getToken(),calculateMore.getUserId()
         )){
-            // TODO: 11/22/2016
+            userRecordSaveService.save(calculateMoreReturn,calculateMore);
         }else {
             error = ErrorUtils.NoLogin.getErrorCode();
         }
@@ -113,6 +117,22 @@ public class CalculateMoreAndroidController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public ExecutionReturn index(BillKey billKey) {
-        return null;
+        if (sessionService.checkToken(
+                billKey.getToken(),billKey.getUserId()
+        )){
+            BillUserRecordKey billUserRecordKey = new BillUserRecordKey();
+            billUserRecordKey.setUserid(billKey.getUserId());
+            billUserRecordKey.setTime(billKey.getTime());
+            userRecordSaveService.delete(
+                    billUserRecordKey
+            );
+            return new ExecutionReturn(
+                    "0"
+            );
+        }else{
+            return new ExecutionReturn(
+                    ErrorUtils.NoLogin.getErrorCode()
+            );
+        }
     }
 }

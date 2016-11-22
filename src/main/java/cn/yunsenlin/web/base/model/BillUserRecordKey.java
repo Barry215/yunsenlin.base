@@ -1,10 +1,8 @@
 package cn.yunsenlin.web.base.model;
 
-import cn.yunsenlin.web.base.model.inter.UserRecordKey;
-
 import java.util.Date;
 
-public class BillUserRecordKey implements UserRecordKey {
+public class BillUserRecordKey {
     private Integer userid;
 
     private Date time;

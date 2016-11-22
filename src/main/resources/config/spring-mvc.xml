@@ -17,9 +17,9 @@
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"
-                  value="org.springframework.web.servlet.view.JstlView" />
-        <property name="prefix" value="/WEB-INF/" />
-        <property name="suffix" value=".jsp" />
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
     <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
         <property name="config">
@@ -52,16 +52,21 @@
     <bean id="weightBaseValidator"
           class="cn.yunsenlin.web.base.dto.calculate.android.validator.WeightBaseValidator"/>
     <bean id="checkMobileParamValidator"
-            class="cn.yunsenlin.web.base.dto.user.android.validator.CheckMobileParamValidator"/>
+          class="cn.yunsenlin.web.base.dto.user.android.validator.CheckMobileParamValidator"/>
     <bean id="loginParamValidator"
-            class="cn.yunsenlin.web.base.dto.user.android.validator.LoginParamValidator"/>
+          class="cn.yunsenlin.web.base.dto.user.android.validator.LoginParamValidator"/>
     <bean id="mobileParamValidator"
-            class="cn.yunsenlin.web.base.dto.user.android.validator.MobileParamValidator"/>
+          class="cn.yunsenlin.web.base.dto.user.android.validator.MobileParamValidator"/>
     <bean id="signInParamValidator"
-            class="cn.yunsenlin.web.base.dto.user.android.validator.SignInParamValidator"/>
+          class="cn.yunsenlin.web.base.dto.user.android.validator.SignInParamValidator"/>
+    <bean id="getBillListParamValidator"
+          class="cn.yunsenlin.web.base.dto.tongBu.android.validator.GetBillListParamValidator"/>
+    <bean id="tokenParamValidator"
+          class="cn.yunsenlin.web.base.dto.tongBu.android.validator.TokenParamValidator"/>
+
     <!--Controller-->
     <bean id="calculateController"
-            class="cn.yunsenlin.web.base.controller.CalculateAndroidController">
+          class="cn.yunsenlin.web.base.controller.CalculateAndroidController">
         <constructor-arg name="commonInfoService" ref="commonInfoService"/>
         <constructor-arg name="evaluateLogBaseValidator" ref="evaluateLogBaseValidator"/>
         <constructor-arg name="logBaseValidator" ref="logBaseValidator"/>
@@ -73,13 +78,14 @@
           class="cn.yunsenlin.web.base.controller.CalculateMoreAndroidController">
         <constructor-arg name="sessionService" ref="sessionService"/>
         <constructor-arg name="volumeAutoCalculateService" ref="volumeAutoCalculateService"/>
+        <constructor-arg name="userRecordSaveService" ref="userRecordSaveService"/>
     </bean>
     <bean id="monitorController"
-            class="cn.yunsenlin.web.base.controller.MonitorController">
+          class="cn.yunsenlin.web.base.controller.MonitorController">
         <constructor-arg name="sigarService" ref="sigarService"/>
     </bean>
     <bean id="userAndroidController"
-            class="cn.yunsenlin.web.base.controller.UserAndroidController">
+          class="cn.yunsenlin.web.base.controller.UserAndroidController">
         <constructor-arg name="checkMobileParamValidator" ref="checkMobileParamValidator"/>
         <constructor-arg name="userService" ref="userService"/>
         <constructor-arg name="loginParamValidator" ref="loginParamValidator"/>
@@ -90,4 +96,11 @@
     </bean>
     <bean id="errorAndroidController"
           class="cn.yunsenlin.web.base.controller.ErrorAndroidController"/>
+    <bean id="tongBuAndroidController"
+          class="cn.yunsenlin.web.base.controller.TongBuAndroidController">\
+        <constructor-arg name="getBillListParamValidator" ref="getBillListParamValidator"/>
+        <constructor-arg name="tokenParamValidator" ref="tokenParamValidator"/>
+        <constructor-arg name="sessionService" ref="sessionService"/>
+        <constructor-arg name="userRecordSaveService" ref="userRecordSaveService"/>
+    </bean>
 </beans>

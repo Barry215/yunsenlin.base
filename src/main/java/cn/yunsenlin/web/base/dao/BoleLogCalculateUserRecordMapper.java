@@ -1,18 +1,16 @@
 package cn.yunsenlin.web.base.dao;
 
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.model.BoleLogCalculateUserRecord;
-import cn.yunsenlin.web.base.model.BoleLogCalculateUserRecordKey;
+
+import java.util.List;
 
 public interface BoleLogCalculateUserRecordMapper {
-    int deleteByPrimaryKey(BoleLogCalculateUserRecordKey key);
+    int deleteByPrimaryKey(BillUserRecordKey key);
 
     int insert(BoleLogCalculateUserRecord record);
 
     int insertSelective(BoleLogCalculateUserRecord record);
 
-    BoleLogCalculateUserRecord selectByPrimaryKey(BoleLogCalculateUserRecordKey key);
-
-    int updateByPrimaryKeySelective(BoleLogCalculateUserRecord record);
-
-    int updateByPrimaryKey(BoleLogCalculateUserRecord record);
+    List<BoleLogCalculateUserRecord> selectByPrimaryKey(BillUserRecordKey key);
 }

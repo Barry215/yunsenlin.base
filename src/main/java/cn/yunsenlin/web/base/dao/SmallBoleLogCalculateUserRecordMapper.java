@@ -1,18 +1,16 @@
 package cn.yunsenlin.web.base.dao;
 
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecord;
-import cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecordKey;
+
+import java.util.List;
 
 public interface SmallBoleLogCalculateUserRecordMapper {
-    int deleteByPrimaryKey(SmallBoleLogCalculateUserRecordKey key);
+    int deleteByPrimaryKey(BillUserRecordKey key);
 
     int insert(SmallBoleLogCalculateUserRecord record);
 
     int insertSelective(SmallBoleLogCalculateUserRecord record);
 
-    SmallBoleLogCalculateUserRecord selectByPrimaryKey(SmallBoleLogCalculateUserRecordKey key);
-
-    int updateByPrimaryKeySelective(SmallBoleLogCalculateUserRecord record);
-
-    int updateByPrimaryKey(SmallBoleLogCalculateUserRecord record);
+    List<SmallBoleLogCalculateUserRecord> selectByPrimaryKey(BillUserRecordKey key);
 }

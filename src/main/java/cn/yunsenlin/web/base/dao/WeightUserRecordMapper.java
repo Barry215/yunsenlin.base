@@ -1,18 +1,16 @@
 package cn.yunsenlin.web.base.dao;
 
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.model.WeightUserRecord;
-import cn.yunsenlin.web.base.model.WeightUserRecordKey;
+
+import java.util.List;
 
 public interface WeightUserRecordMapper {
-    int deleteByPrimaryKey(WeightUserRecordKey key);
+    int deleteByPrimaryKey(BillUserRecordKey key);
 
     int insert(WeightUserRecord record);
 
     int insertSelective(WeightUserRecord record);
 
-    WeightUserRecord selectByPrimaryKey(WeightUserRecordKey key);
-
-    int updateByPrimaryKeySelective(WeightUserRecord record);
-
-    int updateByPrimaryKey(WeightUserRecord record);
+    List<WeightUserRecord> selectByPrimaryKey(BillUserRecordKey key);
 }

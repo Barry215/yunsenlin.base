@@ -10,14 +10,14 @@
     <result column="piece" property="piece" jdbcType="DOUBLE" />
     <result column="sum" property="sum" jdbcType="DOUBLE" />
   </resultMap>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.WeightUserRecordKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.BillUserRecordKey" >
     select
       userId, time, lorry, total, weight, piece, sum
     from weight_user_record
     where userId = #{userid,jdbcType=INTEGER}
       and time = #{time,jdbcType=TIMESTAMP}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.WeightUserRecordKey" >
+  <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.BillUserRecordKey" >
     delete from weight_user_record
     where userId = #{userid,jdbcType=INTEGER}
       and time = #{time,jdbcType=TIMESTAMP}

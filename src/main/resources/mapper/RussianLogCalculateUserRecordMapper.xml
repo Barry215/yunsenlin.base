@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.yunsenlin.web.base.dao.Log1984CalculateUserRecordMapper" >
-  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.Log1984CalculateUserRecord" >
+<mapper namespace="cn.yunsenlin.web.base.dao.RussianLogCalculateUserRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.RussianLogCalculateUserRecord" >
     <id column="userId" property="userid" jdbcType="INTEGER" />
     <id column="time" property="time" jdbcType="TIMESTAMP" />
     <result column="length" property="length" jdbcType="DOUBLE" />
@@ -13,26 +13,26 @@
   </resultMap>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.BillUserRecordKey" >
     select
-      userId, time, length, width, volume, piece, sum,num
-    from log1984_calculate_user_record
+      userId, time, length, width, volume, piece, sum, num
+    from russian_log_calculate_user_record
     where userId = #{userid,jdbcType=INTEGER}
       and time = #{time,jdbcType=TIMESTAMP}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.BillUserRecordKey" >
-    delete from log1984_calculate_user_record
+    delete from russian_log_calculate_user_record
     where userId = #{userid,jdbcType=INTEGER}
       and time = #{time,jdbcType=TIMESTAMP}
   </delete>
-  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.Log1984CalculateUserRecord" >
-    insert into log1984_calculate_user_record (userId, time, length, 
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.RussianLogCalculateUserRecord" >
+    insert into russian_log_calculate_user_record (userId, time, length, 
       width, volume, piece, 
       sum,num)
     values (#{userid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{length,jdbcType=DOUBLE}, 
       #{width,jdbcType=DOUBLE}, #{volume,jdbcType=DOUBLE}, #{piece,jdbcType=DOUBLE},
             #{sum,jdbcType=DOUBLE},#{num,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.Log1984CalculateUserRecord" >
-    insert into log1984_calculate_user_record
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.RussianLogCalculateUserRecord" >
+    insert into russian_log_calculate_user_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userid != null" >
         userId,

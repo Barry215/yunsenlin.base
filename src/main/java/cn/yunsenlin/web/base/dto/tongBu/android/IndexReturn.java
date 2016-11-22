@@ -13,4 +13,5 @@ public class IndexReturn {
     public void setIndexList(List<TimeIndex> indexList) {
         this.indexList = indexList;
     }
+
 }

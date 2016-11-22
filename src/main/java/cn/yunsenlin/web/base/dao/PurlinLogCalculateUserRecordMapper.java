@@ -1,18 +1,16 @@
 package cn.yunsenlin.web.base.dao;
 
+import cn.yunsenlin.web.base.model.BillUserRecordKey;
 import cn.yunsenlin.web.base.model.PurlinLogCalculateUserRecord;
-import cn.yunsenlin.web.base.model.PurlinLogCalculateUserRecordKey;
+
+import java.util.List;
 
 public interface PurlinLogCalculateUserRecordMapper {
-    int deleteByPrimaryKey(PurlinLogCalculateUserRecordKey key);
+    int deleteByPrimaryKey(BillUserRecordKey key);
 
     int insert(PurlinLogCalculateUserRecord record);
 
     int insertSelective(PurlinLogCalculateUserRecord record);
 
-    PurlinLogCalculateUserRecord selectByPrimaryKey(PurlinLogCalculateUserRecordKey key);
-
-    int updateByPrimaryKeySelective(PurlinLogCalculateUserRecord record);
-
-    int updateByPrimaryKey(PurlinLogCalculateUserRecord record);
+    List<PurlinLogCalculateUserRecord> selectByPrimaryKey(BillUserRecordKey key);
 }

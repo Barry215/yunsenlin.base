@@ -170,4 +170,16 @@
         <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.BillUserRecordMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="timberCalculateRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.TimberCalculateRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="timberCalculateUserRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.TimberCalculateUserRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="russianLogCalculateUserRecordMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.yunsenlin.web.base.dao.RussianLogCalculateUserRecordMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 </beans>

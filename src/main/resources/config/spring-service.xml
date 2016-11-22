@@ -47,7 +47,9 @@
         <constructor-arg name="smallBoleLogCalculateRecordMapper" ref="smallBoleLogCalculateRecordMapper"/>
     </bean>
     <bean id="timberVolumeCalculateService"
-          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.TimberVolumeCalculateServiceImpl"/>
+          class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.TimberVolumeCalculateServiceImpl">
+        <constructor-arg name="timberCalculateRecordMapper" ref="timberCalculateRecordMapper"/>
+    </bean>
     <bean id="rafterLogVolumeCalculateService"
           class="cn.yunsenlin.web.base.service.Impl.VolumeCalculate.RafterLogVolumeCalculateServiceImpl">
           <constructor-arg name="rafterLogCalculateRecordMapper" ref="rafterLogCalculateRecordMapper"/>
@@ -125,5 +127,7 @@
         <constructor-arg name="weightUserRecordMapper" ref="weightUserRecordMapper"/>
         <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
         <constructor-arg name="rafterLogCalculateUserRecordMapper" ref="rafterLogCalculateUserRecordMapper"/>
+        <constructor-arg name="russianLogCalculateUserRecordMapper" ref="russianLogCalculateUserRecordMapper"/>
+        <constructor-arg name="timberCalculateUserRecordMapper" ref="timberCalculateUserRecordMapper"/>
     </bean>
 </beans>
