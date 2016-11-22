@@ -97,7 +97,7 @@
     <bean id="errorAndroidController"
           class="cn.yunsenlin.web.base.controller.ErrorAndroidController"/>
     <bean id="tongBuAndroidController"
-          class="cn.yunsenlin.web.base.controller.TongBuAndroidController">\
+          class="cn.yunsenlin.web.base.controller.TongBuAndroidController">
         <constructor-arg name="getBillListParamValidator" ref="getBillListParamValidator"/>
         <constructor-arg name="tokenParamValidator" ref="tokenParamValidator"/>
         <constructor-arg name="sessionService" ref="sessionService"/>
