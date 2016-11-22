@@ -34,12 +34,13 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="log_type"
-               domainObjectName="logType"
+        <table tableName="weight_user_record"
+               domainObjectName="WeightUserRecord"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false"/>
+
     </context>
 </generatorConfiguration>

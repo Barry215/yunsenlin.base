@@ -1,7 +1,9 @@
 package cn.yunsenlin.web.base.controller;
 
 import cn.yunsenlin.web.base.dto.calculate.android.*;
+import cn.yunsenlin.web.base.error.ErrorUtils;
 import cn.yunsenlin.web.base.factory.BigDecimalFactory;
+import cn.yunsenlin.web.base.service.SessionService;
 import cn.yunsenlin.web.base.service.VolumeAutoCalculateService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +16,11 @@ import java.util.List;
 @RequestMapping("/android/calculateMore")
 public class CalculateMoreAndroidController {
     private final VolumeAutoCalculateService volumeAutoCalculateService;
+    private final SessionService sessionService;
 
-    public CalculateMoreAndroidController(VolumeAutoCalculateService volumeAutoCalculateService) {
+    public CalculateMoreAndroidController(VolumeAutoCalculateService volumeAutoCalculateService, SessionService sessionService) {
         this.volumeAutoCalculateService = volumeAutoCalculateService;
+        this.sessionService = sessionService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
@@ -94,8 +98,15 @@ public class CalculateMoreAndroidController {
         calculateMoreReturn.setWeightVolume(weightVolume);
         calculateMoreReturn.setValuationVolume(ValuationVolume);
         calculateMoreReturn.setTimberVolume(timberVolume);
-        // TODO: 11/21/2016
-        String error;
+        String error = "0";
+        if (sessionService.checkToken(
+                calculateMore.getToken(),calculateMore.getUserId()
+        )){
+            // TODO: 11/22/2016
+        }else {
+            error = ErrorUtils.NoLogin.getErrorCode();
+        }
+        calculateMoreReturn.setError(error);
         return calculateMoreReturn;
     }
 

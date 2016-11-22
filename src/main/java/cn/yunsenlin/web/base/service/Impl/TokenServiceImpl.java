@@ -24,7 +24,7 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public String getUniqueTokenString() {
+    public String getUniqueString() {
         Date now = new Date();
         if (now.getTime()-lastTime.getTime()<1000){
             logger.info("Token两次间隔响应时间小于1000毫秒!启动重复检验器");

@@ -109,4 +109,21 @@
         <constructor-arg name="cityMapper" ref="cityMapper"/>
         <constructor-arg name="logTypeMapper" ref="logTypeMapper"/>
     </bean>
+    <bean id="userRecordSaveService"
+            class="cn.yunsenlin.web.base.service.Impl.UserRecordSaveServiceImpl">
+        <constructor-arg name="americanLogCalculateUserRecordMapper" ref="americanLogCalculateUserRecordMapper"/>
+        <constructor-arg name="billUserRecordMapper" ref="billUserRecordMapper"/>
+        <constructor-arg name="boleLogCalculateUserRecordMapper" ref="boleLogCalculateUserRecordMapper"/>
+        <constructor-arg name="bolePinusLogCalculateUserRecordMapper" ref="bolePinusLogCalculateUserRecordMapper"/>
+        <constructor-arg name="boleShanLogCalculateUserRecordMapper" ref="boleShanLogCalculateUserRecordMapper"/>
+        <constructor-arg name="log1984CalculateUserRecordMapper" ref="log1984CalculateUserRecordMapper"/>
+        <constructor-arg name="log2013CalculateUserRecordMapper" ref="log2013CalculateUserRecordMapper"/>
+        <constructor-arg name="mineLogCalculateUserRecordMapper" ref="mineLogCalculateUserRecordMapper"/>
+        <constructor-arg name="purlinLogCalculateUserRecordMapper" ref="purlinLogCalculateUserRecordMapper"/>
+        <constructor-arg name="smallBoleLogCalculateUserRecordMapper" ref="smallBoleLogCalculateUserRecordMapper"/>
+        <constructor-arg name="southeastAsiaLogCalculateUserRecordMapper" ref="southeastAsiaLogCalculateUserRecordMapper"/>
+        <constructor-arg name="weightUserRecordMapper" ref="weightUserRecordMapper"/>
+        <constructor-arg name="woodTypeMapper" ref="woodTypeMapper"/>
+        <constructor-arg name="rafterLogCalculateUserRecordMapper" ref="rafterLogCalculateUserRecordMapper"/>
+    </bean>
 </beans>

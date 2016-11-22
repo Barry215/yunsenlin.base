@@ -72,6 +72,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void modifyPasswordByPhone(String phone, String password) {
+        User user = userMapper.selectByPhone(phone);
+        user.setPassword(
+                aesEncryptionService.encrypt(
+                        password,
+                        user.getPhone().substring(2,8)
+                )
+        );
+        userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
     public boolean hasEmail(String email) {
         User user =userMapper.selectByEmail(email);
         return user!=null;
@@ -84,32 +96,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String sendActivatedEmail(String email) {
+    public String sendEmailToSignIn(String email) {
         return null;
     }
 
     @Override
-    public String sendActivatedMessage(String phone) {
+    public String sendEmailToGetBackPassword(String email) {
         return null;
     }
 
     @Override
-    public String sendForgetPasswordEmail(String email) {
+    public String sendPhoneToSignIn(String email) {
         return null;
     }
 
     @Override
-    public String sendForgetPasswordMessage(String phone) {
+    public String sendPhoneToGetBackPassword(String email) {
         return null;
     }
 
-    @Override
-    public String sendModifyEmailOrPhoneActivatedEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public String sendModifyEmailOrPhoneActivatedPhoen(String phone) {
-        return null;
-    }
 }

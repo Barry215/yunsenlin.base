@@ -3,8 +3,6 @@ package cn.yunsenlin.web.base.controller;
 import cn.yunsenlin.web.base.dto.tongBu.android.BillListReturn;
 import cn.yunsenlin.web.base.dto.tongBu.android.IndexReturn;
 import cn.yunsenlin.web.base.dto.tongBu.android.TokenParam;
-import cn.yunsenlin.web.base.dto.user.LoginReturn;
-import cn.yunsenlin.web.base.dto.user.android.LoginParam;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -92,7 +92,7 @@ public class SessionServiceImpl implements SessionService {
         sessionMapper.deleteByPrimaryKey(userId);
         Session session = new Session();
         session.setUserId(userId);
-        String token =tokenService.getUniqueTokenString();
+        String token =tokenService.getUniqueString();
         session.setToken(token);
         session.setTokenPeriod(tokenPeriod);
         sessionMapper.insert(session);

@@ -12,7 +12,8 @@ public enum  ErrorUtils {
     NoEmail("U0004","邮件地址不存在"),
     NoPhone("U0005","手机号码不存在"),
     ErrorPhoneCode("U0006","手机验证码错误"),
-    ErrorEmailCode("U0007","邮箱验证码错误");
+    ErrorEmailCode("U0007","邮箱验证码错误"),
+    PhoneMessageTooMuch("U0008","手机验证码发送过于频繁，请半小时后重试");
     public String errorCode;
     public String errorInfo;
     private static Logger logger = LoggerFactory.getLogger(ErrorUtils.class);

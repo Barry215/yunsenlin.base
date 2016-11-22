@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.BillUserRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.BillUserRecord" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <id column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="log_sum" property="logSum" jdbcType="DOUBLE" />
+    <result column="log_volume" property="logVolume" jdbcType="DOUBLE" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="weight_sum" property="weightSum" jdbcType="DOUBLE" />
+    <result column="timber_sum" property="timberSum" jdbcType="DOUBLE" />
+    <result column="timber_volume" property="timberVolume" jdbcType="DOUBLE" />
+    <result column="validation_sum" property="validationSum" jdbcType="DOUBLE" />
+    <result column="validation_volume" property="validationVolume" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.BillUserRecordKey" >
+    select
+      userId, time, log_sum, log_volume, weight, weight_sum, timber_sum, timber_volume,
+      validation_sum, validation_volume
+    from bill_user_record
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.BillUserRecordKey" >
+    delete from bill_user_record
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.BillUserRecord" >
+    insert into bill_user_record (userId, time, log_sum, 
+      log_volume, weight, weight_sum, 
+      timber_sum, timber_volume, validation_sum, 
+      validation_volume)
+    values (#{userid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{logSum,jdbcType=DOUBLE}, 
+      #{logVolume,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{weightSum,jdbcType=DOUBLE}, 
+      #{timberSum,jdbcType=DOUBLE}, #{timberVolume,jdbcType=DOUBLE}, #{validationSum,jdbcType=DOUBLE}, 
+      #{validationVolume,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.BillUserRecord" >
+    insert into bill_user_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="logSum != null" >
+        log_sum,
+      </if>
+      <if test="logVolume != null" >
+        log_volume,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="weightSum != null" >
+        weight_sum,
+      </if>
+      <if test="timberSum != null" >
+        timber_sum,
+      </if>
+      <if test="timberVolume != null" >
+        timber_volume,
+      </if>
+      <if test="validationSum != null" >
+        validation_sum,
+      </if>
+      <if test="validationVolume != null" >
+        validation_volume,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSum != null" >
+        #{logSum,jdbcType=DOUBLE},
+      </if>
+      <if test="logVolume != null" >
+        #{logVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="weightSum != null" >
+        #{weightSum,jdbcType=DOUBLE},
+      </if>
+      <if test="timberSum != null" >
+        #{timberSum,jdbcType=DOUBLE},
+      </if>
+      <if test="timberVolume != null" >
+        #{timberVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="validationSum != null" >
+        #{validationSum,jdbcType=DOUBLE},
+      </if>
+      <if test="validationVolume != null" >
+        #{validationVolume,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.BillUserRecord" >
+    update bill_user_record
+    <set >
+      <if test="logSum != null" >
+        log_sum = #{logSum,jdbcType=DOUBLE},
+      </if>
+      <if test="logVolume != null" >
+        log_volume = #{logVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="weightSum != null" >
+        weight_sum = #{weightSum,jdbcType=DOUBLE},
+      </if>
+      <if test="timberSum != null" >
+        timber_sum = #{timberSum,jdbcType=DOUBLE},
+      </if>
+      <if test="timberVolume != null" >
+        timber_volume = #{timberVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="validationSum != null" >
+        validation_sum = #{validationSum,jdbcType=DOUBLE},
+      </if>
+      <if test="validationVolume != null" >
+        validation_volume = #{validationVolume,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.BillUserRecord" >
+    update bill_user_record
+    set log_sum = #{logSum,jdbcType=DOUBLE},
+      log_volume = #{logVolume,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      weight_sum = #{weightSum,jdbcType=DOUBLE},
+      timber_sum = #{timberSum,jdbcType=DOUBLE},
+      timber_volume = #{timberVolume,jdbcType=DOUBLE},
+      validation_sum = #{validationSum,jdbcType=DOUBLE},
+      validation_volume = #{validationVolume,jdbcType=DOUBLE}
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

@@ -199,10 +199,14 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             logReturn.setVolume(
                     volume
             );
-            String sum = BigDecimalFactory.get(volume).multiply(
-                    BigDecimalFactory.get(l.getNum())
-            ).toString();
-            logReturn.setSum(sum);
+            if (BigDecimalFactory.isNumber(l.getPiece())) {
+                String sum = BigDecimalFactory.get(volume).multiply(
+                        BigDecimalFactory.get(l.getNum())
+                ).multiply(
+                        BigDecimalFactory.get(l.getPiece())
+                ).toString();
+                logReturn.setSum(sum);
+            }
             logReturnList.add(logReturn);
         }
         return logReturnList;
@@ -220,10 +224,12 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
                     w.getTotal(),w.getLorry()
             );
             wr.setWeight(weight);
-            String sum = BigDecimalFactory.get(weight).multiply(
-                    BigDecimalFactory.get(w.getPiece())
-            ).divide(BigDecimalFactory.get("1000"),3,BigDecimal.ROUND_HALF_UP).toString();
-            wr.setSum(sum);
+            if (BigDecimalFactory.isNumber(w.getPiece())) {
+                String sum = BigDecimalFactory.get(weight).multiply(
+                        BigDecimalFactory.get(w.getPiece())
+                ).divide(BigDecimalFactory.get("1000"), 3, BigDecimal.ROUND_HALF_UP).toString();
+                wr.setSum(sum);
+            }
             weightReturnList.add(wr);
         }
         return weightReturnList;
@@ -244,10 +250,12 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
                     t.getLength(),t.getWidth(),t.getHeight(),t.getNum()
             );
             tb.setVolume(volume);
-            String sum = BigDecimalFactory.get(volume).multiply(
-                    BigDecimalFactory.get(tb.getVolume())
-            ).toString();
-            tb.setSum(sum);
+            if (BigDecimalFactory.isNumber(t.getPiece())) {
+                String sum = BigDecimalFactory.get(volume).multiply(
+                        BigDecimalFactory.get(tb.getVolume())
+                ).toString();
+                tb.setSum(sum);
+            }
             timberReturnList.add(tb);
         }
         return timberReturnList;
@@ -277,10 +285,14 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
                 );
             }
             vd.setVolume(volume);
-            String sum = BigDecimalFactory.get(volume).multiply(
-                    BigDecimalFactory.get(vd.getPiece())
-            ).toString();
-            vd.setSum(sum);
+            if (BigDecimalFactory.isNumber(vd.getPiece())) {
+                String sum = BigDecimalFactory.get(volume).multiply(
+                        BigDecimalFactory.get(vd.getPiece())
+                ).multiply(
+                        BigDecimalFactory.get(vd.getNum())
+                ).toString();
+                vd.setSum(sum);
+            }
             validationReturn.add(vd);
         }
         return validationReturn;
@@ -291,6 +303,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         BigDecimal sum = BigDecimalFactory.get("0");
         for (LogReturn l :
                 getLogReturn(logList)) {
+            if (!BigDecimalFactory.isNumber(l.getSum())){
+                return "";
+            }
             sum = sum.add(BigDecimalFactory.get(l.getSum()));
         }
         return sum.toString();
@@ -311,6 +326,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         BigDecimal sum = BigDecimalFactory.get("0");
         for (WeightReturn w :
                 getWeightReturn(weightList)) {
+            if (!BigDecimalFactory.isNumber(w.getSum())){
+                return "";
+            }
             sum = sum.add(BigDecimalFactory.get(w.getSum()));
         }
         return sum.toString();
@@ -331,6 +349,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         BigDecimal sum = BigDecimalFactory.get("0");
         for (TimberReturn t :
                 getTimberReturn(timberList)) {
+            if (!BigDecimalFactory.isNumber(t.getSum())){
+                return "";
+            }
             sum = sum.add(BigDecimalFactory.get(t.getSum()));
         }
         return sum.toString();
@@ -351,6 +372,9 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
         BigDecimal sum = BigDecimalFactory.get("0");
         for (ValidationReturn l :
                 getValidationReturn(validationList)) {
+            if (!BigDecimalFactory.isNumber(l.getSum())){
+                return "";
+            }
             sum = sum.add(BigDecimalFactory.get(l.getSum()));
         }
         return sum.toString();

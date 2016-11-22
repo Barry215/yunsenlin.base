@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.SmallBoleLogCalculateUserRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecord" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <id column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="length" property="length" jdbcType="DOUBLE" />
+    <result column="width" property="width" jdbcType="DOUBLE" />
+    <result column="volume" property="volume" jdbcType="DOUBLE" />
+    <result column="piece" property="piece" jdbcType="DOUBLE" />
+    <result column="sum" property="sum" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecordKey" >
+    select
+      userId, time, length, width, volume, piece, sum
+    from small_bole_log_calculate_user_record
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecordKey" >
+    delete from small_bole_log_calculate_user_record
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecord" >
+    insert into small_bole_log_calculate_user_record (userId, time, length, 
+      width, volume, piece, 
+      sum)
+    values (#{userid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{length,jdbcType=DOUBLE}, 
+      #{width,jdbcType=DOUBLE}, #{volume,jdbcType=DOUBLE}, #{piece,jdbcType=DOUBLE}, 
+      #{sum,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecord" >
+    insert into small_bole_log_calculate_user_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="piece != null" >
+        piece,
+      </if>
+      <if test="sum != null" >
+        sum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=DOUBLE},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="piece != null" >
+        #{piece,jdbcType=DOUBLE},
+      </if>
+      <if test="sum != null" >
+        #{sum,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecord" >
+    update small_bole_log_calculate_user_record
+    <set >
+      <if test="length != null" >
+        length = #{length,jdbcType=DOUBLE},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="piece != null" >
+        piece = #{piece,jdbcType=DOUBLE},
+      </if>
+      <if test="sum != null" >
+        sum = #{sum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.SmallBoleLogCalculateUserRecord" >
+    update small_bole_log_calculate_user_record
+    set length = #{length,jdbcType=DOUBLE},
+      width = #{width,jdbcType=DOUBLE},
+      volume = #{volume,jdbcType=DOUBLE},
+      piece = #{piece,jdbcType=DOUBLE},
+      sum = #{sum,jdbcType=DOUBLE}
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

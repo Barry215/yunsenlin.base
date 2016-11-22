@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yunsenlin.web.base.dao.WeightUserRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.yunsenlin.web.base.model.WeightUserRecord" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <id column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="lorry" property="lorry" jdbcType="DOUBLE" />
+    <result column="total" property="total" jdbcType="DOUBLE" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="piece" property="piece" jdbcType="DOUBLE" />
+    <result column="sum" property="sum" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.yunsenlin.web.base.model.WeightUserRecordKey" >
+    select
+      userId, time, lorry, total, weight, piece, sum
+    from weight_user_record
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.WeightUserRecordKey" >
+    delete from weight_user_record
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="cn.yunsenlin.web.base.model.WeightUserRecord" >
+    insert into weight_user_record (userId, time, lorry, 
+      total, weight, piece, 
+      sum)
+    values (#{userid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{lorry,jdbcType=DOUBLE}, 
+      #{total,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{piece,jdbcType=DOUBLE}, 
+      #{sum,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yunsenlin.web.base.model.WeightUserRecord" >
+    insert into weight_user_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="lorry != null" >
+        lorry,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="piece != null" >
+        piece,
+      </if>
+      <if test="sum != null" >
+        sum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lorry != null" >
+        #{lorry,jdbcType=DOUBLE},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="piece != null" >
+        #{piece,jdbcType=DOUBLE},
+      </if>
+      <if test="sum != null" >
+        #{sum,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yunsenlin.web.base.model.WeightUserRecord" >
+    update weight_user_record
+    <set >
+      <if test="lorry != null" >
+        lorry = #{lorry,jdbcType=DOUBLE},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="piece != null" >
+        piece = #{piece,jdbcType=DOUBLE},
+      </if>
+      <if test="sum != null" >
+        sum = #{sum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yunsenlin.web.base.model.WeightUserRecord" >
+    update weight_user_record
+    set lorry = #{lorry,jdbcType=DOUBLE},
+      total = #{total,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      piece = #{piece,jdbcType=DOUBLE},
+      sum = #{sum,jdbcType=DOUBLE}
+    where userId = #{userid,jdbcType=INTEGER}
+      and time = #{time,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

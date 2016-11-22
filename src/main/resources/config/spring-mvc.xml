@@ -51,27 +51,14 @@
           class="cn.yunsenlin.web.base.dto.calculate.android.validator.TimberBaseValidator"/>
     <bean id="weightBaseValidator"
           class="cn.yunsenlin.web.base.dto.calculate.android.validator.WeightBaseValidator"/>
-
-    <bean class="cn.yunsenlin.web.base.dto.validator.LoginParamValidator"
-          id="loginParamValidator"/>
-    <bean class="cn.yunsenlin.web.base.dto.validator.LogVolumeCalculateParamValidator"
-          id="logVolumeCalculateParamValidator">
-        <constructor-arg name="woodTypeService" ref="woodTypeService"/>
-    </bean>
-    <bean id="unitLogVolumeCalculateParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.UnitLogVolumeCalculateParamValidator">
-        <constructor-arg ref="woodTypeService" name="woodTypeService"/>
-    </bean>
-    <bean id="hasEmailParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.HasEmailParamValidator"/>
-    <bean id="hasPhoneParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.HasPhoneParamValidator"/>
-    <bean id="sendEmailParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.SendEmailParamValidator"/>
-    <bean id="sendPhoneParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.SendPhoneParamValidator"/>
+    <bean id="checkMobileParamValidator"
+            class="cn.yunsenlin.web.base.dto.user.android.validator.CheckMobileParamValidator"/>
+    <bean id="loginParamValidator"
+            class="cn.yunsenlin.web.base.dto.user.android.validator.LoginParamValidator"/>
+    <bean id="mobileParamValidator"
+            class="cn.yunsenlin.web.base.dto.user.android.validator.MobileParamValidator"/>
     <bean id="signInParamValidator"
-            class="cn.yunsenlin.web.base.dto.validator.SignInParamValidator"/>
+            class="cn.yunsenlin.web.base.dto.user.android.validator.SignInParamValidator"/>
     <!--Controller-->
     <bean id="calculateController"
             class="cn.yunsenlin.web.base.controller.CalculateAndroidController">
@@ -84,9 +71,23 @@
     </bean>
     <bean id="calculateMoreAndroidController"
           class="cn.yunsenlin.web.base.controller.CalculateMoreAndroidController">
+        <constructor-arg name="sessionService" ref="sessionService"/>
         <constructor-arg name="volumeAutoCalculateService" ref="volumeAutoCalculateService"/>
     </bean>
-    <bean class="cn.yunsenlin.web.base.controller.MonitorController">
+    <bean id="monitorController"
+            class="cn.yunsenlin.web.base.controller.MonitorController">
         <constructor-arg name="sigarService" ref="sigarService"/>
     </bean>
+    <bean id="userAndroidController"
+            class="cn.yunsenlin.web.base.controller.UserAndroidController">
+        <constructor-arg name="checkMobileParamValidator" ref="checkMobileParamValidator"/>
+        <constructor-arg name="userService" ref="userService"/>
+        <constructor-arg name="loginParamValidator" ref="loginParamValidator"/>
+        <constructor-arg name="signInParamValidator" ref="signInParamValidator"/>
+        <constructor-arg name="mobileParamValidator" ref="mobileParamValidator"/>
+        <constructor-arg name="outLetService" ref="outLetService"/>
+        <constructor-arg name="sessionService" ref="sessionService"/>
+    </bean>
+    <bean id="errorAndroidController"
+          class="cn.yunsenlin.web.base.controller.ErrorAndroidController"/>
 </beans>

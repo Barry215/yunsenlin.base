@@ -19,4 +19,12 @@ public class ErrorParam {
     public void setErrorInfo(String errorInfo) {
         this.errorInfo = errorInfo;
     }
+
+    public ErrorParam(String errorCode, String errorInfo) {
+        this.errorCode = errorCode;
+        this.errorInfo = errorInfo;
+    }
+
+    public ErrorParam() {
+    }
 }

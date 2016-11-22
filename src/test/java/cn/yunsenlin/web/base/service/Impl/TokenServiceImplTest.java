@@ -15,9 +15,9 @@ public class TokenServiceImplTest extends SpringTestBase{
     public void getUniqueTokenString() throws Exception {
         for (int i=0;i<10;i++){
             logger.debug("测试TOKEN生成字符串"
-            +tokenService.getUniqueTokenString());
+            +tokenService.getUniqueString());
             logger.debug(tokenService.getTokenDate(
-                    tokenService.getUniqueTokenString()
+                    tokenService.getUniqueString()
             ).toString());
         }
     }
