@@ -26,7 +26,7 @@ public class BigDecimalFactory {
     }
     public static boolean isNumber(String... str) {
         for (String string:str){
-            if (string==null){
+            if (string==null||string.length()==0){
                 return false;
             }
             if (!string.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$")){

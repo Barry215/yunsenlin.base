@@ -13,6 +13,7 @@ import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class CalculateMoreAndroidController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public CalculateMoreReturn index(@RequestBody CalculateMore calculateMore, BindingResult result) {
+    public CalculateMoreReturn index(@RequestBody @Valid CalculateMore calculateMore, BindingResult result) {
         if (result.hasErrors()) {
             new CalculateMoreReturn();
         }
@@ -147,7 +148,7 @@ public class CalculateMoreAndroidController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn index(@RequestBody BillKey billKey, BindingResult result) {
+    public ExecutionReturn index(@RequestBody @Valid BillKey billKey, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.NoLogin.getErrorCode());

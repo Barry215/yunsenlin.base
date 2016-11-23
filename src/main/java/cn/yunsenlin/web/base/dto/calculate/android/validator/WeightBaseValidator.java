@@ -15,7 +15,7 @@ public class WeightBaseValidator implements Validator{
     @Override
     public void validate(Object target, Errors errors) {
         WeightBase weightBase = (WeightBase) target;
-        if (BigDecimalFactory.isNumber(
+        if (!BigDecimalFactory.isNumber(
              weightBase.getLorry(),weightBase.getTotal()
         )){
             errors.rejectValue("total", ErrorUtils.DataValid.getErrorCode());

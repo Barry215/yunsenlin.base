@@ -21,6 +21,11 @@ public class EvaluateLogBaseValidator implements Validator{
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"cityCode",code);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"diameter",code);
         EvaluateLogBase evaluateLogBase = (EvaluateLogBase) target;
+        if (evaluateLogBase.getLogCode().length()==0||
+                evaluateLogBase.getCityCode().length()==0||
+                evaluateLogBase.getDiameter().length()==0){
+            errors.rejectValue("length",code);
+        }
         if (BigDecimalFactory.isNumber(
                 evaluateLogBase.getLength(),evaluateLogBase.getDiameter()
         )){

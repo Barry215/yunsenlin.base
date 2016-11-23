@@ -16,7 +16,7 @@ public class LogBaseValidator implements Validator{
     public void validate(Object target, Errors errors) {
         String code = ErrorUtils.DataValid.getErrorCode();
         LogBase logBase = (LogBase) target;
-        if (BigDecimalFactory.isNumber(
+        if (!BigDecimalFactory.isNumber(
                 logBase.getDiameter(),logBase.getLength()
         )){
             errors.rejectValue("length",code);

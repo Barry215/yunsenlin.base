@@ -86,10 +86,6 @@
         <constructor-arg name="billKeyValidator" ref="billKeyValidator"/>
         <constructor-arg name="calculateMoreValidator" ref="calculateMoreValidator"/>
     </bean>
-    <bean id="monitorController"
-          class="cn.yunsenlin.web.base.controller.MonitorController">
-        <constructor-arg name="sigarService" ref="sigarService"/>
-    </bean>
     <bean id="userAndroidController"
           class="cn.yunsenlin.web.base.controller.UserAndroidController">
         <constructor-arg name="checkMobileParamValidator" ref="checkMobileParamValidator"/>

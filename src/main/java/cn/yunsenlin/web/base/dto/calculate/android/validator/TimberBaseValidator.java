@@ -15,7 +15,7 @@ public class TimberBaseValidator implements Validator{
     @Override
     public void validate(Object target, Errors errors) {
         TimberBase timberBase = (TimberBase) target;
-        if (BigDecimalFactory.isNumber(
+        if (!BigDecimalFactory.isNumber(
                 timberBase.getHeight(),timberBase.getLength(),
                 timberBase.getWidth()
         )){

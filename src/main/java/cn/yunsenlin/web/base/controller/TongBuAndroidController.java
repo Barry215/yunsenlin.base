@@ -8,11 +8,9 @@ import cn.yunsenlin.web.base.service.UserRecordSaveService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +38,7 @@ public class TongBuAndroidController {
 
     @RequestMapping(value = "/getBillIndex", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public IndexReturn getBillIndex(TokenParam tokenParam) {
+    public IndexReturn getBillIndex(@RequestBody @Valid TokenParam tokenParam) {
         if (sessionService.checkToken(
                 tokenParam.getToken(),tokenParam.getUserId()
         )) {
@@ -52,7 +50,7 @@ public class TongBuAndroidController {
     }
     @RequestMapping(value = "/getBillList", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public BillListReturn getBillList(GetBillListParam getBillListParam) {
+    public BillListReturn getBillList(@RequestBody @Valid GetBillListParam getBillListParam) {
         if (sessionService.checkToken(
                 getBillListParam.getToken(),getBillListParam.getUserId()
         )) {

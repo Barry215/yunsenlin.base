@@ -17,6 +17,8 @@ import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Transactional
 @RequestMapping("/android/user")
 public class UserAndroidController {
@@ -66,7 +68,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public LoginInfoReturn login(@RequestBody LoginParam loginParam, BindingResult result) {
+    public LoginInfoReturn login(@RequestBody @Valid LoginParam loginParam, BindingResult result) {
         if (result.hasErrors()) {
             return new LoginInfoReturn(
                     "", ErrorUtils.DataValid.getErrorCode(), ""
@@ -91,7 +93,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/sendMessageToSignIn", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn sendMessageToSignIn(@RequestBody MobileParam mobileParam, BindingResult result) {
+    public ExecutionReturn sendMessageToSignIn(@RequestBody @Valid MobileParam mobileParam, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.DataValid.getErrorCode()
@@ -113,7 +115,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/checkCodeToSignIn", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn checkCodeToSignIn(@RequestBody CheckMobileParam checkMobileParam, BindingResult result) {
+    public ExecutionReturn checkCodeToSignIn(@RequestBody @Valid CheckMobileParam checkMobileParam, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.DataValid.getErrorCode()
@@ -130,7 +132,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/sendMessageToGetBackPassword", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn sendMessageToGetBackPassword(@RequestBody MobileParam mobileParam, BindingResult result) {
+    public ExecutionReturn sendMessageToGetBackPassword(@RequestBody @Valid MobileParam mobileParam, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.DataValid.getErrorCode()
@@ -152,7 +154,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/checkCodeToGetBackPassword", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn checkCodeToGetBackPassword(@RequestBody CheckMobileParam checkMobileParam, BindingResult result) {
+    public ExecutionReturn checkCodeToGetBackPassword(@RequestBody @Valid CheckMobileParam checkMobileParam, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.DataValid.getErrorCode()
@@ -169,7 +171,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn signIn(@RequestBody SignInParam signInParam, BindingResult result) {
+    public ExecutionReturn signIn(@RequestBody @Valid SignInParam signInParam, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.DataValid.getErrorCode()
@@ -189,7 +191,7 @@ public class UserAndroidController {
 
     @RequestMapping(value = "/resetPassword", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn resetPassword(@RequestBody SignInParam signInParam, BindingResult result) {
+    public ExecutionReturn resetPassword(@RequestBody @Valid SignInParam signInParam, BindingResult result) {
         if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.DataValid.getErrorCode()
