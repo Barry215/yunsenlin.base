@@ -25,13 +25,18 @@ public class CalculateMoreAndroidController {
     private final Validator calculateMoreValidator;
     private final Validator billKeyValidator;
 
-    public CalculateMoreAndroidController(VolumeAutoCalculateService volumeAutoCalculateService, SessionService sessionService, UserRecordSaveService userRecordSaveService, Validator calculateMoreValidator, Validator billKeyValidator) {
+    public CalculateMoreAndroidController(VolumeAutoCalculateService volumeAutoCalculateService,
+                                          SessionService sessionService,
+                                          UserRecordSaveService userRecordSaveService,
+                                          Validator calculateMoreValidator,
+                                          Validator billKeyValidator) {
         this.volumeAutoCalculateService = volumeAutoCalculateService;
         this.sessionService = sessionService;
         this.userRecordSaveService = userRecordSaveService;
         this.calculateMoreValidator = calculateMoreValidator;
         this.billKeyValidator = billKeyValidator;
     }
+
     @InitBinder(value = "calculateMore")
     public void logBaseValidator(DataBinder binder) {
         binder.addValidators(calculateMoreValidator);
@@ -44,57 +49,61 @@ public class CalculateMoreAndroidController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public CalculateMoreReturn index(@RequestBody CalculateMore calculateMore,BindingResult result) {
-        if (result.hasErrors()){
+    public CalculateMoreReturn index(@RequestBody CalculateMore calculateMore, BindingResult result) {
+        if (result.hasErrors()) {
             new CalculateMoreReturn();
         }
         CalculateMoreReturn calculateMoreReturn = new CalculateMoreReturn();
         calculateMoreReturn.setTime(calculateMore.getTime());
+        List<Log> logList = calculateMore.getLogList() == null ? new ArrayList<>() : calculateMore.getLogList();
+        List<Timber> timberList = calculateMore.getTimberList() == null ? new ArrayList<>() : calculateMore.getTimberList();
+        List<Validation> validationList = calculateMore.getValidationList() == null ? new ArrayList<>() : calculateMore.getValidationList();
+        List<Weight> weightList = calculateMore.getWeightList() == null ? new ArrayList<>() : calculateMore.getWeightList();
         List<LogReturn> logReturnList
                 = volumeAutoCalculateService.getLogReturn(
-                        calculateMore.getLogList()==null?new ArrayList<>():calculateMore.getLogList());
+                logList);
         List<WeightReturn> weightReturnList
                 = volumeAutoCalculateService.getWeightReturn(
-                        calculateMore.getWeightList()==null?new ArrayList<>():calculateMore.getWeightList());
+                weightList);
         List<TimberReturn> timberReturnList
                 = volumeAutoCalculateService.getTimberReturn(
-                        calculateMore.getTimberList()==null?new ArrayList<>():calculateMore.getTimberList());
+                timberList);
         List<ValidationReturn> validationReturnList
                 = volumeAutoCalculateService.getValidationReturn(
-                        calculateMore.getValidationList()==null?new ArrayList<>():calculateMore.getValidationList());
+                validationList);
         calculateMoreReturn.setLogList(logReturnList);
         calculateMoreReturn.setTimberList(timberReturnList);
         calculateMoreReturn.setValidationList(validationReturnList);
         calculateMoreReturn.setWeightList(weightReturnList);
         String logSum = volumeAutoCalculateService.getLogSum(
-                calculateMore.getLogList()==null?new ArrayList<>():calculateMore.getLogList()
+                logList
         );
-        String logVolume= volumeAutoCalculateService.getLogVolume(
-                calculateMore.getLogList()==null?new ArrayList<>():calculateMore.getLogList()
+        String logVolume = volumeAutoCalculateService.getLogVolume(
+                logList
         );
-        String weightSum= volumeAutoCalculateService.getWeightSum(
-                calculateMore.getWeightList()==null?new ArrayList<>():calculateMore.getWeightList()
+        String weightSum = volumeAutoCalculateService.getWeightSum(
+                weightList
         );
-        String weightVolume= volumeAutoCalculateService.getWeight(
-                calculateMore.getWeightList()==null?new ArrayList<>():calculateMore.getWeightList()
+        String weightVolume = volumeAutoCalculateService.getWeight(
+                weightList
         );
-        String timberSum= volumeAutoCalculateService.getTimberSum(
-                calculateMore.getTimberList()==null?new ArrayList<>():calculateMore.getTimberList()
+        String timberSum = volumeAutoCalculateService.getTimberSum(
+                timberList
         );
-        String timberVolume= volumeAutoCalculateService.getTimberVolume(
-                calculateMore.getTimberList()==null?new ArrayList<>():calculateMore.getTimberList()
+        String timberVolume = volumeAutoCalculateService.getTimberVolume(
+                timberList
         );
-        String valuationSum= volumeAutoCalculateService.getValidationSum(
-                calculateMore.getValidationList()==null?new ArrayList<>():calculateMore.getValidationList()
+        String valuationSum = volumeAutoCalculateService.getValidationSum(
+                validationList
         );
-        String ValuationVolume= volumeAutoCalculateService.getValidationVolume(
-                calculateMore.getValidationList()==null?new ArrayList<>():calculateMore.getValidationList()
+        String ValuationVolume = volumeAutoCalculateService.getValidationVolume(
+                validationList
         );
         String allSum = null;
-        if (logSum.length()>0
-                &&valuationSum.length()>0
-                &&weightSum.length()>0
-                &&timberSum.length()>0){
+        if (logSum.length() > 0
+                && valuationSum.length() > 0
+                && weightSum.length() > 0
+                && timberSum.length() > 0) {
             allSum = BigDecimalFactory.get(logSum).add(
                     BigDecimalFactory.get(valuationSum)
             ).add(
@@ -109,16 +118,16 @@ public class CalculateMoreAndroidController {
         calculateMoreReturn.setValuationSum(valuationSum);
         calculateMoreReturn.setWeightSum(weightSum);
         calculateMoreReturn.setLogVolume(
-                volumeAutoCalculateService.getLogVolume(calculateMore.getLogList()==null?new ArrayList<>():calculateMore.getLogList())
+                volumeAutoCalculateService.getLogVolume(logList)
         );
         calculateMoreReturn.setWeightVolume(
-                volumeAutoCalculateService.getWeight(calculateMore.getWeightList()==null?new ArrayList<>():calculateMore.getWeightList())
+                volumeAutoCalculateService.getWeight(weightList)
         );
         calculateMoreReturn.setValuationVolume(
-                volumeAutoCalculateService.getValidationVolume(calculateMore.getValidationList()==null?new ArrayList<>():calculateMore.getValidationList())
+                volumeAutoCalculateService.getValidationVolume(validationList)
         );
         calculateMoreReturn.setTimberVolume(
-                volumeAutoCalculateService.getTimberVolume(calculateMore.getTimberList()==null?new ArrayList<>():calculateMore.getTimberList())
+                volumeAutoCalculateService.getTimberVolume(timberList)
         );
         calculateMoreReturn.setLogVolume(logVolume);
         calculateMoreReturn.setWeightVolume(weightVolume);
@@ -126,10 +135,10 @@ public class CalculateMoreAndroidController {
         calculateMoreReturn.setTimberVolume(timberVolume);
         String error = "0";
         if (sessionService.checkToken(
-                calculateMore.getToken(),calculateMore.getUserId()
-        )){
-            userRecordSaveService.save(calculateMoreReturn,calculateMore);
-        }else {
+                calculateMore.getToken(), calculateMore.getUserId()
+        )) {
+            userRecordSaveService.save(calculateMoreReturn, calculateMore);
+        } else {
             error = ErrorUtils.NoLogin.getErrorCode();
         }
         calculateMoreReturn.setError(error);
@@ -138,14 +147,14 @@ public class CalculateMoreAndroidController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public ExecutionReturn index(@RequestBody BillKey billKey,BindingResult result) {
-        if (result.hasErrors()){
+    public ExecutionReturn index(@RequestBody BillKey billKey, BindingResult result) {
+        if (result.hasErrors()) {
             return new ExecutionReturn(
                     ErrorUtils.NoLogin.getErrorCode());
         }
         if (sessionService.checkToken(
-                billKey.getToken(),billKey.getUserId()
-        )){
+                billKey.getToken(), billKey.getUserId()
+        )) {
             BillUserRecordKey billUserRecordKey = new BillUserRecordKey();
             billUserRecordKey.setUserid(billKey.getUserId());
             billUserRecordKey.setTime(billKey.getTime());
@@ -155,7 +164,7 @@ public class CalculateMoreAndroidController {
             return new ExecutionReturn(
                     "0"
             );
-        }else{
+        } else {
             return new ExecutionReturn(
                     ErrorUtils.NoLogin.getErrorCode()
             );

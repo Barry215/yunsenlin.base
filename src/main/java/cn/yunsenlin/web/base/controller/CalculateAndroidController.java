@@ -66,7 +66,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100001","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -82,7 +82,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100002","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -98,7 +98,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100004","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -114,7 +114,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100005","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -130,7 +130,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100006","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -146,7 +146,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100007","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -162,7 +162,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100012","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -178,7 +178,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100003","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -194,7 +194,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100009","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -210,7 +210,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100008","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -226,7 +226,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100013","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -242,7 +242,7 @@ public class CalculateAndroidController {
                 logBase.getLength(),
                 logBase.getDiameter(),
                 "100014","1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -257,7 +257,7 @@ public class CalculateAndroidController {
         String weight = volumeAutoCalculateService.getWeightCalculate(
                 weightBase.getTotal(),
                 weightBase.getLorry()
-        );
+        ).toString();
         return new WeightBaseReturn(
                 weight,"0"
         );
@@ -276,7 +276,7 @@ public class CalculateAndroidController {
                 timberBase.getWidth(),
                 timberBase.getHeight(),
                 "1"
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -318,7 +318,7 @@ public class CalculateAndroidController {
                 "1",
                 evaluateLogBase.getLogCode(),
                 evaluateLogBase.getCityCode()
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 
@@ -336,7 +336,7 @@ public class CalculateAndroidController {
                 "1",
                 evaluateLogBase.getLogCode(),
                 evaluateLogBase.getCityCode()
-        );
+        ).toString();
         return new LogBaseReturn(volume,"0");
     }
 

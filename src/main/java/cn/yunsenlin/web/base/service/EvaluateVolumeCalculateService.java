@@ -1,9 +1,11 @@
 package cn.yunsenlin.web.base.service;
 
 
+import java.math.BigDecimal;
+
 public interface EvaluateVolumeCalculateService {
-    String evaluateXiongJing(String length,String xiongjing,
-                             String num,String typeCode,String cityCode);
-    String evaluateGenJing(String length,String xiongjing,
+    BigDecimal evaluateXiongJing(String length, String xiongjing,
+                                 String num, String typeCode, String cityCode);
+    BigDecimal evaluateGenJing(String length,String xiongjing,
                              String num,String typeCode,String cityCode);
 }

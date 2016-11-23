@@ -24,4 +24,15 @@ public class BigDecimalFactory {
     public static boolean isNumber(String str) {
         return str != null && str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
     }
+    public static boolean isNumber(String... str) {
+        for (String string:str){
+            if (string==null){
+                return false;
+            }
+            if (!string.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$")){
+                return false;
+            }
+        }
+        return true;
+    }
 }

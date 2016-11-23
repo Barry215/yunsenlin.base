@@ -65,121 +65,121 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
 
 
     @Override
-    public String getLogVolumeAutoCalculate(String length, String diameter, String typeCode, String num) {
+    public BigDecimal getLogVolumeAutoCalculate(String length, String diameter, String typeCode, String num) {
         WoodType woodType = woodTypeMapper.selectByPrimaryKey(typeCode);
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("原木2013")) {
             return log2013LogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("原木1984")) {
             return log1984LogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("矿木")){
             return mineLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("檩材")){
             return purlinLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("椽材")){
             return rafterLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原条")
                 && woodType.getName().equals("原条1999")){
             return bole1999LogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原条")
                 && woodType.getName().equals("小原条")){
             return smallBoleLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原条")
                 && woodType.getName().equals("杉原条")){
             return boleShanLogCalculateRecordMapper.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原条")
                 && woodType.getName().equals("马尾松原条")){
             return bolePinusLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("美国原木")){
             return americanLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("俄罗斯原木")){
             return russianLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
         if (woodType != null && woodType.getBelongs().equals("原木")
                 && woodType.getName().equals("东南亚原木")){
             return southeastAsiaLogVolumeCalculateService.getVolumeCalculateResult(
                     BigDecimalFactory.get(length),
                     BigDecimalFactory.get(diameter)
-            ).multiply(BigDecimalFactory.get(num)).toString();
+            ).multiply(BigDecimalFactory.get(num));
         }
-        return "-1";
+        return BigDecimalFactory.get("-1");
 
     }
 
     @Override
-    public String getTimberVolumeAutoCalculate(String length, String width, String height,String num) {
+    public BigDecimal getTimberVolumeAutoCalculate(String length, String width, String height,String num) {
         return timberVolumeCalculateService.getVolumeCalculateResult(length, width, height)
-                .multiply(BigDecimalFactory.get(num)).toString();
+                .multiply(BigDecimalFactory.get(num));
     }
 
     @Override
-    public String getEvaluateXiongJingVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
+    public BigDecimal getEvaluateXiongJingVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
         return evaluateVolumeCalculateService.evaluateXiongJing(
                 length, xiongjing, num, typeCode, cityCode
         );
     }
 
     @Override
-    public String getEvaluateGenJingVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
+    public BigDecimal getEvaluateGenJingVolumeAutoCalculate(String length, String xiongjing, String num, String typeCode, String cityCode) {
         return evaluateVolumeCalculateService.evaluateGenJing(
                 length, xiongjing, num, typeCode, cityCode
         );
     }
 
     @Override
-    public String getWeightCalculate(String total, String lorry) {
+    public BigDecimal getWeightCalculate(String total, String lorry) {
         return BigDecimalFactory.get(total).subtract(
                 BigDecimalFactory.get(lorry)
-        ).toString();
+        );
     }
 
     @Override
@@ -192,17 +192,17 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             logReturn.setDiameter(l.getDiameter());
             logReturn.setNum(l.getNum());
             logReturn.setPiece(l.getPiece());
-            String volume = getLogVolumeAutoCalculate(
+            BigDecimal volume = getLogVolumeAutoCalculate(
                     l.getLength(),l.getDiameter(),
                     l.getTypeCode(),l.getNum()
             );
             logReturn.setVolume(
-                    BigDecimalFactory.get(volume).multiply(
+                    volume.multiply(
                             BigDecimalFactory.get(l.getNum())
                     ).toString()
             );
             if (BigDecimalFactory.isNumber(l.getPiece())) {
-                String sum = BigDecimalFactory.get(volume).multiply(
+                String sum = volume.multiply(
                         BigDecimalFactory.get(l.getNum())
                 ).multiply(
                         BigDecimalFactory.get(l.getPiece())
@@ -224,7 +224,7 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             wr.setPiece(w.getPiece());
             String weight = getWeightCalculate(
                     w.getTotal(),w.getLorry()
-            );
+            ).toString();
             wr.setWeight(weight);
             if (BigDecimalFactory.isNumber(w.getPiece())) {
                 String sum = BigDecimalFactory.get(weight).multiply(
@@ -248,16 +248,16 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             tb.setStack(t.getStack());
             tb.setPiece(t.getPiece());
             tb.setNum(t.getNum());
-            String volume = getTimberVolumeAutoCalculate(
+            BigDecimal volume = getTimberVolumeAutoCalculate(
                     t.getLength(),t.getWidth(),t.getHeight(),t.getNum()
             );
             tb.setVolume(
-                    BigDecimalFactory.get(volume).multiply(
+                    volume.multiply(
                             BigDecimalFactory.get(t.getStack())
                     ).toString()
             );
             if (BigDecimalFactory.isNumber(t.getPiece())) {
-                String sum = BigDecimalFactory.get(volume).multiply(
+                String sum = volume.multiply(
                         BigDecimalFactory.get(tb.getPiece())
                 ).multiply(
                         BigDecimalFactory.get(t.getStack())
@@ -280,17 +280,22 @@ public class VolumeAutoCalculateServiceImpl implements VolumeAutoCalculateServic
             vd.setCityCode(v.getCityCode());
             vd.setType(v.getType());
             vd.setLogCode(v.getLogCode());
+            vd.setNum(v.getNum());
             String volume;
             if (v.getType().equals("genjing")){
                 volume = getEvaluateGenJingVolumeAutoCalculate(
                         v.getLength(),v.getDiameter(),v.getNum(),
                         v.getLogCode(),v.getCityCode()
-                );
+                ).multiply(
+                        BigDecimalFactory.get(v.getNum())
+                ).toString();
             }else{
                 volume = getEvaluateXiongJingVolumeAutoCalculate(
                         v.getLength(),v.getDiameter(),v.getNum(),
                         v.getLogCode(),v.getCityCode()
-                );
+                ).multiply(
+                        BigDecimalFactory.get(v.getNum())
+                ).toString();
             }
             vd.setVolume(volume);
             if (BigDecimalFactory.isNumber(vd.getPiece())) {
